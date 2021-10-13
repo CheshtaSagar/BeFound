@@ -1,0 +1,19 @@
+.banner-section{
+    padding: 189px 0 120px;
+    position: relative;
+    background: url(http://pixner.net/peyamba/peyamba/assets/images/banner/hero-banner.png);
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+}
+
+.banner-section .img1 {
+    right: 10%;
+    animation: alternate-reverse;
+}
+.banner-section .img2 {
+    right: 10%;
+    animation: alternate-reverse;
+}
