@@ -4,11 +4,12 @@ body,html {
   }
 #chat-botCard{  
    margin: 10px;
+
 }
 #col1
 {
     padding: 2px;
-    box-shadow: 0 5px 11px rgb(161, 45, 255);
+    box-shadow: 0 5px 11px rgb(136, 4, 243);
     border-radius: 50px;
     align-items: center;
     font-family: cursive;
@@ -16,22 +17,14 @@ body,html {
     background-color:white;
     
   }
-  #col1:hover{
-  transform: scale(1.1); 
-}
+ 
 .bg {
     
-   background-repeat: no-repeat;
-    height: 100%;
+    background-repeat: no-repeat;
+    height: 70%;
     background-position: center;
-background-size: cover;
-}
-    body,html {
-      height: 100%;
-      background-color:rgb(255, 255, 255);
-    }
-  
-  
+    background-size: cover;
+}  
     .form-control {
       font-size: 16px;
       text-align: center;
@@ -53,6 +46,7 @@ background-size: cover;
       width: 100%;
       margin: 0 auto;
       border-radius: 50px;
+      height:80%
     }
   
     .signup-form form {
@@ -100,4 +94,7 @@ background-size: cover;
     .signup-btn:hover {
       background: #3c0692;
       opacity: 0.8;
+    }
+    #id1:hover{
+      transform: scale(1.1); 
     }

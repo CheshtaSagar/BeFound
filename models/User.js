@@ -28,6 +28,27 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  city:
+  {
+    type: String,
+    required: true,
+  },
+  age:
+  {
+    type: Number,
+    required: true,
+  },
+  preferences: //to be made array later
+  {
+    type: String,
+    required:true,
+  },
+  radius:
+  {
+    type:Number,
+    required: true,
+  },
+
   resetPasswordToken: String,
   resetPasswordExpire: Date,
 });

@@ -30,7 +30,7 @@ router.get("/register", function (req, res) {
 //Register post Handling
 router.post("/register", (req, res) => {
 
-  const { username, email, gender, password, password2 } = req.body;
+  const { username, email, password, password2, gender, city, age, preferences, radius } = req.body;
   let errors = [];
   //validation for email
   function isLowerCase(str) {
@@ -38,7 +38,7 @@ router.post("/register", (req, res) => {
   }
 
   //Validations for registration form
-  if (!username || !email || !gender || !password || !password2) {
+  if (!username || !email || !password || !password2 || !gender || !city || !age || !preferences || !radius) {
     errors.push({ msg: "Please enter all fields" });
   }
 
@@ -59,9 +59,14 @@ router.post("/register", (req, res) => {
       errors, //    if entries are not according to validation render filled fields
       user,
       email,
-      gender,
       password,
       password2,
+      gender,
+      city,
+      age,
+      preferences,
+      radius,
+
     });
   } else {
     //if Validations passed
@@ -71,10 +76,15 @@ router.post("/register", (req, res) => {
         res.send("username exists")
           res.render("register", {
             errors,
-            email,
-            gender, //if email already exists render the fields
+            email,//if email already exists render the fields
             password,
             password2,
+            gender,
+            city,
+            age,
+            preferences,
+            radius,
+
           }
           );
       }
@@ -84,20 +94,29 @@ router.post("/register", (req, res) => {
                 errors.push("email is already Exists");
           res.render("register", {
             errors,
-            email,
-            gender, //if email already exists render the fields
+            email, //if email already exists render the fields
             password,
             password2,
+            gender,
+            city,
+            age,
+            preferences,
+            radius,
+
           }
           );
                }
                else{
                 const newUser = new User({
                     username,
-                    email,
-                    gender,///if all validation passed store a new User indb
+                    email,///if all validation passed store a new User indb
                     password,
                     password2,
+                    gender,
+                    city,
+                    age,
+                    preferences,
+                    radius,
                   });
                 
                   //to save password in hash format(pass the plain password and hash will be the encyrpted password)
