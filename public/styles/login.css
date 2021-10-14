@@ -20,6 +20,10 @@ body,html {
   #col1:hover{
   transform: scale(1.1); 
 }
+
+.login__body{
+  padding-top: 200px;
+}
 .bg {
     
    background-repeat: no-repeat;

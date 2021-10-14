@@ -17,7 +17,10 @@ body,html {
     background-color:white;
     
   }
- 
+ .register__body{
+   padding-top: 70px;
+ }
+
 .bg {
     
     background-repeat: no-repeat;

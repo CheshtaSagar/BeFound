@@ -23,9 +23,10 @@
 
 <body>
   <!--importing navbar-->
-  <%- include ('/nav') %>
+  <%- include ('indexPartials/nav2') %>
 
   <!----login page design starts here-->
+  <div class=login__body>
     <div class="container">
       <div class="row" id="chat-botCard">
         <!----Image Column-->
@@ -46,7 +47,7 @@
 
                 <h2 class="text-center mb-4"><i class="fas fa-sign-in-alt"></i>Login</h2>
 
-                <%- include ('/messages') %>
+                <%- include ('partials/messages') %>
 
                   <div class="form-group">
                     <input type="email" class="form-control input-lg" name="email" placeholder="Email Address"
@@ -80,8 +81,9 @@
 
       </div>
     </div>
+    </div>
   
-<%- include ('/footer') %>
+    <%- include ('partials/footer') %>
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
