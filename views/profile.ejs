@@ -1,13 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Mali:wght@500&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+    integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Bungee+Inline&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/login.css" type="text/css">
+  <link rel="stylesheet" href="/styles/profile.css" type="text/css">
+
+
+  <title>Login</title>
 </head>
+
+
 <body>
+<<<<<<< HEAD
     <h1>profile</h1>
     <a href="/logout">Logout</a>
+=======
+  <!--importing navbar-->
+  <%- include ('partials/nav') %>
+
+    <div class="container-fluid">
+      <div class="row">
+
+
+
+        <!----------------------------------------------------------------------->
+        <div class="col-12 col-lg-3 " id="left">
+          user profile card
+
+          <div class="card shadow-lg p-3 mb-5 bg-white" style="width: 18rem; border-radius: 50px;
+        opacity:90%;">
+            <img class="card-img-top " style="border-radius: 50%;" src="/images/intro.jpg" alt="Error">
+            <div class="card-body">
+              <h5 class="card-title" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+              text-align: center;
+              font-size: 1.5em;
+              color: darkmagenta;">
+                <%= user.username %>
+              </h5>
+              <p style="color: grey;">
+                <%= user.bio %>
+              </p>
+              <p style="color: black; font-size: 1.2em "><b>
+                  <%= user.city %>
+                </b></p>
+
+
+              <hr style="width:50%; background-color:rgb(114, 15, 180)">
+              </hr>
+              <div class="text-center"><a href="#" class="btn btn-primary center">Edit Profile</a></div>
+            </div>
+          </div>
+        </div>
+        <!------------------------------------------------------------------------------->
+
+
+
+       <!----col2-->
+        <div class="col-12 col-lg-6" id="middle">
+
+           <!------column that shows cards for recommended people------------------>
+          <div class="row" id="middle-row1">
+            <div class="col">
+              <div class="card" style="width:99%; padding-left: 10px; padding-right: 10px;">
+                <div class="card-body">
+                  <h5 class="card-title">Swipe left/right feature will be shown here</h5>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <!-----rows that will show newsfeed- entry1-----loop will be used here--------------->
+          <div class="row" id="middle-row2">
+            <div class="col">
+
+              <div class="card text-center">
+
+                <div class="card-body">
+                  <h5 class="card-title">News Feed</h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+                <div class="card-footer text-muted">
+                  2 days ago
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+
+
+          <!------------news feed entry 2-->
+          <div class="row" id="middle-row2">
+            <div class="col">
+
+              <div class="card text-center">
+
+                <div class="card-body">
+                  <h5 class="card-title">News Feed</h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+                <div class="card-footer text-muted">
+                  2 days ago
+                </div>
+              </div>
+
+
+            </div>
+
+          </div>
+
+
+
+
+
+        </div>
+
+
+
+
+        <!-----------third column starts here-------------------------->
+        <div class="col-12 col-lg-3" id="right">
+          3 of 3
+          <!---chat box-->
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top rounded" src="/images/intro.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Recent Chats</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                content.</p>
+              <a href="#" class="btn btn-primary">See More Chats</a>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+    <%- include ('partials/footer') %>
+>>>>>>> 8e6c37fd454cac2cbed91ca6583f50c867e99ba5
 </body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+  integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+  integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
 </html>

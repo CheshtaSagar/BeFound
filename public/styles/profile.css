@@ -1,0 +1,18 @@
+#left{
+    border-color: rgb(0, 0, 0); 
+    border-width: 15px; 
+    background-color: white;
+    height:90%;
+}
+#middle{
+    border-color: rgb(0, 0, 0);
+    border-width: 15px;
+    background-color: cornflowerblue;
+    padding-top: 30px;
+}
+
+#right{
+    border-color: rgb(0, 0, 0);
+    border-width: 15px;
+    background-color: darkgrey;
+}

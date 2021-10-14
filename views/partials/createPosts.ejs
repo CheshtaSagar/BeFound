@@ -1,0 +1,21 @@
+<div class="col">
+    <div class="card " style="width:70%; padding-left: 10px; padding-right: 10px;">
+        <div class="card-body">
+          <h5 class="card-title">Create Post</h5>
+          
+          <form method="POST" action="#" enctype="multipart/form-data">
+            <div class="form-group">
+              <div class="form-group">
+                <textarea class="form-control" id="updates" rows="5" name="updates"
+                  placeholder="Write your text here"
+                  value="<%= typeof description != 'undefined' ? description: '' %>"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="file">Add Image</label>
+                <input type="file" data-file_types="jpg|jpeg|png" class="form-control-file" name="file" id="file">
+              </div>
+            <button type="submit" class="btn btn-primary">Post</button>
+          </form>
+        </div>
+      </div>
+    </div>
