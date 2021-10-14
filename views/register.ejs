@@ -129,6 +129,14 @@
                       placeholder="Distance(in km)" required="required" min="0"
                       value="<%= typeof radius != 'undefined' ? radius : '' %>" />
               </div>
+              
+              <!----Add Bio-->
+              <div class="form-group">
+              <label for="bio">Add Bio</label>
+              <textarea class="form-control ta" id="bio" rows="6" placeholder="Add words that define you..."
+              name="bio" value="<%= typeof bio != 'undefined' ? bio : '' %>"></textarea>
+            </div>
+
 
 
                   <div class="form-group">

@@ -48,7 +48,11 @@ const UserSchema = new mongoose.Schema({
     type:Number,
     required: true,
   },
+  bio:
+  {
+    type: String,
 
+  } ,
   resetPasswordToken: String,
   resetPasswordExpire: Date,
 });

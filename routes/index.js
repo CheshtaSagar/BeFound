@@ -30,7 +30,7 @@ router.get("/register", function (req, res) {
 //Register post Handling
 router.post("/register", (req, res) => {
 
-  const { username, email, password, password2, gender, city, age, preferences, radius } = req.body;
+  const { username, email, password, password2, gender, city, age, preferences, radius, bio } = req.body;
   let errors = [];
   //validation for email
   function isLowerCase(str) {
@@ -66,6 +66,7 @@ router.post("/register", (req, res) => {
       age,
       preferences,
       radius,
+      bio,
 
     });
   } else {
@@ -84,6 +85,7 @@ router.post("/register", (req, res) => {
             age,
             preferences,
             radius,
+            bio,
 
           }
           );
@@ -102,6 +104,7 @@ router.post("/register", (req, res) => {
             age,
             preferences,
             radius,
+            bio,
 
           }
           );
@@ -117,6 +120,7 @@ router.post("/register", (req, res) => {
                     age,
                     preferences,
                     radius,
+                    bio,
                   });
                 
                   //to save password in hash format(pass the plain password and hash will be the encyrpted password)
@@ -157,7 +161,9 @@ router.post("/login", (req, res, next) => {
 
 //profile
 router.get("/profile", (req, res) => {
-    res.render("profile");
+    res.render("profile", {
+    user: req.user
+    });
 });
 
 
