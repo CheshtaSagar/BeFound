@@ -60,9 +60,30 @@ app.use(function(req, res, next) {
 //for using static files
 app.use(express.static('public'));
 
+//image route
+app.get("/image/:filename", (req, res) => {
+  // console.log('id', req.params.id)
+  const file = gfs
+    .find({
+      filename: req.params.filename
+    })
+    .toArray((err, files) => {
+      if (!files || files.length === 0) {
+        return res.status(404).json({
+          err: "no files exist"
+        });
+      }
+      gfs.openDownloadStreamByName(req.params.filename).pipe(res);
+    });
+});
+
+
 // Connecting Routes
 //any request coming will be redirected to routes's auth
 app.use("/", require('./routes/index'));
+app.use('/userProfile',require('./routes/userProfile'));
+app.use('/upload',require('./routes/upload'));
+
 
 //const PORT = process.env.PORT || 5000;
 
