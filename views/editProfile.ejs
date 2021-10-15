@@ -15,6 +15,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles/register.css" type="text/css">
     <title>Edit Profile : <%= user.username %>
     </title>
@@ -248,6 +251,19 @@
 
                 </div>
 
+
+
+                <!----Show profile preview button-->
+                <button class="btn btn-default" data-toggle="modal" data-target=".bd-example-modal-lg">
+                <img src="/images/preview1.jpg" class="img-fluid" style="border-radius: 50%; 
+                    border:3px solid black; height:70px ;width:70px;
+                     box-shadow: 7px 5px 10px rgb(161, 113, 250);
+                     position: fixed;
+                  bottom: 9px;
+                  right: 50px;">
+                </button>
+
+                <%- include ('partials/profilePreview') %>
             </div>
 
         </div>
