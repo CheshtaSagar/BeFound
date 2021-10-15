@@ -8,6 +8,9 @@ const passport = require('passport');
 const nodemailer = require("nodemailer");
 const path= require('path');
 const session = require('express-session');
+const multer=require('multer');
+const {GridFsStorage}=require('multer-gridfs-storage');
+const Grid=require('gridfs-stream');
 const methodOverride=require('method-override');
 
 // DB Config
@@ -22,6 +25,14 @@ console.log('Connected to MongoDB!!!')
 
 // Passport Config
 require('./config/passport')(passport);
+
+let gfs;
+mongoose.connection.once("open", () => {
+  // init stream
+  gfs = new mongoose.mongo.GridFSBucket(mongoose.connection.db, {
+    bucketName: "uploads"
+  });
+});
 
 
 //setting up template engine
