@@ -19,5 +19,7 @@
 #right{
     border-color: rgb(0, 0, 0);
     border-width: 15px;
-    background-color: darkgrey;
+    background-color: white;
+    height:90%;
+    border-radius: 10%;
 }

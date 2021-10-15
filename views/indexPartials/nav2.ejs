@@ -5,7 +5,10 @@
 <div>
     <div class="header-blue">
         <nav class="navbar fixed-top navbar-dark navbar-expand-md navigation-clean-search">
-            <div class="container"><a class="navbar-brand" href="/">BE FOUND</a><button class="navbar-toggler"
+            <div class="container">
+                <img class="navimg" src="/images/navimg.png" alt="">
+                <a class="navbar-brand" href="/">BE FOUND</a>
+                <button class="navbar-toggler"
                     data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
                         class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navcol-1">
@@ -24,8 +27,22 @@
 
                     </form>
                     <% if (user) { %>
-                        <a
-                        class="btn btn-light action-button" role="button" href="/logout">Logout</a>
+                            <% if (user.displayProfile) {%> 
+
+                            <img class="navimg" src="/image/<%= user.displayProfile %> " alt="altt">
+                            <% }else{ %> 
+                            <img class="navimg" src="https://img1.pnghut.com/1/16/10/nrdkyKR0fe/symbol-figure-icon-portrait-customer-redm.jpg" alt="" style="border-radius: 50%;">
+                            <% } %> 
+                        <ul class="nav navbar-nav">
+                        <li class="dropdown"><a class="dropdown-toggle nav-link dropdown-toggle" data-toggle="dropdown"
+                            aria-expanded="false"><%= user.username %></a>
+                        <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation"
+                                href="#">First Item</a><a class="dropdown-item" role="presentation" href="#">Second
+                                Item</a><a class="dropdown-item" role="presentation" href="/logout">Logout</a></div>
+                    </li>
+                </ul>
+                        <!-- <a
+                        class="btn btn-light action-button" role="button" href="/logout">Logout</a> -->
                       <% } else{%> 
                     <span class="navbar-text"> <a href="/login" class="login">Log In</a></span><a
                         class="btn btn-light action-button" role="button" href="/register">Sign Up</a>
