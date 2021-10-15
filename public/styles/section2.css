@@ -1,0 +1,29 @@
+body{
+    margin-top:20px;
+    background:#fffefe;
+}
+.order-card {
+    color:  hsl(276, 84%, 36%);
+    font-size: larger;
+    font-weight: 700;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.section2_card {
+    border-radius: 5px;
+    border: none;
+    -webkit-transition: all 0.3s ease-in-out;
+    
+}
+
+
+.section2_card .card-block {
+    padding: 25px;
+}
+
+
+

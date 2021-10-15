@@ -1,7 +1,9 @@
 .howitworks{
     padding-top: 50px;
     background: url(http://pixner.net/peyamba/peyamba/assets/images/h-it-w/bg-img.jpg);
-    height: 600px;
+   
+   /* background: url(http://pixner.net/peyamba/peyamba/assets/images/footer/right-shape.png);
+    */height: 600px;
 }
   
   
@@ -75,17 +77,17 @@
     width: 100%;
     margin: 0;
     text-align: center;
-    margin-top: 30px;
-    color: indigo;
+    margin-top: 10px;
+    color:  hsl(276, 84%, 36%);
     font-weight: 700;
+    font-size: large;
     text-transform: uppercase;
-    letter-spacing: 4px;
   }
   
 
   
   .card:hover {
-    height: 320px;
+    height: 350px;
   }
   
 

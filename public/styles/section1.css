@@ -1,19 +1,27 @@
 .banner-section{
-    padding: 120px 0 120px;
+    /* padding: 120px 0 800px;
+    background: url(http://pixner.net/peyamba/peyamba/assets/images/banner/hero-banner.png);
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: cover;  */
+    padding: 120px 0 700px;
     position: relative;
     background: url(http://pixner.net/peyamba/peyamba/assets/images/banner/hero-banner.png);
     background-repeat: no-repeat;
     background-position: bottom;
     background-size: cover;
     position: relative;
-    overflow: hidden; 
+    overflow: hidden;
 }
 
 .banner-section .img1 {
-    right: 10%;
-    animation: alternate-reverse;
+    /* position: absolute;
+    right: 10%; */
+    position: absolute;
+    right: 10%
 }
 .banner-section .img2 {
+    position: absolute;
     right: 10%;
-    animation: alternate-reverse;
+    top: 60%;
 }
