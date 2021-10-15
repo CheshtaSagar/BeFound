@@ -36,9 +36,7 @@
       padding-bottom:1rem;
     }
   }
-  .header-blue .sticky-top{
-    position: sticky,
-  }
+  
   .header-blue .navbar .navbar-brand {
     font-weight:bold;
     color:inherit;
@@ -126,7 +124,6 @@
     text-shadow:none;
     padding:.3rem .8rem;
     background:transparent;
-    transition:background-color 0.25s;
     outline:none;
   }
   

@@ -1,0 +1,16 @@
+
+
+.profile {
+    background-image: url(https://images.pexels.com/photos/281260/pexels-photo-281260.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500);
+    background-repeat: no-repeat;
+    background-size: 100% 75%;
+}
+
+.profileCard__img{
+    height: auto;
+    width: 50%;
+    margin: 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

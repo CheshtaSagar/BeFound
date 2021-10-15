@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
-var auth = require('../config/auth');
+const auth = require('../config/auth');
 const { ValidatorsImpl } = require("express-validator/src/chain");
-var isUser=auth.isUser;
+const isUser=auth.isUser;
 
 
 
-router.get("/editProfile", (req, res) => {
+router.get("/editProfile", isUser,(req, res) => {
     res.render("editProfile", {
     user: req.user
     });
@@ -15,7 +15,7 @@ router.get("/editProfile", (req, res) => {
 
 
 //to edit user profile
-router.post("/editProfile", (req, res)=> {
+router.post("/editProfile",isUser, (req, res)=> {
  console.log(req.user.email);
 
  var  person= {

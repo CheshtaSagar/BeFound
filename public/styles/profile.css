@@ -3,10 +3,10 @@
 }
 
 #left{
-    border-color: rgb(0, 0, 0); 
+    /* border-color: rgb(0, 0, 0); 
     border-width: 15px; 
     background-color: white;
-    height:90%;
+    height:90%; */
 }
 #middle{
     border-color: rgb(0, 0, 0);
@@ -18,7 +18,7 @@
 
 #right{
     border-color: rgb(0, 0, 0);
-    border-width: 15px;
+    border-width: 90%;
     background-color: white;
     height:90%;
     border-radius: 10%;
