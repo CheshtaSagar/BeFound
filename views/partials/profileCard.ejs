@@ -1,25 +1,126 @@
-<!---Left Card that shows up on profile screen-->
+<link rel="stylesheet" href="/styles/profileCard.css" />
 
-<div class="card shadow-lg p-3 mb-5 bg-white" style="width: 18rem; border-radius: 50px;
-        opacity:90%; text-align: center;" >
-     <centre><img src="/image/<%= user.displayPicture %>" alt="refresh" style="border:1px solid rgb(253, 253, 253);"class="rounded-circle" width="150px" height="150px"/></centre>
-    <div class="card-body">
-        <h5 class="card-title" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-              text-align: center;
-              font-size: 1.5em;
-              color: darkmagenta;">
-            <%= user.username %>
-        </h5>
-        <p style="color: rgb(0, 0, 0); font-size: 0.9em ">
-            <%= user.bio %>
-        </p>
-        <p style="color: black; font-size: 1.2em "><b>
-                <%= user.city %>
-            </b></p>
+<!-- -Left Card that shows up on profile screen-->
 
 
-        <hr style="width:50%; background-color:rgb(114, 15, 180)">
-        </hr>
-        <div class="text-center"><a href="/userProfile/editProfile" class="btn btn-primary center">Edit Profile</a></div>
+<div class="row py-5 px-4">
+  <div>
+    <!-- Profile widget -->
+    <div class="bg-white shadow rounded overflow-hidden">
+      <div >
+        <div class="text-center profile">
+          <div class="text-center " >
+            <% if (user.displayPicture) {%>
+            <img
+              src="/image/<%= user.displayPicture %>"
+              alt="..."
+              width="60%"
+              class="rounded pt-10 img-thumbnail"
+            />
+
+            <% }else{ %>
+            <img
+              src="https://img1.pnghut.com/1/16/10/nrdkyKR0fe/symbol-figure-icon-portrait-customer-redm.jpg"
+              style="border-radius: 50%"
+              alt=" ..."
+              width="60%"
+              class="rounded pt-10 img-thumbnail"
+            />
+            <% } %>
+
+            <!--  <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80"
+                                        alt="..." width="130" class="rounded mb-2 img-thumbnail" /> -->
+            <div class="text-center">
+              <a
+                href="/userProfile/editProfile"
+                class="btn btn-sm text-center"
+                style="
+                  width: 40%;
+                  color: rgb(255, 255, 255);
+                  background-color: cornflowerblue;
+                "
+                >Edit profile</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <div>
+            <h4><%= user.username %></h4>
+            <p class="small mb-4">
+              <i class="fas fa-map-marker-alt mr-2"></i>
+              <%= user.city %>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="bg-light text-center" style="color: blueviolet">
+        <ul class="list-inline mb-0">
+          <li class="list-inline-item">
+            <h5 class="font-weight-bold mb-0 d-block">215</h5>
+            <small class="text-muted">
+              <i class="fas fa-image mr-1"></i>Photos</small
+            >
+          </li>
+          <li class="list-inline-item">
+            <h5 class="font-weight-bold mb-0 d-block">745</h5>
+            <small class="text-muted">
+              <i class="fas fa-user mr-1"></i>Matches</small
+            >
+          </li>
+          <li class="list-inline-item">
+            <h5 class="font-weight-bold mb-0 d-block">340</h5>
+            <small class="text-muted">
+              <i class="fas fa-user mr-1"></i>Request</small>
+          </li>
+        </ul>
+      </div>
+      <div class="px-4 py-3">
+        <h5 class="mb-0">About</h5>
+        <div class="p-4 rounded shadow-sm bg-light" style="color: blueviolet">
+          <p><%= user.bio %></p>
+        </div>
+      </div>
+      <div class="py-4 px-4">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <h5 class="mb-0">Recent photos</h5>
+          <a href="#" class="btn btn-link text-muted">Show all</a>
+        </div>
+        <% if (user.profilePictures.count==0) {%>
+            <h3>0 images uploaded</h3>
+            <% }else{ %> 
+        <div class="row">
+          <div class="col-lg-6 mb-2 pr-lg-1 profileCard__img ">
+            <img
+              src="/image/<%= user.profilePictures[0] %> "
+              alt=""
+              class="img-fluid rounded shadow-sm"
+            />
+          </div>
+          <div class="col-lg-6 mb-2 pl-lg-1 profileCard__img ">
+            <img
+              src="/image/<%= user.profilePictures[1] %>"
+              alt=""
+              class="img-fluid rounded  shadow-sm"
+            />
+          </div>
+          <div class="col-lg-6 pr-lg-1 mb-2 profileCard__img ">
+            <img
+              src="/image/<%= user.profilePictures[2] %>"
+              alt=""
+              class="img-fluid rounded  shadow-sm"
+            />
+          </div>
+          <div class="col-lg-6 pl-lg-1 mb-2 profileCard__img ">
+            <img
+              src="/image/<%= user.profilePictures[3] %>"
+              alt=""
+              class="img-fluid rounded shadow-sm"
+            />
+          </div>
+        </div>
+        <% } %> 
+      </div>
     </div>
+  </div>
 </div>

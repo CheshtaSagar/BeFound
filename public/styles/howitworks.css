@@ -90,11 +90,5 @@
     height: 350px;
   }
   
-
-  
-  .card:hover .howitworks_img {
-    background-position: -120px;
-    transition: all 0.3s ease;
-  }
   
   

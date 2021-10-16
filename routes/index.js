@@ -5,8 +5,8 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs"); //for storing encrypted password
 const passport = require("passport");
 const User = require("../models/User");
-var auth = require('../config/auth');
-var isUser=auth.isUser;
+const auth = require('../config/auth');
+const isUser=auth.isUser;
 
 
 
@@ -160,15 +160,17 @@ router.post("/login", (req, res, next) => {
 });
 
 //profile
-router.get("/profile", (req, res) => {
+router.get("/profile",isUser, (req, res) => {
+  const loggedIn = req.isAuthenticated() ? true : false;
     res.render("profile", {
-    user: req.user
+    user: req.user,
+    loggedIn: loggedIn,
     });
 });
 
 
 // Logout handling
-router.get("/logout", (req, res) => {
+router.get("/logout",isUser, (req, res) => {
   req.logout(); //passport middleware function
   req.flash("success_msg", "You are logged out");
   res.redirect("/login");
