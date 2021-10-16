@@ -1,8 +1,8 @@
 <!---Left Card that shows up on profile screen-->
 
 <div class="card shadow-lg p-3 mb-5 bg-white" style="width: 18rem; border-radius: 50px;
-        opacity:90%;">
-    <img class="card-img-top " style="border-radius: 50%;" src="/images/intro.jpg" alt="Error">
+        opacity:90%; text-align: center;" >
+     <centre><img src="/image/<%= user.displayPicture %>" alt="refresh" style="border:1px solid rgb(253, 253, 253);"class="rounded-circle" width="150px" height="150px"/></centre>
     <div class="card-body">
         <h5 class="card-title" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
               text-align: center;
@@ -10,7 +10,7 @@
               color: darkmagenta;">
             <%= user.username %>
         </h5>
-        <p style="color: grey;">
+        <p style="color: rgb(0, 0, 0); font-size: 0.9em ">
             <%= user.bio %>
         </p>
         <p style="color: black; font-size: 1.2em "><b>
