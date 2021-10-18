@@ -7,8 +7,7 @@ const passport = require("passport");
 const User = require("../models/User");
 const auth = require('../config/auth');
 const isUser=auth.isUser;
-
-
+var longitude,latitude;
 
 //rendering home page
 router.get("/", (req, res) => {
@@ -28,9 +27,14 @@ router.get("/register", function (req, res) {
 
 
 //Register post Handling
-router.post("/register", (req, res) => {
+router.post("/register/:lat/:long", (req, res) => {
+  longitude=req.params.long;
+  latitude=req.params.lat;
 
+   console.log(req.params.long);
+   console.log(req.params.lat);
   const { username, email, password, password2, gender, city, age, preferences, radius, bio } = req.body;
+  const location = {"type":"Point","coordinates":[longitude, latitude]};
   let errors = [];
   //validation for email
   function isLowerCase(str) {
@@ -41,7 +45,10 @@ router.post("/register", (req, res) => {
   if (!username || !email || !password || !password2 || !gender || !city || !age || !preferences || !radius) {
     errors.push({ msg: "Please enter all fields" });
   }
-
+  if(!location)
+  {
+    errors.push({msg : "Please give access to location"});
+  }
   if (!isLowerCase(email)) {
     errors.push({ msg: "Email cannot be in upper case" });
   }
@@ -67,7 +74,7 @@ router.post("/register", (req, res) => {
       preferences,
       radius,
       bio,
-
+      
     });
   } else {
     //if Validations passed
@@ -121,6 +128,7 @@ router.post("/register", (req, res) => {
                     preferences,
                     radius,
                     bio,
+                    location,
                   });
                 
                   //to save password in hash format(pass the plain password and hash will be the encyrpted password)
@@ -151,7 +159,7 @@ router.post("/register", (req, res) => {
 
 //login handling
 router.post("/login", (req, res, next) => {
-  //console.log("hii");
+ 
   passport.authenticate("local", {
     successRedirect: "/profile",
     failureRedirect: "/login",
@@ -159,13 +167,42 @@ router.post("/login", (req, res, next) => {
   })(req, res, next);
 });
 
+
+
 //profile
 router.get("/profile",isUser, (req, res) => {
   const loggedIn = req.isAuthenticated() ? true : false;
+
+  let kmToRadian = function(miles){
+    var earthRadiusInMiles = 6378;
+    return miles / earthRadiusInMiles; //converting km to miles
+ };
+  const option = {
+     location : {
+        geoWithin : {
+            centerSphere : [ req.user.location.coordinates , kmToRadian(req.user.radius) ]
+        }
+    }
+};
+
+  User.find(
+    { gender : req.user.preferences },option).exec(
+    function (err, docs) {
+      if (err) 
+      console.log(err);
+      
+    else {
+    console.log(docs);
+    console.log(req.user.coordinates);
+    
     res.render("profile", {
     user: req.user,
     loggedIn: loggedIn,
+    recommendedUsers: docs,
     });
+
+  }});
+
 });
 
 

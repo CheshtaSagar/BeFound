@@ -47,14 +47,18 @@
 
            <!------column that shows cards for recommended people------------------>
           <div class="row" id="middle-row1">
+
+            <% recommendedUsers.forEach(function(recUser){ %>
             <div class="col">
               <div class="card" style="width:99%; padding-left: 10px; padding-right: 10px;">
                 <div class="card-body">
-                  <h5 class="card-title">Swipe left/right feature will be shown here</h5>
+                  <h5 class="card-title"><%= recUser.username %></h5>
 
                 </div>
               </div>
             </div>
+
+            <%});%>
           </div>
 
 
