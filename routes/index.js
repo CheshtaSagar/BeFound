@@ -177,32 +177,28 @@ router.get("/profile",isUser, (req, res) => {
     var earthRadiusInMiles = 6378;
     return miles / earthRadiusInMiles; //converting km to miles
  };
-  const option = {
-     location : {
-        geoWithin : {
-            centerSphere : [ req.user.location.coordinates , kmToRadian(req.user.radius) ]
-        }
+
+ //using geowithin to find users that are within particular radius
+ var lg=req.user.location.coordinates[0];
+ var lt=req.user.location.coordinates[1];
+  var option = {
+     'location' : {
+      $geoWithin : {
+            $centerSphere :  [[lg ,lt ] , kmToRadian(req.user.radius)  ]
     }
+  }
 };
 
-  User.find(
-    { gender : req.user.preferences },option).exec(
-    function (err, docs) {
-      if (err) 
-      console.log(err);
-      
-    else {
-    console.log(docs);
-    console.log(req.user.coordinates);
-    
-    res.render("profile", {
-    user: req.user,
-    loggedIn: loggedIn,
-    recommendedUsers: docs,
-    });
-
-  }});
-
+  User.find(option).then(data =>{
+    console.log(data);
+      res.render("profile", {
+      user: req.user,
+      loggedIn: loggedIn,
+      recommendedUsers: data,//all users within radius are passed to ejs, 
+                              // where we are filtering based on preference.
+      });
+  })
+  
 });
 
 
