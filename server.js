@@ -94,6 +94,7 @@ app.get("/image/:filename", (req, res) => {
 app.use("/", require('./routes/index'));
 app.use('/userProfile',require('./routes/userProfile'));
 app.use('/upload',require('./routes/upload'));
+app.use('/messages',require('./routes/messages'));
 
 
 //const PORT = process.env.PORT || 5000;

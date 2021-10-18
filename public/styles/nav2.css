@@ -1,4 +1,4 @@
-/* .header-blue {
+/* .header-purple {
     /* background:linear-gradient(135deg, #172a74, #21a9af);
     background-color:#184e8e; */
     /* padding: 0px 0 120px;
@@ -14,12 +14,12 @@
   }
   
   @media (min-width:768px) {
-    .header-blue {
+    .header-purple {
       padding-bottom:120px;
     }
   } */ 
   
-  .header-blue .navbar {
+  .header-purple .navbar {
     /* background:transparent; */
     background-color: #4e2cca;
     padding-top:.75rem;
@@ -31,28 +31,28 @@
   }
   
   @media (min-width:768px) {
-    .header-blue .navbar {
+    .header-purple .navbar {
       padding-top:1rem;
       padding-bottom:1rem;
     }
   }
   
-  .header-blue .navbar .navbar-brand {
+  .header-purple .navbar .navbar-brand {
     font-weight:bold;
     color:inherit;
   }
   
-  .header-blue .navbar .navbar-brand:hover {
+  .header-purple .navbar .navbar-brand:hover {
     color:#f0f0f0;
   }
   
-  .header-blue .navbar .navbar-collapse {
+  .header-purple .navbar .navbar-collapse {
     border-top:1px solid rgba(255,255,255,0.3);
     margin-top:.5rem;
   }
   
   @media (min-width:768px) {
-    .header-blue .navbar .navbar-collapse {
+    .header-purple .navbar .navbar-collapse {
       border-color:transparent;
       margin:0;
     }
@@ -63,60 +63,60 @@
     height: 40px;
   }
   
-  .header-blue .navbar .navbar-collapse span .login {
+  .header-purple .navbar .navbar-collapse span .login {
     color:#d9d9d9;
     margin-right:.5rem;
     text-decoration:none;
   }
   
-  .header-blue .navbar .navbar-collapse span .login:hover {
+  .header-purple .navbar .navbar-collapse span .login:hover {
     color:#fff;
   }
   
-  .header-blue .navbar .navbar-toggler {
+  .header-purple .navbar .navbar-toggler {
     border-color:rgba(255,255,255,0.3);
   }
   
-  .header-blue .navbar .navbar-toggler:hover, .header-blue .navbar-toggler:focus {
+  .header-purple .navbar .navbar-toggler:hover, .header-purple .navbar-toggler:focus {
     background:none;
   }
   
-  .header-blue .navbar .navbar-nav a.active, .header-blue .navbar .navbar-nav > .show .dropdown-item {
+  .header-purple .navbar .navbar-nav a.active, .header-purple .navbar .navbar-nav > .show .dropdown-item {
     background:none;
     box-shadow:none;
   }
   
   @media (min-width: 768px) {
-    .header-blue .navbar-nav .nav-link {
+    .header-purple .navbar-nav .nav-link {
       padding-left:.7rem;
       padding-right:.7rem;
     }
   }
   
   @media (min-width: 992px) {
-    .header-blue .navbar-nav .nav-link {
+    .header-purple .navbar-nav .nav-link {
       padding-left:1.2rem;
       padding-right:1.2rem;
     }
   }
   
-  .header-blue .navbar .navbar-nav > li > .dropdown-menu {
+  .header-purple .navbar .navbar-nav > li > .dropdown-menu {
     margin-top:-5px;
     box-shadow:0 4px 8px rgba(0,0,0,.1);
     background-color:#fff;
     border-radius:2px;
   }
   
-  .header-blue .navbar .dropdown-menu .dropdown-item:focus, .header-blue .navbar .dropdown-menu .dropdown-item {
+  .header-purple .navbar .dropdown-menu .dropdown-item:focus, .header-purple .navbar .dropdown-menu .dropdown-item {
     line-height:2;
     color:#37434d;
   }
   
-  .header-blue .navbar .dropdown-menu .dropdown-item:focus, .header-blue .navbar .dropdown-menu .dropdown-item:hover {
+  .header-purple .navbar .dropdown-menu .dropdown-item:focus, .header-purple .navbar .dropdown-menu .dropdown-item:hover {
     background:#ebeff1;
   }
   
-  .header-blue .action-button, .header-blue .action-button:not(.disabled):active {
+  .header-purple .action-button, .header-purple .action-button:not(.disabled):active {
     border:1px solid rgba(255,255,255,0.7);
     border-radius:40px;
     color:#ebeff1;
@@ -127,15 +127,15 @@
     outline:none;
   }
   
-  .header-blue .action-button:hover {
+  .header-purple .action-button:hover {
     color:#fff;
   }
   
-  .header-blue .navbar .form-inline label {
+  .header-purple .navbar .form-inline label {
     color:#d9d9d9;
   }
   
-  .header-blue .navbar .form-inline .search-field {
+  .header-purple .navbar .form-inline .search-field {
     display:inline-block;
     width:80%;
     background:none;
@@ -148,7 +148,7 @@
     transition:border-bottom-color 0.3s;
   }
   
-  .header-blue .navbar .form-inline .search-field:focus {
+  .header-purple .navbar .form-inline .search-field:focus {
     border-bottom:1px solid #ccc;
   }
   

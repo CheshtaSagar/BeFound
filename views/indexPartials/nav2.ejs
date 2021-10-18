@@ -3,7 +3,7 @@
 
 
 <div>
-    <div class="header-blue">
+    <div class="header-purple">
         <nav class="navbar fixed-top navbar-dark navbar-expand-md navigation-clean-search">
             <div class="container">
                 <img class="navimg" src="/images/navimg.png" alt="">
@@ -21,28 +21,25 @@
 
                     </form>
                     <% if (user) { %>
-                        <% if (user.displayPicture !="" ) {%>
-
-                            <img class="navimg" src="/image/<%= user.displayPicture %> " alt="altt"
-                                style="border-radius: 50%;">
-                            <% }else{ %>
-                                <img class="navimg"
-                                    src="https://img1.pnghut.com/1/16/10/nrdkyKR0fe/symbol-figure-icon-portrait-customer-redm.jpg"
-                                    alt="" style="border-radius: 50%;">
-                                <% } %>
-                                    <ul class="nav navbar-nav">
-                                        <li class="dropdown"><a class="dropdown-toggle nav-link dropdown-toggle"
-                                                data-toggle="dropdown" aria-expanded="false">
-                                                <%= user.username %>
-                                            </a>
-                                            <div class="dropdown-menu" role="menu"><a class="dropdown-item"
-                                                    role="presentation" href="/profile">Profile</a><a class="dropdown-item"
-                                                    role="presentation" href="#">Second
-                                                    Item</a><a class="dropdown-item" role="presentation"
-                                                    href="/logout">Logout</a></div>
-                                        </li>
-                                    </ul>
-                                    <!-- <a
+                        <a href="/messages">
+                        <i class="fa fa-envelope-o" style="font-size:25px;color:rgb(248, 244, 244); margin-right: 20px;"></i>
+                    </a>
+                        <a href="/profile">
+                            <% if (user.displayPicture) {%> 
+                            <img class="navimg" src="/image/<%= user.displayPicture %>" alt="altt" style="border-radius: 50%;">
+                            <% }else{ %> 
+                            <img class="navimg" src="https://img1.pnghut.com/1/16/10/nrdkyKR0fe/symbol-figure-icon-portrait-customer-redm.jpg"  alt="" style="border-radius: 50%;">
+                            <% } %> 
+                        </a>
+                        <ul class="nav navbar-nav">
+                        <li class="dropdown"><a class="dropdown-toggle nav-link dropdown-toggle" data-toggle="dropdown"
+                            aria-expanded="false"><%= user.username %></a>
+                        <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation"
+                                href="#">First Item</a><a class="dropdown-item" role="presentation" href="#">Second
+                                Item</a><a class="dropdown-item" role="presentation" href="/logout">Logout</a></div>
+                    </li>
+                </ul>
+                        <!-- <a
                         class="btn btn-light action-button" role="button" href="/logout">Logout</a> -->
                                     <% } else{%>
                                         <span class="navbar-text"> <a href="/login" class="login">Log In</a></span><a

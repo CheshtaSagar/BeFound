@@ -1,24 +1,24 @@
 .howitworks{
     padding-top: 50px;
     background: url(http://pixner.net/peyamba/peyamba/assets/images/h-it-w/bg-img.jpg);
+    background-repeat: no-repeat;
+    position: relative;
+    background-position: bottom;
+    background-size: cover;
+    overflow: hidden;
    
    /* background: url(http://pixner.net/peyamba/peyamba/assets/images/footer/right-shape.png);
-    */height: 600px;
+    */height: auto;
 }
   
   
   .howitworkscontent {  
-     padding: 0px 0px 120px;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
     position: relative;
     overflow: hidden;
     width: 100%;
-    margin: 0 auto;
     display: flex;
     justify-content: center;
-    align-items: center;
+
   }
 
 .section-header {
