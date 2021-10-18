@@ -46,7 +46,7 @@
               </h1>
               <div class="signup-form " style="overflow: auto;">
 
-                <form action="/register" method="POST">
+                <form id="form1" method="POST">
                    
                   <!---importing msgs column-->
                   <%- include ('partials/messages') %>
@@ -162,6 +162,45 @@
 </div>
 
 <%- include ('partials/footer') %>
+<script>
+  var lat,long,url;
+function getLocation()
+{
+   if(navigator.geolocation)
+   {
+     
+     navigator.geolocation.getCurrentPosition(objectUse);
+   }
+   else
+   {
+     alert("no support");
+   }
+}
+
+function objectUse(position)
+{
+  lat=position.coords.latitude;
+  long=position.coords.longitude;
+  alert("Allow website to access your location");
+  //alert("Latitude:"+ lat +" Longitude:" + long);
+  //console.log("/login/"+lat+"/"+long);
+  url="/register/"+lat+"/"+long;
+  console.log(url);
+
+  OnSubmitForm();
+}
+getLocation();
+</script>
+ 
+<script>
+  function OnSubmitForm()
+  {
+    console.log(url);
+    document.getElementById('form1').action=url;
+    return true;
+  }
+  
+  </script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>

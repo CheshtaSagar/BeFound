@@ -73,7 +73,7 @@ app.use(express.static('public'));
 
 //image route
 app.get("/image/:filename", (req, res) => {
-  //  console.log('id', req.params.id)
+
   const file = gfs
     .find({
       filename: req.params.filename
