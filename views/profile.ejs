@@ -44,18 +44,21 @@
 
        <!----col2-->
         <div class="col-12 col-lg-5" id="middle">
-
+          <h3>People you may like</h3>
+        </br>
            <!------column that shows cards for recommended people------------------>
-          <div class="row" id="middle-row1">
-
+          <div class="row" id="middle-row1" style="overflow: auto;">
+               
             <% recommendedUsers.forEach(function(recUser){ %>
               <%if(recUser.id != user.id  && recUser.gender == user.preferences){%>
             <div class="col">
               <div class="card" style="width:99%; padding-left: 10px; padding-right: 10px;">
-                <div class="card-body">
-                  <h5 class="card-title"><%= recUser.username %></h5>
-
-                </div>
+                <img class="card-img-top rounded" src="/image/<%= recUser.displayPicture %>" >
+              <div class="card-body">
+                <h5 class="card-title"><%= recUser.username %></h5>
+                <p class="card-text"><%= recUser.bio %></p>
+                <a href="#" class="btn btn-primary">See Profile</a>
+              </div>
               </div>
             </div>
 
