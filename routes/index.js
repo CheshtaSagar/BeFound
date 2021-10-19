@@ -28,6 +28,7 @@ router.get("/register", function (req, res) {
 
 //Register post Handling
 router.post("/register/:lat/:long", (req, res) => {
+  console.log("hii");
   longitude=req.params.long;
   latitude=req.params.lat;
 
