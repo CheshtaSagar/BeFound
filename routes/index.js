@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs"); //for storing encrypted password
 const passport = require("passport");
 const User = require("../models/User");
+const Conversation = require("../models/Conversation");
 const auth = require('../config/auth');
 const isUser=auth.isUser;
 var longitude,latitude;
@@ -65,7 +66,7 @@ router.post("/register/:lat/:long", (req, res) => {
   if (errors.length > 0) {
     res.render("register", {
       errors, //    if entries are not according to validation render filled fields
-      user,
+      username,
       email,
       password,
       password2,
@@ -200,6 +201,32 @@ router.get("/profile",isUser, (req, res) => {
       });
   })
   
+});
+
+
+router.get("/allUsers", function (req, res) {
+  User.find({}).exec(function (err, usrs) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render("allUsers", {
+        usrs: usrs
+      });
+    }
+  });
+});
+
+router.get("/addUser/:senderid/:id",isUser, (req, res) => {
+  const newConversation = new Conversation({
+    members: [req.params.senderid, req.params.id],
+  });
+  console.log("added");
+  try {
+    const savedConversation =newConversation.save();
+   res.status(200).json(savedConversation);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 

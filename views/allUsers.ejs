@@ -34,57 +34,31 @@
     />
     <link rel="stylesheet" href="/styles/chat.css" type="text/css" />
 
-    <title>Chat</title>
+    <title>Login</title>
   </head>
 
   <body>
     <!--importing navbar-->
     <%- include ('indexPartials/nav2') %>
-    <div class="chat__body py-5 mt-4" >
-      <div class="container-fluid" >
-        <div class="row">
-          <div class="col-12 col-lg-3 left" >
-            <div class="card">
-               <%- include('chatPartials/chatLeft') %> 
-            </div>
-          </div>
-          <div class="col-12 col-lg-7 middle" >
-            <%- include('chatPartials/chatMiddle') %> 
-            </div>
-          <!-----------third column starts here-------------------------->
-          <div class="col-12 col-lg-2 right" >
-            <div class="card">
-                <%- include('chatPartials/chatRight') %> 
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    
+    <% if(usrs.length>0){%>
+            <ul>
+        <% usrs.forEach(function(u){ %>
+           <li>
+                <h5><%= u.username %> </h5>
+               <p> <button class="btn btn-outline-success my-2 my-sm-0"><a class="nav-link"
+                           href="/addUser/<%= user.id %>/<%= u._id %>  ">Add</a></button></p>
+           </li>
+           
+        <% }); %>
+        <% }else{ %>
+       No developers are found
+        <% } %>   
+    </ul>   
+
+
     <%- include ('partials/footer') %>
   </body>
-  <!-- <script>
-   const getConversations = async () => {
-      try {
-        const res = await axios.get("/conversations/" + user._id);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    const chats=document.querySelectorAll('.users .person');
-    console.log(chats)
-   
-    Array.from(chats).forEach(function(chat){
-  chat.addEventListener('click', (e) => {
-    // console.log(chat.textContent);
-    // var middle=document.querySelector('.middle');
-    // middle.innerHTML=chat.textContent; 
-    getConversations();
-
-
-  });
-});
-  </script> -->
   <script
     src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

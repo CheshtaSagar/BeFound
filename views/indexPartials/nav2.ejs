@@ -21,7 +21,7 @@
 
                     </form>
                     <% if (user) { %>
-                        <a href="/messages">
+                        <a href="/chat/<%= user._id %>  ">
                         <i class="fa fa-envelope-o" style="font-size:25px;color:rgb(248, 244, 244); margin-right: 20px;"></i>
                     </a>
                         <a href="/profile">
@@ -35,8 +35,7 @@
                         <li class="dropdown"><a class="dropdown-toggle nav-link dropdown-toggle" data-toggle="dropdown"
                             aria-expanded="false"><%= user.username %></a>
                         <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation"
-                                href="#">First Item</a><a class="dropdown-item" role="presentation" href="#">Second
-                                Item</a><a class="dropdown-item" role="presentation" href="/logout">Logout</a></div>
+                                href="#">First Item</a><a class="dropdown-item" role="presentation" href="/allUsers">All users</a><a class="dropdown-item" role="presentation" href="/logout">Logout</a></div>
                     </li>
                 </ul>
                         <!-- <a

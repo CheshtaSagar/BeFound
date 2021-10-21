@@ -1,10 +1,10 @@
-<link rel="stylesheet" href="styles/chatmiddle.css">
+<link rel="stylesheet" href="/styles/chatmiddle.css" type="text/css">
 
 <div class="chatWrapper">
+ <% if(title==='start converse'){ %> 
 <div class="chatBoxTop" style="overflow: auto;">
     <%- include('message') %> 
-    <%- include('message') %> 
-    <%- include('message') %> 
+  
 </div>
 <div class="chatBottomBox">
     <div class="row">
@@ -16,4 +16,7 @@
     </div>
 </div>
 </div>
+<% }else{ %> 
+    <h1 class="text-center" style="color: rgb(100, 97, 97);">click on user to start conversation...</h1>
+<% } %> 
 </div>
