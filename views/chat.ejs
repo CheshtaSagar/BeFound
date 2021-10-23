@@ -34,7 +34,7 @@
     />
     <link rel="stylesheet" href="/styles/chat.css" type="text/css" />
 
-    <title>Login</title>
+    <title>Chat</title>
   </head>
 
   <body>
@@ -62,6 +62,29 @@
     </div>
     <%- include ('partials/footer') %>
   </body>
+  <!-- <script>
+   const getConversations = async () => {
+      try {
+        const res = await axios.get("/conversations/" + user._id);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    const chats=document.querySelectorAll('.users .person');
+    console.log(chats)
+   
+    Array.from(chats).forEach(function(chat){
+  chat.addEventListener('click', (e) => {
+    // console.log(chat.textContent);
+    // var middle=document.querySelector('.middle');
+    // middle.innerHTML=chat.textContent; 
+    getConversations();
+
+
+  });
+});
+  </script> -->
   <script
     src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
