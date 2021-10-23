@@ -1,89 +1,170 @@
 <div>
 
-<style>
+    <style>
+        .swiper-container {
+            height: 350px;
 
-.swiper-container{
-    height: 350px;
-    
-}
-.swiper-wrapper{
-   align-items: center;
-}
-.swiper-slide{
-    width: 250px;
-    height: 180px;
-}
-.swiper-slide img{
-    width: 250px;
-    height: 180px;
-}
-.swiper-slide-active{
-    transform: scale(1,1.5);
-    transition: .4s;
-}
-.info{
-    width: 100%;
-    padding: 8px 0;
-    background: rgba(0,0,0,0.6);
-    position: absolute;
-    bottom: 0;
-    text-align: justify;
-    border-radius: 0 0 5px 5px;
-}
-.info h3{
-    font-size: 15px;
-    margin-left: 7px;
-    font-weight: 100;
-    color: #fff;
-}
-.info p{
-    font-size: 10px;
-    margin-left: 7px;
-    color: #fff;
-}
-.info a{
-    text-decoration: none;
-    color: #fff;
-    float: right;
-    margin-right: 7px;
-    margin-top: -28px;
-    border: 1px solid #fff;
-    border-radius: 20px;
-    font-size: 10px;
-    padding: 2px 8px;
-}
-.swiper-pagination{
-    bottom: 0 !important;
-}
-</style>
+        }
 
-   <div class="row" style="height: 400px; text-align: center;">
+        .swiper-wrapper {
+            align-items: center;
+        }
 
-   
-    <div class="swiper mySwiper">
-        <div class="swiper-wrapper">
-    <% recommendedUsers.forEach(function(recUser){ %>
-        <%if(recUser.id !=user.id && recUser.gender==user.preferences){%>
-            <div class="swiper-slide">
-               
-                    <img class="card-img-top rounded" height="90%" width="70%"
-                        src="/image/<%= recUser.displayPicture %>">
-                    <div class="info" >
-                        <h3><%= recUser.username %></h3>
-                        <p><%= recUser.city %></p>
-                        <a href="/userProfile/showProfile/<%= recUser.id %>">See Profile</a>
-                    </div>
-                       
-             </div>
-                    
-                    <% }});%>
-        </div>
-        
-                    <div class="swiper-pagination"></div>
-                  
-                  
-                  
-                </div>
-                </div>
-              
+        .swiper-slide {
+            width: 250px;
+            height: 180px;
+        }
+
+        .swiper-slide img {
+            width: 250px;
+            height: 180px;
+        }
+
+        .swiper-slide-active {
+            transform: scale(1, 1.5);
+            transition: .4s;
+        }
+
+        .info {
+            width: 100%;
+            padding: 8px 0;
+            background: rgba(0, 0, 0, 0.6);
+            position: absolute;
+            bottom: 0;
+            text-align: justify;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .info h3 {
+            font-size: 15px;
+            margin-left: 7px;
+            font-weight: 100;
+            color: #fff;
+        }
+
+        .info p {
+            font-size: 10px;
+            margin-left: 7px;
+            color: #fff;
+        }
+
+        .info #a1 {
+            text-decoration: none;
+            color: #fff;
+            float: right;
+            margin-right: 7px;
+            margin-top: -28px;
+            border: 1px solid #fff;
+            border-radius: 20px;
+            font-size: 10px;
+            padding: 2px 8px;
+        }
+        .info #i1
+        {
+            float: right;
+            margin-right: 140px;
+            margin-top: -28px;
+            font-size: 25px;
+            color: red;
+            border-radius: 100%;
+         
+            padding: 2px 8px;
+        }
+        .info #i1:hover
+        {
+            background: #000000;
+            opacity: 0.8;
+            color: white;
+            transform: scale(1.2, 1.1);
+        }
+        .info #i2
+        {
+            float: right;
+            margin-right: 95px;
+            margin-top: -28px;
+            font-size: 25px;
+            color: red;
+            border-radius: 100%;
+            padding: 2px 8px;
+        }
+        .info #i2:hover
+        {
+            background: #000000;
+            opacity: 0.8;
+            color: rgb(247, 21, 108);
+            transform: scale(1.2, 1.1);
+        }
+        .swiper-pagination {
+            bottom: 0 !important;
+        }
+    </style>
+
+    <div class="row" style="height: 400px; text-align: center;">
+
+
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <% recommendedUsers.forEach(function(recUser){ %>
+                    <%if(recUser.id !=user.id && recUser.gender==user.preferences){%>
+                        <div class="swiper-slide" id="slider">
+
+                            <% if (recUser.displayPicture) {%>
+                            <img class="card-img-top rounded" height="90%" width="70%"
+                                src="/image/<%= recUser.displayPicture %>">
+                            <%}else{%>
+                            <img src="https://i.pinimg.com/originals/fd/14/a4/fd14a484f8e558209f0c2a94bc36b855.png"
+                                    style="border-radius: 50%" height="90%" width="70%" alt=" ..." class="rounded pt-10 img-thumbnail"/>
+                            <% } %>       
+                                
+                            <div class="info">
+                                <h3>
+                                    <%= recUser.username %>
+                                </h3>
+                                <p>
+                                    <%= recUser.city %>
+                                </p>
+                                
+                                <a href="/userProfile/showProfile/<%= recUser.id %>" id="a1">See Profile</a>
+                                
+                                <a href="/recommendations/deleteRecommendedUser/<%= recUser.id %>">
+                                <i class="fa fa-times-circle" id="i1" ></i>
+                                </a>
+                                <a href="/recommendations/likeRecommendedUser/<%= recUser.id %>">
+                                <i class="fa fa-heart" id="i2" ></i>
+                                </a>
+                            </div>
+                            
+
+                        </div>
+
+                        <% }});%>
             </div>
+
+            <div class="swiper-pagination"></div>
+
+
+
+        </div>
+    </div>
+
+    <script>
+        let touchstartX = 0
+        let touchendX = 0
+
+        const slider = document.getElementById('slider')
+
+        function handleGesture() {
+            if (touchendX < touchstartX) alert('swiped left!')
+            if (touchendX > touchstartX) alert('swiped right!')
+        }
+
+        slider.addEventListener('touchstart', e => {
+            touchstartX = e.changedTouches[0].screenX
+        })
+
+        slider.addEventListener('touchend', e => {
+            touchendX = e.changedTouches[0].screenX
+            handleGesture()
+        })
+    </script>
+</div>

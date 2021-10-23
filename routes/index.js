@@ -30,11 +30,12 @@ router.get("/register", function (req, res) {
 router.post("/register/:lat/:long", (req, res) => {
   longitude=req.params.long;
   latitude=req.params.lat;
-
+  
    console.log(req.params.long);
    console.log(req.params.lat);
   const { username, email, password, password2, gender, city, age, preferences, radius, bio } = req.body;
   const location = {"type":"Point","coordinates":[longitude, latitude]};
+  
   let errors = [];
   //validation for email
   function isLowerCase(str) {
@@ -129,6 +130,7 @@ router.post("/register/:lat/:long", (req, res) => {
                     radius,
                     bio,
                     location,
+                    
                   });
                 
                   //to save password in hash format(pass the plain password and hash will be the encyrpted password)
@@ -169,37 +171,6 @@ router.post("/login", (req, res, next) => {
 
 
 
-//profile
-router.get("/profile",isUser, (req, res) => {
-  const loggedIn = req.isAuthenticated() ? true : false;
-
-  let kmToRadian = function(miles){
-    var earthRadiusInMiles = 6378;
-    return miles / earthRadiusInMiles; //converting km to miles
- };
-
- //using geowithin to find users that are within particular radius
- var lg=req.user.location.coordinates[0];
- var lt=req.user.location.coordinates[1];
-  var option = {
-     'location' : {
-      $geoWithin : {
-            $centerSphere :  [[lg ,lt ] , kmToRadian(req.user.radius)  ]
-    }
-  }
-};
-
-  User.find(option).then(data =>{
-    console.log(data);
-      res.render("profile", {
-      user: req.user,
-      loggedIn: loggedIn,
-      recommendedUsers: data,//all users within radius are passed to ejs, 
-                              // where we are filtering based on preference.
-      });
-  })
-  
-});
 
 
 // Logout handling

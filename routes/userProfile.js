@@ -1,8 +1,8 @@
+//contains routes for edit profile 
 const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
 const auth = require('../config/auth');
-const { ValidatorsImpl } = require("express-validator/src/chain");
 const isUser=auth.isUser;
 
 

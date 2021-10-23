@@ -92,9 +92,13 @@ app.get("/image/:filename", (req, res) => {
 // Connecting Routes
 //any request coming will be redirected to routes's auth
 app.use("/", require('./routes/index'));
+app.use("/profile", require('./routes/profile'));
 app.use('/userProfile',require('./routes/userProfile'));
 app.use('/upload',require('./routes/upload'));
 app.use('/messages',require('./routes/messages'));
+app.use('/recommendations',require('./routes/recommendations'));
+
+
 
 
 //const PORT = process.env.PORT || 5000;

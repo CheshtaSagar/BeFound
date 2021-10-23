@@ -74,6 +74,18 @@ const UserSchema = new mongoose.Schema({
        },
 
    },
+   recommendedUsers:[     //stores all users that are recommended to the current logged in user
+    {
+     type: mongoose.Schema.Types.ObjectId,
+     ref:'User'
+    }
+  ],
+  likedUsers: [     //stores all users that the current user likes
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref:'User'
+     }
+  ],
   resetPasswordToken: String,
   resetPasswordExpire: Date,
 });
