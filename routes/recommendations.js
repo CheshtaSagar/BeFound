@@ -19,8 +19,8 @@ router.get("/deleteRecommendedUser/:id", isUser, (req, res) => {
           throw err;
         }
         else {
-          console.log(docs.recommendedUsers);
-          res.render("profile", {
+            console.log(req.params.id + " deleted");
+            res.render("profile", {
             user: req.user,
             loggedIn: loggedIn,
             recommendedUsers: docs.recommendedUsers,
@@ -54,7 +54,7 @@ router.get("/likeRecommendedUser/:id", isUser, (req, res) => {
             throw err;
           }
           else {
-            console.log(req.user.username + " likes " + docs.likedUser.username);
+            console.log(req.user.username + " likes " + likedUser.username);
             res.render("profile", {
               user: req.user,
               loggedIn: loggedIn,

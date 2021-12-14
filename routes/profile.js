@@ -33,14 +33,14 @@ router.get("/",isUser, (req, res) => {
     }
   };
   
-    if(req.user.recommendedUsers!=null)//if we are fetching users based on loaction for the first time
+    if(req.user.recommendedUsers.length == 0)//if we are fetching users based on location for the first time
     {
     User.find(option).then(data =>{
-      console.log(data);
+      console.log("Visiting profile for the first time");
   
       User.findOneAndUpdate({_id: req.user._id}, {$set:{recommendedUsers: data }}, {new: true}, (err, doc) => {
         if (err) {
-            console.log("Something wrong when updating data!");
+            console.log("Something went wrong when updating data!");
         }
           res.render("profile", {
           user: req.user,
@@ -65,10 +65,12 @@ router.get("/",isUser, (req, res) => {
           }
           else
           {
+            console.log("Already visited profile before");
+            //console.log(docs);
             res.render("profile", {
               user: req.user,
               loggedIn: loggedIn,
-              recommendedUsers: docs,//all users within radius are passed to ejs, 
+              recommendedUsers: docs.recommendedUsers,//all users within radius are passed to ejs, 
                                    // where we are filtering based on preference.
               });
           }

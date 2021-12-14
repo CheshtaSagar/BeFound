@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
 
 
-  <title>Login</title>
+  <title><%= user.username %></title>
 </head>
 
 
@@ -47,21 +47,18 @@
 
        <!----col2-->
         <div class="col-12 col-lg-5" id="middle">
-          <h3>People you may like</h3>
-        </br>
            <!------column that shows cards for recommended people------------------>
          
-          
+           <%if(recommendedUsers) {%>
+           
            <!----or include /recommendedCards ------->
            <%- include('Partials/recommendedCards') %>
          
-
+             <%}else{%>
+               <h3>Nothing</h3>
+              <%}%>
            <br>
 
-
-          
-           
-        
 
           <!-----rows that will show newsfeed- entry1-----loop will be used here--------------->
           <div class="row" id="middle-row2">
@@ -106,12 +103,7 @@
           </div>
 
 
-
-
-
         </div>
-
-
 
 
         <!-----------third column starts here-------------------------->
@@ -132,8 +124,8 @@
 
       </div>
     
-
-      <a href="/index"><img src="/images/intro.jpg" class="img-fluid" style="border-radius: 50%; 
+      
+      <a href="/"><img src="/images/intro.jpg" class="img-fluid" style="border-radius: 50%; 
         border:3px solid black; height:70px ;width:70px;
          box-shadow: 7px 5px 10px rgb(161, 113, 250);
          position: fixed;

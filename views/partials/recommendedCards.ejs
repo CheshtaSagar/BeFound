@@ -101,8 +101,9 @@
 
     <div class="row" style="height: 400px; text-align: center;">
 
-
+       
         <div class="swiper mySwiper">
+            <h5 style="text-align: left;">People you may like</h5>
             <div class="swiper-wrapper">
                 <% recommendedUsers.forEach(function(recUser){ %>
                     <%if(recUser.id !=user.id && recUser.gender==user.preferences){%>
@@ -117,15 +118,14 @@
                             <% } %>       
                                 
                             <div class="info">
-                                <h3>
+                                <h3 style="text-transform: capitalize;">
                                     <%= recUser.username %>
                                 </h3>
-                                <p>
+                                <p  style="text-transform: capitalize;">
                                     <%= recUser.city %>
                                 </p>
                                 
-                                <a href="/userProfile/showProfile/<%= recUser.id %>" id="a1">See Profile</a>
-                                
+                                <a href="/showProfile/<%= recUser.id %>" id="a1">See Profile</a>
                                 <a href="/recommendations/deleteRecommendedUser/<%= recUser.id %>">
                                 <i class="fa fa-times-circle" id="i1" ></i>
                                 </a>

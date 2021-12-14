@@ -99,10 +99,12 @@ app.use('/chat',require('./routes/chat'));
 app.use('/messages',require('./routes/messages'));
 app.use('/recommendations',require('./routes/recommendations'));
 app.use('/conversation',require('./routes/conversation'));
+app.use('/showProfile',require('./routes/showProfile'));
+
 
 
 //const PORT = process.env.PORT || 5000;
 
 const server = app.listen(5000, () =>
-  console.log("Sever running on port 5000")
+  console.log("Server running on port 5000")
 );
