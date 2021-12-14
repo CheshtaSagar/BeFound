@@ -1,101 +1,106 @@
 <link rel="stylesheet" href="/styles/profileCard.css" />
 <style>
-.info #i1
-{
-    
+  .info #i1 {
+
     margin-top: 5px;
     font-size: 35px;
     color: red;
     border-radius: 100%;
     padding: 10px;
 
-}
-.info #i1:hover
-{
+  }
+
+  .info #i1:hover {
     background: #000000;
     opacity: 0.8;
     color: white;
     transform: scale(1.2, 1.1);
-}
-.info #i2
-{
-   
+  }
+
+  .info #i2 {
+
     margin-top: 5px;
     font-size: 35px;
     color: red;
     border-radius: 100%;
     padding: 10px;
-    
-}
-.info #i2:hover
-{
+
+  }
+
+  .info #i2:hover {
     background: #000000;
     opacity: 0.8;
     color: rgb(247, 21, 108);
     transform: scale(1.2, 1.1);
-}
+  }
 </style>
 <!-- -Left Card that shows up on profile screen-->
 
 
-<div class="row py-5 px-4">
+<div class="row py-5  px-4">
   <div>
     <!-- Profile widget -->
     <div class="bg-white shadow rounded overflow-hidden">
-      <div >
+      <div>
         <div class="text-center profile">
-          <div class="text-center " >
+          <div class="text-center ">
             <% if (doc.displayPicture) {%>
-            <img
-              src="/image/<%= doc.displayPicture %>"
-              alt="..."
-              width="60%"
-              class="rounded pt-10 img-thumbnail"
-            />
+              <img src="/image/<%= doc.displayPicture %>" alt="..." width="60%" class="rounded pt-10 img-thumbnail" />
 
-            <% }else{ %>
-            <img
-              src="https://i.pinimg.com/originals/fd/14/a4/fd14a484f8e558209f0c2a94bc36b855.png"
-              style="border-radius: 50%"
-              alt=" ..."
-              width="60%"
-              class="rounded pt-10 img-thumbnail"
-            />
-            <% } %>
+              <% }else{ %>
+                <img src="https://i.pinimg.com/originals/fd/14/a4/fd14a484f8e558209f0c2a94bc36b855.png"
+                  style="border-radius: 50%" alt=" ..." width="60%" class="rounded pt-10 img-thumbnail" />
+                <% } %>
 
-            <!--  <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80"
+                  <!--  <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80"
                                         alt="..." width="130" class="rounded mb-2 img-thumbnail" /> -->
-            
+
           </div>
         </div>
         <div class="text-center">
+        </br>
           <div>
-            <h4><%= doc.username %></h4>
-            <p class="small mb-4">
+            <h4 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+              <%= doc.username %>
+            </h4>
+            <p class="md mb-4">
               <i class="fas fa-map-marker-alt mr-2"></i>
               <%= doc.city %>
             </p>
+            <%if(distance < 1){%>
+              <h6 style="color:rgb(255, 107, 8);">
+                Within 1 km
+              </h6>
+              <%}else{%>
+                <h6 style="color:rgb(255, 107, 8);">
+                  <%= distance %> km away
+                </h6>
+                <%}%>
+
+             
           </div>
         </div>
       </div>
-      
+
       <div class="px-4 py-3">
         <h5 class="mb-0">About</h5>
         <div class="p-4 rounded shadow-sm bg-light" style="color: blueviolet">
-          <p><%= doc.bio %></p>
+          <p>
+            <%= doc.bio %>
+          </p>
         </div>
       </div>
-      
 
-      
-    <div class="info" style="text-align: center;">
-       
-          <a href="/recommendations/likeRecommendedUser/<%= doc.id %>">
-          <i class="fa fa-heart" id="i2" ></i>
-          </a>
-          <a href="/recommendations/deleteRecommendedUser/<%= doc.id %>">
-            <i class="fa fa-times-circle" id="i1" ></i>
-            </a>
+
+
+      <div class="info" style="text-align: center;">
+
+        <a href="/recommendations/likeRecommendedUser/<%= doc.id %>">
+          <i class="fa fa-heart" id="i2"></i>
+        </a>
+        <a href="/recommendations/deleteRecommendedUser/<%= doc.id %>">
+          <i class="fa fa-times-circle" id="i1"></i>
+        </a>
       </div>
     </div>
 

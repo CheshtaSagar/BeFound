@@ -100,6 +100,7 @@ app.use('/messages',require('./routes/messages'));
 app.use('/recommendations',require('./routes/recommendations'));
 app.use('/conversation',require('./routes/conversation'));
 app.use('/showProfile',require('./routes/showProfile'));
+app.use('/location',require('./routes/location'));
 
 
 

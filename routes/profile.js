@@ -33,7 +33,8 @@ router.get("/",isUser, (req, res) => {
     }
   };
   
-    if(req.user.recommendedUsers.length == 0)//if we are fetching users based on location for the first time
+    if(req.user.recommendedUsers.length == 0)//if we are fetching users based on location for the first time or
+                                            // have updated location 
     {
     User.find(option).then(data =>{
       console.log("Visiting profile for the first time");
