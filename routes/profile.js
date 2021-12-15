@@ -25,11 +25,13 @@ router.get("/",isUser, (req, res) => {
    //using geowithin to find users that are within particular radius
    var lg=req.user.location.coordinates[0];
    var lt=req.user.location.coordinates[1];
+   var popup=0;
     var option = {
        'location' : {
         $geoWithin : {
               $centerSphere :  [[lg ,lt ] , kmToRadian(req.user.radius)  ]
       }
+      
     }
   };
   
@@ -47,7 +49,8 @@ router.get("/",isUser, (req, res) => {
           user: req.user,
           loggedIn: loggedIn,
           recommendedUsers: data,//all users within radius are passed to ejs, 
-                               // where we are filtering based on preference.
+          popup: popup,           // where we are filtering based on preference.
+          likedUser: null,                   
           });
         
     });
@@ -72,7 +75,8 @@ router.get("/",isUser, (req, res) => {
               user: req.user,
               loggedIn: loggedIn,
               recommendedUsers: docs.recommendedUsers,//all users within radius are passed to ejs, 
-                                   // where we are filtering based on preference.
+              popup: popup,// where we are filtering based on preference.
+              likedUser: null,                     
               });
           }
     });

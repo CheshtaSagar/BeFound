@@ -14,130 +14,185 @@
   <link href="https://fonts.googleapis.com/css2?family=Bungee+Inline&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles/login.css" type="text/css">
   <link rel="stylesheet" href="/styles/profile.css" type="text/css">
-  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
 
-  <title><%= user.username %></title>
+  <title>
+    <%= user.username %>
+  </title>
 </head>
 
 
 <body>
   <!--importing navbar-->
   <%- include ('indexPartials/nav2') %>
-  <div class="profile__body px-5">
-
-    <div class="container-fluid">
-      <div class="row">
 
 
 
-        <!----------------------------------------------------------------------->
-        <div class="col-12 col-lg-4 " id="left">
-          <%- include ('Partials/profileCard') %>
-          
-        </div>
-        <!------------------------------------------------------------------------------->
+    <div class="profile__body px-5">
+
+      <div class="container-fluid">
+        <div class="row">
 
 
 
-       <!----col2-->
-        <div class="col-12 col-lg-5" id="middle">
-           <!------column that shows cards for recommended people------------------>
-         
-           <%if(recommendedUsers) {%>
-           
-           <!----or include /recommendedCards ------->
-           <%- include('Partials/recommendedCards') %>
-         
-             <%}else{%>
-               <h3>Nothing</h3>
-              <%}%>
-           <br>
+          <!----------------------------------------------------------------------->
+          <div class="col-12 col-lg-4 " id="left">
+            <%- include ('Partials/profileCard') %>
+
+          </div>
+          <!------------------------------------------------------------------------------->
 
 
-          <!-----rows that will show newsfeed- entry1-----loop will be used here--------------->
-          <div class="row" id="middle-row2">
-            <div class="col">
 
-              <div class="card text-center">
+          <!----col2-->
+          <div class="col-12 col-lg-5" id="middle">
+            <!------column that shows cards for recommended people------------------>
 
-                <div class="card-body">
-                  <h5 class="card-title">News Feed</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-                <div class="card-footer text-muted">
-                  2 days ago
-                </div>
+            <%if(recommendedUsers) {%>
+
+              <!----or include /recommendedCards ------->
+              <%- include('Partials/recommendedCards') %>
+
+                <%}else{%>
+                  <h3>Nothing</h3>
+                  <%}%>
+                    <br>
+
+
+                    <!-----rows that will show newsfeed- entry1-----loop will be used here--------------->
+                    <div class="row" id="middle-row2">
+                      <div class="col">
+
+                        <div class="card text-center">
+
+                          <div class="card-body">
+                            <h5 class="card-title">News Feed</h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.
+                            </p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                          </div>
+                          <div class="card-footer text-muted">
+                            2 days ago
+                          </div>
+                        </div>
+
+
+                      </div>
+                    </div>
+
+
+                    <!------------news feed entry 2-->
+                    <div class="row" id="middle-row2">
+                      <div class="col">
+
+                        <div class="card text-center">
+
+                          <div class="card-body">
+                            <h5 class="card-title">News Feed</h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.
+                            </p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                          </div>
+                          <div class="card-footer text-muted">
+                            2 days ago
+                          </div>
+                        </div>
+
+
+                      </div>
+
+                    </div>
+
+
+          </div>
+
+
+          <!-----------third column starts here----------------------------------------------------------->
+          <div class="col-12 col-lg-3 " id="right">
+            <!---chat box-->
+            <div class="card">
+              <img class="card-img-top rounded" src="/images/intro.jpg" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Recent Chats</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                  card's
+                  content.</p>
+                <a href="#" class="btn btn-primary">See More Chats</a>
               </div>
-
-
             </div>
           </div>
-
-
-          <!------------news feed entry 2-->
-          <div class="row" id="middle-row2">
-            <div class="col">
-
-              <div class="card text-center">
-
-                <div class="card-body">
-                  <h5 class="card-title">News Feed</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-                <div class="card-footer text-muted">
-                  2 days ago
-                </div>
-              </div>
-
-
-            </div>
-
-          </div>
-
-
-        </div>
-
-
-        <!-----------third column starts here-------------------------->
-        <div class="col-12 col-lg-3 " id="right">
-          <!---chat box-->
-          <div class="card" >
-            <img class="card-img-top rounded" src="/images/intro.jpg" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Recent Chats</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                content.</p>
-              <a href="#" class="btn btn-primary">See More Chats</a>
-            </div>
-          </div>
-        </div>
-
+          <!---------------------------------------------------------------------------------------------->
         </div>
 
       </div>
-    
-      
+
+      <!---relocation button on boottom right corner------------------------------------------------------->   
       <a href="" id="a3" onclick='return submit()'><img src="/images/location.png" class="img-fluid" style="border-radius: 50%; 
         border:1px solid black; height:70px ;width:70px;
          box-shadow: 7px 5px 10px rgb(161, 113, 250);
          position: fixed;
       bottom: 9px;
       right: 50px;"></a>
-
+     <!---------------------------------------------------------------------------------------------------------> 
 
     </div>
-  
-  <%- include ('partials/footer') %>
+
+    
+    <!--Modal for match found popup---------------------------------------------------------------------------->
+    <div class="modal" tabindex="-1" role="dialog" id="myModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header" style="background-color: #4e2cca; padding-left: 40%; justify-content: center;">
+            <h5 class="modal-title" style="font-family: 'Libre Baskerville', serif; color: cornsilk; font-style: bold;">Match Found</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="match">
+            <img src="/image/<%= user.displayPicture %>" class="match-img" alt="altt">
+            <%if(likedUser){%>
+            <img src="/image/<%= likedUser.displayPicture %>" class="match-img" alt="altt">
+            <%}%>
+
+          </div>
+          </div>
+          <div class="modal-footer" style="align-content: center;padding-right: 25%;">
+            <button type="button" id="popup-button1" class="btn" >Start Conversation</button>
+            <button type="button"  id="popup-button2" class="btn" data-dismiss="modal">Later</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-------------------------------------------------------------------------------------------------------->
+    <%- include ('partials/footer') %>
+
+
+
+
 </body>
 
+<!-----script for match found modal-->
+<script>
+
+  var yes = '<%= popup %>';
+  window.onload = function () {
+
+    console.log("not inside if");
+    console.log("popup=" + yes);
+    if (yes == 1) {
+      $("#myModal").modal('show');
+      console.log("open");
+    }
+  };
+
+
+</script>
 <!-- Swiper JS -->
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
@@ -153,49 +208,48 @@
       el: ".swiper-pagination",
       clickable: true,
     },
-   
+
   });
 </script>
 
-
+<!------script for geolocation modal-->
 <script>
-  var lat,long,url;
-function getLocation()
-{
-   if(navigator.geolocation)
-   {
-     
-     navigator.geolocation.getCurrentPosition(objectUse);
-   }
-   else
-   {
-     alert("no support");
-   }
-}
+  var lat, long, url;
+  function getLocation() {
+    if (navigator.geolocation) {
 
-function objectUse(position)
-{
-  lat=position.coords.latitude;
-  long=position.coords.longitude;
-  //alert("Allow website to access your location");
-  //alert("Latitude:"+ lat +" Longitude:" + long);
-  //console.log("/login/"+lat+"/"+long);
-  href="/location/changeLocation/"+lat+"/"+long;
-  console.log(href);
+      navigator.geolocation.getCurrentPosition(objectUse);
+    }
+    else {
+      alert("no support");
+    }
+  }
 
-  submit();
-}
-getLocation();
+  function objectUse(position) {
+    lat = position.coords.latitude;
+    long = position.coords.longitude;
+    //alert("Allow website to access your location");
+    //alert("Latitude:"+ lat +" Longitude:" + long);
+    //console.log("/login/"+lat+"/"+long);
+    href = "/location/changeLocation/" + lat + "/" + long;
+    console.log(href);
+
+    submit();
+  }
+  getLocation();
 </script>
- 
+
+
+<!--script for relocation-->
 <script>
-  function submit()
-  {
-    document.getElementById('a3').href=href;
+  function submit() {
+    document.getElementById('a3').href = href;
     return true;
   }
-  
-  </script>
+
+</script>
+
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
   integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"

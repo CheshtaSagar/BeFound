@@ -10,6 +10,7 @@ const isUser = auth.isUser;
 
 router.get("/deleteRecommendedUser/:id", isUser, (req, res) => {
   const loggedIn = req.isAuthenticated() ? true : false;
+  var popup=0;
   User.findOneAndUpdate(
     { _id: req.user.id },
     { $pull: { recommendedUsers: req.params.id } },
@@ -25,6 +26,9 @@ router.get("/deleteRecommendedUser/:id", isUser, (req, res) => {
             user: req.user,
             loggedIn: loggedIn,
             recommendedUsers: docs.recommendedUsers,
+            popup: popup,
+            likedUser: null,
+
           });
         }
 
@@ -88,6 +92,7 @@ router.get("/likeRecommendedUser/:id", isUser, (req, res) => {
                     user: req.user,
                     loggedIn: loggedIn,
                     recommendedUsers: docs.recommendedUsers,
+                    likedUser: likedUser,
                     popup: popup,//will use this to show popup on frontend for match found
                   });
 
@@ -100,6 +105,7 @@ router.get("/likeRecommendedUser/:id", isUser, (req, res) => {
                     loggedIn: loggedIn,
                     recommendedUsers: docs.recommendedUsers,
                     popup: popup,
+                    likedUser: null,
                   });
 
                 }
