@@ -28,6 +28,7 @@ router.get("/deleteRecommendedUser/:id", isUser, (req, res) => {
             recommendedUsers: docs.recommendedUsers,
             popup: popup,
             likedUser: null,
+            opttitle: "newsfeed",
 
           });
         }
@@ -95,6 +96,7 @@ router.get("/likeRecommendedUser/:id", isUser, (req, res) => {
                     recommendedUsers: docs.recommendedUsers,
                     likedUser: likedUser,
                     popup: popup,//will use this to show popup on frontend for match found
+                    opttitle: "newsfeed",
                   });
 
                   //puhing match id in both the users' matches field   
@@ -120,6 +122,7 @@ router.get("/likeRecommendedUser/:id", isUser, (req, res) => {
                     recommendedUsers: docs.recommendedUsers,
                     popup: popup,
                     likedUser: null,
+                    opttitle: "newsfeed",
                   });
 
                 }

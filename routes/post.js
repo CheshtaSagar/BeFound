@@ -31,7 +31,7 @@ router.post("/createPost", upload.array("file",10), (req, res) => {
         post.save().then((user) => {
           req.flash("success_msg", "Posted successfully ");
           console.log("Successfully posted");
-          res.redirect("/profile");
+          res.redirect("/profile/newsfeed");
         });
 
         User.findOneAndUpdate(
