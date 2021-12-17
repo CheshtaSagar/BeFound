@@ -1,0 +1,18 @@
+
+
+  .matches-card .match-user{
+    padding: 20px 0;
+    background-color: #fff;
+    border-top: 1px solid #f1f2f2;
+    border-bottom: 1px solid #f1f2f2;
+    margin-bottom: 20px;
+  }
+  .matches-card:hover{
+    transform: scale(1.08);
+  box-shadow: 0 9px 47px 11px rgba(192, 36, 179, 0.18);
+  }
+  
+  img.profile-photo-lg{
+    height: 80px;
+    width: 80px;
+  }

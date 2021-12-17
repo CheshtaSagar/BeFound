@@ -2,14 +2,13 @@
 
 <!-- -Left Card that shows up on profile screen-->
 
-
-<div class="row py-5 px-4">
+<div class="row px-4">
   <div>
     <!-- Profile widget -->
     <div class="bg-white shadow rounded overflow-hidden">
-      <div >
+      <div>
         <div class="text-center profile">
-          <div class="text-center " >
+          <div class="text-center">
             <% if (user.displayPicture) {%>
             <img
               src="/image/<%= user.displayPicture %>"
@@ -37,7 +36,11 @@
                 style="
                   width: 40%;
                   color: rgb(255, 255, 255);
-                  background-color: cornflowerblue;
+                  background-image: linear-gradient(
+                    166deg,
+                    #f22876 0%,
+                    #942dd9 100%
+                  );
                 "
                 >Edit profile</a
               >
@@ -46,7 +49,7 @@
         </div>
         <div class="text-center">
           <div>
-            <h4 style="text-transform: capitalize;"><%= user.username %></h4>
+            <h4 style="text-transform: capitalize"><%= user.username %></h4>
             <p class="small mb-4">
               <i class="fas fa-map-marker-alt mr-2"></i>
               <%= user.city %>
@@ -71,7 +74,8 @@
           <li class="list-inline-item">
             <h5 class="font-weight-bold mb-0 d-block">340</h5>
             <small class="text-muted">
-              <i class="fas fa-user mr-1"></i>Request</small>
+              <i class="fas fa-user mr-1"></i>Request</small
+            >
           </li>
         </ul>
       </div>
@@ -87,31 +91,31 @@
           <a href="#" class="btn btn-link text-muted">Show all</a>
         </div>
         <% if (user.profilePictures.count==0) {%>
-            <h3>0 images uploaded</h3>
-            <% }else{ %> 
+        <h3>0 images uploaded</h3>
+        <% }else{ %>
         <div class="row">
-          <div class="col-lg-6 mb-2 pr-lg-1 profileCard__img ">
+          <div class="col-lg-6 mb-2 pr-lg-1 profileCard__img">
             <img
               src="/image/<%= user.profilePictures[0] %> "
               alt=""
               class="img-fluid rounded shadow-sm"
             />
           </div>
-          <div class="col-lg-6 mb-2 pl-lg-1 profileCard__img ">
+          <div class="col-lg-6 mb-2 pl-lg-1 profileCard__img">
             <img
               src="/image/<%= user.profilePictures[1] %>"
               alt=""
-              class="img-fluid rounded  shadow-sm"
+              class="img-fluid rounded shadow-sm"
             />
           </div>
-          <div class="col-lg-6 pr-lg-1 mb-2 profileCard__img ">
+          <div class="col-lg-6 pr-lg-1 mb-2 profileCard__img">
             <img
               src="/image/<%= user.profilePictures[2] %>"
               alt=""
-              class="img-fluid rounded  shadow-sm"
+              class="img-fluid rounded shadow-sm"
             />
           </div>
-          <div class="col-lg-6 pl-lg-1 mb-2 profileCard__img ">
+          <div class="col-lg-6 pl-lg-1 mb-2 profileCard__img">
             <img
               src="/image/<%= user.profilePictures[3] %>"
               alt=""
@@ -119,7 +123,7 @@
             />
           </div>
         </div>
-        <% } %> 
+        <% } %>
       </div>
     </div>
   </div>

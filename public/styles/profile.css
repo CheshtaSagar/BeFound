@@ -48,3 +48,41 @@
     box-shadow: 3px 6px 9px rgb(161, 113, 250);
 }
 
+
+
+.options {
+    width: 100%;
+    /* background-color: cornflowerblue; */
+    background-image: linear-gradient(
+166deg, #f22876 0%, #942dd9 100%);
+    margin-top: 50px;
+    margin-bottom: 20px;
+    overflow: auto;
+  }
+  
+  .options a {
+    float: left;
+    padding: 12px;
+    color: white;
+    text-decoration: none;
+    font-size: 17px;
+    width: 25%; /* Four links of equal widths */
+    text-align: center;
+  }
+  
+  .options a:hover {
+    color: #4e2cca
+  }
+  
+  /* .options a.active {
+    background-color: #a51de4;
+  } */
+  
+  @media screen and (max-width: 100px) {
+    .options a {
+      float: none;
+      display: block;
+      width: 100%;
+      text-align: left;
+    }
+  }

@@ -10,11 +10,12 @@ const passport = require("passport");
 const User = require("../models/User");
 const auth = require('../config/auth');
 const isUser=auth.isUser;
+var opttitle;
 
 
 
 //profile
-router.get("/",isUser, (req, res) => {
+router.get("/:opttitle",isUser, (req, res) => {
     const loggedIn = req.isAuthenticated() ? true : false;
   
     let kmToRadian = function(miles){
@@ -25,6 +26,8 @@ router.get("/",isUser, (req, res) => {
    //using geowithin to find users that are within particular radius
    var lg=req.user.location.coordinates[0];
    var lt=req.user.location.coordinates[1];
+   opttitle=req.params.opttitle;
+   console.log(opttitle);
    var popup=0;
     var option = {
        'location' : {
@@ -50,7 +53,8 @@ router.get("/",isUser, (req, res) => {
           loggedIn: loggedIn,
           recommendedUsers: data,//all users within radius are passed to ejs, 
           popup: popup,           // where we are filtering based on preference.
-          likedUser: null,                   
+          likedUser: null,
+          opttitle: opttitle,                   
           });
         
     });
@@ -76,7 +80,8 @@ router.get("/",isUser, (req, res) => {
               loggedIn: loggedIn,
               recommendedUsers: docs.recommendedUsers,//all users within radius are passed to ejs, 
               popup: popup,// where we are filtering based on preference.
-              likedUser: null,                     
+              likedUser: null,  
+              opttitle: opttitle,                    
               });
           }
     });

@@ -165,7 +165,7 @@ router.post("/register/:lat/:long", (req, res) => {
 router.post("/login", (req, res, next) => {
  
   passport.authenticate("local", {
-    successRedirect: "/profile",
+    successRedirect: "/profile/newsfeed",
     failureRedirect: "/login",
     failureFlash: true,
   })(req, res, next);

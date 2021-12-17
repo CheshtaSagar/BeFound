@@ -33,7 +33,7 @@ router.get('/changeLocation/:lat/:long', isUser, (req, res) => {
           else if (docs) {
             console.log("location updated: " + longitude +" "+ latitude);
             console.log(req.user._id);
-            res.redirect("/profile");
+            res.redirect("/profile/newsfeed");
           }
         }
         );

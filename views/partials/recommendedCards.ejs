@@ -103,7 +103,10 @@
 
        
         <div class="swiper mySwiper">
-            <h5 style="text-align: left;">People you may like</h5>
+            <div class="py-0  shadow rounded overflow-hidden" style="background-image: linear-gradient(
+                166deg, #f22876 0%, #942dd9 100%) ;">
+            <h5 style=" color: white;">People you may like</h5>
+        </div>
             <div class="swiper-wrapper">
                 <% recommendedUsers.forEach(function(recUser){ %>
                     <%if(recUser.id !=user.id && recUser.gender==user.preferences){%>

@@ -1,0 +1,21 @@
+<div class="optionsWrapper">
+    <% if(opttitle==='newsfeed'){ %> 
+   <div >
+    <%- include('newsfeed') %> 
+   </div>
+   <% } else if(opttitle==='detailedProfile'){ %> 
+   <div >
+    <%- include('detailedProfile') %> 
+   </div>
+   <% } else if(opttitle==='date'){ %> 
+   <div >
+    <%- include('dates') %> 
+   </div>
+   <% } else if(opttitle==='match'){ %> 
+   <div >
+    <%- include('matches') %> 
+   </div>
+   <% } else{ %> 
+       <h1 class="text-center" style="color: rgb(100, 97, 97);">click on user to start conversation...</h1>
+   <% } %> 
+   </div>

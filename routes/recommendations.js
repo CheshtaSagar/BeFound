@@ -42,7 +42,7 @@ router.get("/deleteRecommendedUser/:id", isUser, (req, res) => {
 //3)In user1's likedUsers array add id of user2 and remove it from recommendedUsers.
 //4)In user2, check if user1 is there in liked array or not
 //5)if yes,then match found, then show popup to the user and save the match id in database
-//6)else simply continue with /profile
+//6)else simply continue with /profile/newsfeed
 router.get("/likeRecommendedUser/:id", isUser, (req, res) => {
   const loggedIn = req.isAuthenticated() ? true : false;
 
