@@ -68,7 +68,7 @@ router.get("/likeRecommendedUser/:id", isUser, (req, res) => {
 
             //if likedUser also contains user id in its likedUsers array,then it is a match
             console.log(req.user.username + " likes " + likedUser.username);
-            ///
+            
 
             User.findOne(
               { _id: likedUser.id, likedUsers: req.user.id },
@@ -88,6 +88,7 @@ router.get("/likeRecommendedUser/:id", isUser, (req, res) => {
                     
                     newMatch.save().then((user) => {
                     console.log("new match created");
+                    console.log(newMatch._id);
                     res.render("profile", {
                     user: req.user,
                     loggedIn: loggedIn,
@@ -95,6 +96,19 @@ router.get("/likeRecommendedUser/:id", isUser, (req, res) => {
                     likedUser: likedUser,
                     popup: popup,//will use this to show popup on frontend for match found
                   });
+
+                  //puhing match id in both the users' matches field   
+                  User.updateMany(
+                    { _id: { $in : [req.user.id,likedUser.id] }},
+                    { $push: { matches: newMatch } },
+                    { new: true },
+                    function (err, doc) {
+                      if (err) console.log(err);
+                      else {
+                        console.log(req.user.id + " "+ likedUser.id);
+                      }
+                    }
+                  );
 
                 });
                 }

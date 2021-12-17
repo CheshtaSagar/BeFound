@@ -1,21 +1,14 @@
 <div class="col">
-    <div class="card " style="width:70%; padding-left: 10px; padding-right: 10px;">
-        <div class="card-body">
-          <h5 class="card-title">Create Post</h5>
-          
-          <form method="POST" action="#" enctype="multipart/form-data">
-            <div class="form-group">
-              <div class="form-group">
-                <textarea class="form-control" id="updates" rows="5" name="updates"
-                  placeholder="Write your text here"
-                  value="<%= typeof description != 'undefined' ? description: '' %>"></textarea>
-              </div>
-              <div class="form-group">
-                <label for="file">Add Image</label>
-                <input type="file" data-file_types="jpg|jpeg|png" class="form-control-file" name="file" id="file">
-              </div>
-            <button type="submit" class="btn btn-primary">Post</button>
-          </form>
-        </div>
-      </div>
+
+  <div class="card text-center shadow rounded overflow-hidden" >
+
+    <div class="card-body" style="padding-left:2px; padding-right: 2px;">
+      <!--<h5 class="card-title">Create Post</h5>
+      <p class="card-text">With supporting text below as a natural lead-in to additional content.
+      </p>--->
+      <img src="/images/cam.jpg" id="post-img" class="img-fluid" >
+      <button type="button" id="post-btn" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Create post........</button>
     </div>
+  </div>
+  
+</div>

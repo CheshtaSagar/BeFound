@@ -1,5 +1,5 @@
 //middleware for uploading and storing files
-
+const util = require("util")
 const crypto=require('crypto'); //to generate file names
 const multer=require('multer');
 const path= require('path');
@@ -37,4 +37,7 @@ const storage = new GridFsStorage({
   const upload = multer({
     storage
   });
-  module.exports={storage:storage,upload:upload};
+
+
+
+module.exports={storage:storage,upload:upload};
