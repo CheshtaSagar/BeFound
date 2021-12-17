@@ -3,7 +3,7 @@
     <style>
         .swiper-container {
             height: 350px;
-
+           
         }
 
         .swiper-wrapper {
@@ -99,11 +99,13 @@
         }
     </style>
 
-    <div class="row" style="height: 400px; text-align: center;">
+    <div class="row" id="rcards" style="height: 400px; text-align: center; ">
 
        
-        <div class="swiper mySwiper">
-            <h5 style="text-align: left;">People you may like</h5>
+        <div class="swiper mySwiper shadow rounded overflow-hidden">
+            <h5 style="padding-left:1%; text-align: left;font-family: 'Libre Baskerville', serif; 
+            color: rgb(67, 11, 252); 
+            font-style: bold;">People you may like</h5>
             <div class="swiper-wrapper">
                 <% recommendedUsers.forEach(function(recUser){ %>
                     <%if(recUser.id !=user.id && recUser.gender==user.preferences){%>

@@ -1,0 +1,54 @@
+<!--Modal for creating Post------------------------------------------------------------------------------>
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #4e2cca; padding-left: 30%; justify-content: center;">
+            <h5 class="modal-title" style="font-family: 'Libre Baskerville', serif; color: cornsilk; font-style: bold;">What's in your mind?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <form action="/post/createPost" enctype="multipart/form-data" method="POST">
+               
+        <div class="modal-body" style="position: relative;">
+          
+          
+                <div class="form-group">
+                    <textarea class="form-control ta" id="post-data" rows="5"
+                        name="description"
+                        placeholder="Write something here..."></textarea>
+                </div>
+                <div class="custom-file" >
+                   
+                    <input type="file" data-file_types="jpg|jpeg|png" class="custom-file-input" accept='image/*' name="file" onchange="readSingleFile(this.files)" multiple>
+                    <label class="custom-file-label" id="file-label" style="border-radius:10px;" for="file" >Choose pictures</label>
+                        
+                </div>
+                
+                
+            
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="post1" data-dismiss="modal">Discard</button>
+          <div class="form-group">
+          <button type="submit" class="btn btn-primary" id="post2">Post</button>
+          </div>
+        </div>
+
+    </form>
+      </div>
+    </div>
+</div>
+<script>
+  
+    //script for changing "choose file" to file name
+    function readSingleFile(e) {
+      const name =[];
+      for(let i=0;i<e.length;i++) 
+      name.push(e[i].name);
+
+      document.getElementById("file-label").textContent = name;
+    }
+</script>

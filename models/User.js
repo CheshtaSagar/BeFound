@@ -1,5 +1,7 @@
 
 const mongoose = require("mongoose");
+const Post = require('./Post');
+const Match = require('./Match');
 
 const UserSchema = new mongoose.Schema({
   username: {
@@ -84,6 +86,20 @@ const UserSchema = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref:'User'
+     }
+  ],
+  posts:
+  [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref:'Post'
+     }
+  ],
+  matches:
+  [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref:'Match'
      }
   ],
   resetPasswordToken: String,

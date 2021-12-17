@@ -31,14 +31,10 @@
   <!--importing navbar-->
   <%- include ('indexPartials/nav2') %>
 
-
-
     <div class="profile__body px-5">
 
       <div class="container-fluid">
         <div class="row">
-
-
 
           <!----------------------------------------------------------------------->
           <div class="col-12 col-lg-4 " id="left">
@@ -51,18 +47,33 @@
 
           <!----col2-->
           <div class="col-12 col-lg-5" id="middle">
-            <!------column that shows cards for recommended people------------------>
 
+
+            <!------Create post--------------------------------------->
+            <div class="row" id="middle-row2">
+              <%- include ('Partials/createPosts') %>
+            </div>
+            <!--------------------------------------------->
+            
+        
+          <hr style="width:100%; background-color:rgb(114, 15, 180)">
+         
+
+
+
+            <!------column that shows cards for recommended people------------------>
+            
             <%if(recommendedUsers) {%>
 
-              <!----or include /recommendedCards ------->
+              <!----or include /recommendedCards -------------------------------------------------------------------->
               <%- include('Partials/recommendedCards') %>
 
                 <%}else{%>
                   <h3>Nothing</h3>
                   <%}%>
-                    <br>
+              <!----------------------------------------------------------------------------------------------------->
 
+                  <hr style="width:100%; background-color:rgb(114, 15, 180)">
 
                     <!-----rows that will show newsfeed- entry1-----loop will be used here--------------->
                     <div class="row" id="middle-row2">
@@ -131,8 +142,9 @@
 
       </div>
 
-      <!---relocation button on boottom right corner------------------------------------------------------->   
-      <a href="" id="a3" onclick='return submit()'><img src="/images/location.png" class="img-fluid" style="border-radius: 50%; 
+      <!---relocation button on bottom right corner------------------------------------------------------->   
+      <a href="" id="a3" onclick='return submit()'>
+      <img src="/images/location.png" class="img-fluid" style="border-radius: 50%; 
         border:1px solid black; height:70px ;width:70px;
          box-shadow: 7px 5px 10px rgb(161, 113, 250);
          position: fixed;
@@ -145,7 +157,7 @@
     
     <!--Modal for match found popup---------------------------------------------------------------------------->
     <div class="modal" tabindex="-1" role="dialog" id="myModal">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header" style="background-color: #4e2cca; padding-left: 40%; justify-content: center;">
             <h5 class="modal-title" style="font-family: 'Libre Baskerville', serif; color: cornsilk; font-style: bold;">Match Found</h5>
@@ -156,8 +168,13 @@
           <div class="modal-body">
             <div class="match">
             <img src="/image/<%= user.displayPicture %>" class="match-img" alt="altt">
-            <%if(likedUser){%>
-            <img src="/image/<%= likedUser.displayPicture %>" class="match-img" alt="altt">
+            <%if(likedUser!=null){%>
+            
+              <% if (likedUser.displayPicture) {%> 
+               <img src="/image/<%= likedUser.displayPicture %>" class="match-img" alt="altt">
+               <%}else{%>
+                <img src="https://img1.pnghut.com/1/16/10/nrdkyKR0fe/symbol-figure-icon-portrait-customer-redm.jpg" class="match-img" alt="altt">
+                <%}%>
             <%}%>
 
           </div>
@@ -169,7 +186,15 @@
         </div>
       </div>
     </div>
-    <!-------------------------------------------------------------------------------------------------------->
+
+
+
+
+    <!-----Modal for creating Post------------------------------------------------------------------------------------------------------->
+    <%- include ('partials/modalForCreatePost') %>
+
+    
+    <!--------------------------------------------------------------------------------------------------------->
     <%- include ('partials/footer') %>
 
 
