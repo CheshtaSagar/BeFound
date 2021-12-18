@@ -11,7 +11,6 @@ const User = require("../models/User");
 const auth = require("../config/auth");
 const isUser = auth.isUser;
 var opttitle;
-var optresult=null;
 
 //profile
 router.get("/:opttitle", isUser, async(req, res) => {
@@ -22,23 +21,13 @@ router.get("/:opttitle", isUser, async(req, res) => {
     return miles / earthRadiusInMiles; //converting km to miles
   };
 
-  opttitle = req.params.opttitle;
-  // console.log(opttitle);
-  // if(opttitle==='match'){
-  // try {
-  //   optresult = await User.findOne({ _id: req.user.id }).populate("matches");
-  //   console.log(optresult.matches);
-  //   console.log("hi");
-  // } catch (err) {
-  //   res.redirect("/login");
-  // }
-  // }
 
 
   //using geowithin to find users that are within particular radius
   var lg = req.user.location.coordinates[0];
   var lt = req.user.location.coordinates[1];
-
+  opttitle = req.params.opttitle;
+  console.log(opttitle);
   var popup = 0;
   var option = {
     location: {
@@ -69,7 +58,6 @@ router.get("/:opttitle", isUser, async(req, res) => {
             popup: popup, // where we are filtering based on preference.
             likedUser: null,
             opttitle: opttitle,
-            optresult: optresult,
           });
         }
       );
@@ -91,7 +79,6 @@ router.get("/:opttitle", isUser, async(req, res) => {
             popup: popup, // where we are filtering based on preference.
             likedUser: null,
             opttitle: opttitle,
-            optresult: optresult,
           });
         }
       });
@@ -101,15 +88,15 @@ router.get("/:opttitle", isUser, async(req, res) => {
 
 
 
-// router.get("/findmatch/matches",async (req, res) => {
-//   try {
-//      var optresult = await User.findOne({ _id: req.user.id }).populate("matches");
-//       console.log(optresult.matches);
-//       console.log("hi");
-//       res.status(200).json(optresult);
-//     } catch (err) {
-//       res.status(500).json(err);
-//     }
-// });
+router.get("/findmatch/matches",async (req, res) => {
+  try {
+     var optresult = await User.findOne({ _id: req.user.id }).populate("matches");
+      console.log(optresult.matches);
+      console.log("hi");
+      res.status(200).json(optresult);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+});
 
 module.exports = router;
