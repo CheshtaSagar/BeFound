@@ -88,18 +88,16 @@ const UserSchema = new mongoose.Schema({
       ref:'User'
      }
   ],
-  posts:
-  [
+  posts: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref:'Post'
      }
   ],
-  matches:
-  [
+  matchedUsers: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref:'Match'
+      ref:'User'
      }
   ],
   resetPasswordToken: String,

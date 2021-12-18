@@ -10,7 +10,7 @@ const isUser = auth.isUser;
 
 router.get("/deleteRecommendedUser/:id", isUser, (req, res) => {
   const loggedIn = req.isAuthenticated() ? true : false;
-  var popup=0;
+  var popup = 0;
   User.findOneAndUpdate(
     { _id: req.user.id },
     { $pull: { recommendedUsers: req.params.id } },
@@ -38,104 +38,126 @@ router.get("/deleteRecommendedUser/:id", isUser, (req, res) => {
 });
 
 
-//1)User likes a profile(user1)
-//2)Find the id of liked profile(user2)
-//3)In user1's likedUsers array add id of user2 and remove it from recommendedUsers.
-//4)In user2, check if user1 is there in liked array or not
-//5)if yes,then match found, then show popup to the user and save the match id in database
-//6)else simply continue with /profile/newsfeed
+//1)Check if user2(liked profile) also likes user1
+//2)If yes,match found, popup value becomes 1
+//3)   In user1's and user2's matchedUsers array, add ids of one another
+//4)   From user1,remove user2 from recommendedUsers array and from user2, remove user1 from likedUsers array
+//5)   Direct to profile
+//6)Else
+//7)   From user1,remove user2 from recommendedUsers and add it in likedUsers
+//8)   Direct to profile
+
 router.get("/likeRecommendedUser/:id", isUser, (req, res) => {
   const loggedIn = req.isAuthenticated() ? true : false;
 
   var popup = 0;
-  //remove liked user from recommends and add it to liked array
-  User.findById({ _id: req.params.id }, function (err, likedUser) {
-    if (err)
-      console.log(err);
 
-    User.findOneAndUpdate(
-      { _id: req.user.id },
+  User.findOne(
+    { _id: req.params.id, likedUsers: req.user.id },
+    function (err, matchFound) {
+      if (err) {
+        console.log(err);
+        throw err;
+      }
+
+      if (matchFound) {
+        popup = 1;
+        console.log("match Found");
+
+        //removing user2 from recommendedUsers of user1 and adding it to matchedUsers
+        User.findOneAndUpdate(
+          { _id: req.user.id },
+          {
+            $pull: { recommendedUsers: req.params.id },
+            $push: { matchedUsers: matchFound }
+          },
+          { new: true }).populate("recommendedUsers").populate("matchedUsers").exec(
+            function (err, user1) {
+              if (err) {
+                console.log(err);
+                throw err;
+              }
+
+
+              //removing user1 from likedUsers of user2 and adding it to matchedUsers
+              User.findOneAndUpdate(
+                { _id: req.params.id },
+                {
+                  $pull: { likedUsers: req.user.id },
+                  $push: { matchedUsers: user1 }
+                },
+                { new: true }).exec(
+                  function (err, user2) {
+                    if (err) {
+                      console.log(err);
+                      throw err;
+                    }
+
+                    console.log("new match created");
+                    console.log("user1: " + user1.username + " matched with user2: " + user2.username);
+                    console.log(user1.matchedUsers);
+                    res.render("profile", {
+                      user: req.user,
+                      loggedIn: loggedIn,
+                      recommendedUsers: user1.recommendedUsers,
+                      matchedUsers: user1.matchedUsers,
+                      likedUser: user2,
+                      popup: popup,//will use this to show popup on frontend for match found
+                      opttitle: "newsfeed",
+                    });
+
+
+
+                  });
+
+            });
+
+      }
+      else //match not found which means no likedUser returned
       {
-        $pull: { recommendedUsers: req.params.id },
-        $push: { likedUsers: likedUser }
-      },
-      { new: true }).populate("recommendedUsers").exec(
-        function (err, docs) {
-          if (err) {
+
+
+        User.findById({ _id: req.params.id }, function (err, likedUser) {
+          if (err)
             console.log(err);
-            throw err;
-          }
-          else {
 
-            //if likedUser also contains user id in its likedUsers array,then it is a match
-            console.log(req.user.username + " likes " + likedUser.username);
-            
-
-            User.findOne(
-              { _id: likedUser.id, likedUsers: req.user.id },
-              function (err, matchFound) {
+          //remove user2's id from recommendedUsers and add it to likedUsers
+          User.findOneAndUpdate(
+            { _id: req.user.id },
+            {
+              $pull: { recommendedUsers: req.params.id },
+              $push: { likedUsers: likedUser }
+            },
+            { new: true }).populate("recommendedUsers").populate("matchedUsers").exec(
+              function (err, user1) {
                 if (err) {
                   console.log(err);
                   throw err;
                 }
-                if (matchFound) {
-                    popup = 1;
-                    console.log("match Found");
 
-                    //create a new entry in match collection
-                    const newMatch = new Match({
-                    "members" : [ req.user.id ,likedUser.id ]
-                    });
-                    
-                    newMatch.save().then((user) => {
-                    console.log("new match created");
-                    console.log(newMatch._id);
-                    res.render("profile", {
-                    user: req.user,
-                    loggedIn: loggedIn,
-                    recommendedUsers: docs.recommendedUsers,
-                    likedUser: likedUser,
-                    popup: popup,//will use this to show popup on frontend for match found
-                    opttitle: "newsfeed",
-                  });
-
-                  //puhing match id in both the users' matches field   
-                  User.updateMany(
-                    { _id: { $in : [req.user.id,likedUser.id] }},
-                    { $push: { matches: newMatch } },
-                    { new: true },
-                    function (err, doc) {
-                      if (err) console.log(err);
-                      else {
-                        console.log(req.user.id + " "+ likedUser.id);
-                      }
-                    }
-                  );
-
+                console.log("user1: " + user1.username + " likes user2: " + likedUser.username);
+                console.log(user1.matchedUsers);
+                //render profile 
+                res.render("profile", {
+                  user: req.user,
+                  loggedIn: loggedIn,
+                  recommendedUsers: user1.recommendedUsers,
+                  matchedUsers: user1.matchedUsers,
+                  popup: popup,
+                  likedUser: null,
+                  opttitle: "newsfeed",
                 });
-                }
-                else {
-
-                  res.render("profile", {
-                    user: req.user,
-                    loggedIn: loggedIn,
-                    recommendedUsers: docs.recommendedUsers,
-                    popup: popup,
-                    likedUser: null,
-                    opttitle: "newsfeed",
-                  });
-
-                }
               });
 
-          }
+
+
 
         });
+      }
 
-  });
+
+    });
 
 
 });
-
-
 module.exports = router;
