@@ -18,7 +18,7 @@
     height:90%;
     border-radius: 10%;
 }
-#popup-button1,#popup-button2,#post1,#post2{
+#popup-button1,#popup-button2,#post1,#post2,#date,#nodate{
     border-color: #4e2cca;
     border-width:2px; 
     background-color: #3700ff;
@@ -27,7 +27,7 @@
     font-style: bold;
     
 }
-#popup-button1:hover,#popup-button2:hover,#post1:hover,#post2:hover{
+#popup-button1:hover,#popup-button2:hover,#post1:hover,#post2:hover,#date:hover,#nodate:hover{
     border-color:#3700ff;
     border-width:2px; 
     background-color: #fafafa;

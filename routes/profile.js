@@ -45,7 +45,7 @@ router.get("/:opttitle", isUser, async (req, res) => {
 
     //data contains all users which are near to given latitude and longitude
     User.find(option).then(data => {
-      console.log("Visiting profile for the first time");
+      
 
       User.findOneAndUpdate({ _id: req.user._id }, { $set: { recommendedUsers: data } }, { new: true })
         .populate("matchedUsers").exec(
@@ -75,8 +75,9 @@ router.get("/:opttitle", isUser, async (req, res) => {
                   }
                 });
             }
-            else //in case of new user matches will be null
+            else //in case of new user ,matches will be null
             {
+              console.log("Visiting profile for the first time");
               res.render("profile", {
                 user: req.user,
                 loggedIn: loggedIn,
