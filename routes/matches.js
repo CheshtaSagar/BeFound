@@ -29,5 +29,16 @@ router.get("/find",async (req, res) => {
   });
 
 
+  // if(opttitle==='match'){
+  //   try {
+  //     optresult = await User.findOne({ _id: req.user.id }).populate("matches");
+  //     console.log(optresult.matches);
+  //     console.log("hi");
+  //   } catch (err) {
+  //     res.redirect("/login");
+  //   }
+  //   }
+
+
 
 module.exports = router;
