@@ -104,6 +104,7 @@ router.get("/likeRecommendedUser/:id", isUser, (req, res) => {
                       likedUser: user2,
                       popup: popup,//will use this to show popup on frontend for match found
                       opttitle: "newsfeed",
+                      posts:null
                     });
 
 
@@ -146,6 +147,7 @@ router.get("/likeRecommendedUser/:id", isUser, (req, res) => {
                   popup: popup,
                   likedUser: null,
                   opttitle: "newsfeed",
+                  posts:null
                 });
               });
 
