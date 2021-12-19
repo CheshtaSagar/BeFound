@@ -9,22 +9,21 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs"); //for storing encrypted password
 const passport = require("passport");
 const User = require("../models/User");
-const Match = require("../models/Match");
 const Post = require("../models/Post");
-const auth = require('../config/auth');
+const auth = require("../config/auth");
 const isUser = auth.isUser;
 var opttitle;
 
-
-
 //profile
-router.get("/:opttitle", isUser, (req, res) => {
+router.get("/:opttitle", isUser, async (req, res) => {
   const loggedIn = req.isAuthenticated() ? true : false;
 
   let kmToRadian = function (miles) {
     var earthRadiusInMiles = 6378;
     return miles / earthRadiusInMiles; //converting km to miles
   };
+
+
 
   //using geowithin to find users that are within particular radius
   var lg = req.user.location.coordinates[0];
@@ -33,12 +32,11 @@ router.get("/:opttitle", isUser, (req, res) => {
   console.log(opttitle);
   var popup = 0;
   var option = {
-    'location': {
+    location: {
       $geoWithin: {
-        $centerSphere: [[lg, lt], kmToRadian(req.user.radius)]
-      }
-
-    }
+        $centerSphere: [[lg, lt], kmToRadian(req.user.radius)],
+      },
+    },
   };
 
   if (req.user.recommendedUsers.length == 0)//if we are fetching users based on location for the first time or
@@ -50,20 +48,34 @@ router.get("/:opttitle", isUser, (req, res) => {
       console.log("Visiting profile for the first time");
 
       User.findOneAndUpdate({ _id: req.user._id }, { $set: { recommendedUsers: data } }, { new: true })
-      .populate("matchedUsers").exec(
-        function (err, doc){
-        if (err) {
-          console.log("Something went wrong when updating data!");
-        }
-        else if(doc.matchedUsers) //if we are updating loation then previous matches still exist
-        {
-          //finding posts of matched users for newsfeed
-          Post.find({ "postedBy": { $in: doc.matchedUsers } }).populate("postedBy").sort({ Date: -1 })
-          .exec(function (err, posts) {
+        .populate("matchedUsers").exec(
+          function (err, doc) {
             if (err) {
-              console.log(err);
+              console.log("Something went wrong when updating data!");
             }
-            else 
+            else if (doc.matchedUsers) //if we are updating loation then previous matches still exist
+            {
+              //finding posts of matched users for newsfeed
+              Post.find({ "postedBy": { $in: doc.matchedUsers } }).populate("postedBy").sort({ Date: -1 })
+                .exec(function (err, posts) {
+                  if (err) {
+                    console.log(err);
+                  }
+                  else {
+                    res.render("profile", {
+                      user: req.user,
+                      loggedIn: loggedIn,
+                      recommendedUsers: data,//all users within radius are passed to ejs, 
+                      popup: popup,         // where we are filtering based on preference.
+                      likedUser: null,
+                      opttitle: opttitle,
+                      posts: posts
+                    });
+
+                  }
+                });
+            }
+            else //in case of new user matches will be null
             {
               res.render("profile", {
                 user: req.user,
@@ -72,28 +84,13 @@ router.get("/:opttitle", isUser, (req, res) => {
                 popup: popup,         // where we are filtering based on preference.
                 likedUser: null,
                 opttitle: opttitle,
-                posts:posts
+                posts: null
               });
-              
             }
           });
-        }
-        else //in case of new user matches will be null
-        {
-        res.render("profile", {
-          user: req.user,
-          loggedIn: loggedIn,
-          recommendedUsers: data,//all users within radius are passed to ejs, 
-          popup: popup,         // where we are filtering based on preference.
-          likedUser: null,
-          opttitle: opttitle,
-          posts:null
-        });
-       }
-      });
 
     });
-    
+
   }
 
   else {
@@ -113,7 +110,7 @@ router.get("/:opttitle", isUser, (req, res) => {
               else {
                 console.log("Already visited profile before");
                 //console.log(docs.recommendedUsers);
-                  res.render("profile", {
+                res.render("profile", {
                   user: req.user,
                   loggedIn: loggedIn,
                   recommendedUsers: docs.recommendedUsers,//all users within radius are passed to ejs, 
@@ -123,14 +120,30 @@ router.get("/:opttitle", isUser, (req, res) => {
                   posts: posts,
                 });
               }
-                console.log(posts);
+              console.log(posts);
             });
-          }
-        });
-      }
-
+        }
       });
+  }
+
+});
 
 
 
-    module.exports = router;
+
+/*
+
+router.get("/findmatch/matches", async (req, res) => {
+  try {
+    var optresult = await User.findOne({ _id: req.user.id }).populate("matches");
+    console.log(optresult.matches);
+    console.log("hi");
+    res.status(200).json(optresult);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+*/
+
+module.exports = router;
+

@@ -1,0 +1,15 @@
+.about-post .commentimg{
+    width: 20px;
+    height: 20px;
+}
+.about-post .comment-content{
+    text-size-adjust:  30px;
+}
+
+.about-post input{
+    width:90%;
+    border:0;
+    font-family:"Oxygen";
+    padding-left:10px;
+    margin-top:-10px;
+  }
