@@ -13,6 +13,7 @@ const Post = require("../models/Post");
 const auth = require("../config/auth");
 const isUser = auth.isUser;
 var opttitle;
+var optresult=null;
 
 //profile
 router.get("/:opttitle", isUser, async (req, res) => {
@@ -29,7 +30,24 @@ router.get("/:opttitle", isUser, async (req, res) => {
   var lg = req.user.location.coordinates[0];
   var lt = req.user.location.coordinates[1];
   opttitle = req.params.opttitle;
-  console.log(opttitle);
+  //console.log(opttitle);
+  
+  if(opttitle==='match'){
+    console.log("inside matches");
+    try {
+      optresult = await User.findOne({ _id: req.user.id }).populate("matchedUsers");
+      //console.log(optresult.matchedUsers);
+      //console.log("hi");
+    } catch (err) {
+      optresult=null;
+      console.log("error in matches");
+      console.log(err);
+
+    }
+    }
+
+
+
   var popup = 0;
   var option = {
     location: {
@@ -69,7 +87,8 @@ router.get("/:opttitle", isUser, async (req, res) => {
                       popup: popup,         // where we are filtering based on preference.
                       likedUser: null,
                       opttitle: opttitle,
-                      posts: posts
+                      posts: posts,
+                      optresult: optresult
                     });
 
                   }
@@ -85,7 +104,8 @@ router.get("/:opttitle", isUser, async (req, res) => {
                 popup: popup,         // where we are filtering based on preference.
                 likedUser: null,
                 opttitle: opttitle,
-                posts: null
+                posts: null,
+                optresult: null,
               });
             }
           });
@@ -119,9 +139,10 @@ router.get("/:opttitle", isUser, async (req, res) => {
                   likedUser: null,
                   opttitle: opttitle,
                   posts: posts,
+                  optresult:optresult,
                 });
               }
-              console.log(posts);
+             // console.log(posts);
             });
         }
       });
@@ -132,19 +153,19 @@ router.get("/:opttitle", isUser, async (req, res) => {
 
 
 
-/*
+
 
 router.get("/findmatch/matches", async (req, res) => {
+  console.log("hi");
   try {
     var optresult = await User.findOne({ _id: req.user.id }).populate("matches");
-    console.log(optresult.matches);
     console.log("hi");
+    //console.log(optresult);
     res.status(200).json(optresult);
   } catch (err) {
     res.status(500).json(err);
   }
 });
-*/
 
 module.exports = router;
 

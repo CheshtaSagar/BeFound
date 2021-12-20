@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
+const User = require('./User');
 
-const MatchSchema = new mongoose.Schema(
+const ScheduleDateSchema = new mongoose.Schema(
     {
 
         user1: {
@@ -11,20 +12,23 @@ const MatchSchema = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
         },
-        date: {
-            type: Date,
+        sdate: {
+            type: Date
         },
-        time: {
-            type: time,
+        stime: {
+            type: String
         },
         location: {
-            type: String,
+            type: String
+        },
+        theme: {
+            type: String
         },
         status:{
-            type: String,
+            type: String
         }
     },
     { timestamps: true }
 );
 
-module.exports = mongoose.model("Match", MatchSchema);
+module.exports = mongoose.model("ScheduleDate", ScheduleDateSchema);

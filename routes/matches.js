@@ -17,16 +17,16 @@ router.get("/find",async (req, res) => {
 
 
 
-  router.get("/findmatch/matches",async (req, res) => {
-    try {
-       var optresult = await User.findOne({ _id: req.user.id }).populate("matches");
-        console.log(optresult.matches);
-        console.log("hi");
-        res.status(200).json(optresult);
-      } catch (err) {
-        res.status(500).json(err);
-      }
-  });
+  // router.get("/findmatch/matches",async (req, res) => {
+  //   try {
+  //      var optresult = await User.findOne({ _id: req.user.id }).populate("matches");
+  //       console.log(optresult.matches);
+  //       console.log("hi");
+  //       res.status(200).json(optresult);
+  //     } catch (err) {
+  //       res.status(500).json(err);
+  //     }
+  // });
 
 
   // if(opttitle==='match'){
