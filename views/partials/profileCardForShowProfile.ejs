@@ -45,7 +45,7 @@
         <div class="text-center profile">
           <div class="text-center ">
             <% if (doc.displayPicture) {%>
-              <img src="/image/<%= doc.displayPicture %>" alt="..." width="60%" class="rounded pt-10 img-thumbnail" />
+              <img src="/image/<%= doc.displayPicture %>" alt="..." width="60%" class="rounded pt-10 img-thumbnail" style="object-fit: cover;"/>
 
               <% }else{ %>
                 <img src="https://i.pinimg.com/originals/fd/14/a4/fd14a484f8e558209f0c2a94bc36b855.png"

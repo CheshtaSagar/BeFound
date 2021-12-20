@@ -17,7 +17,7 @@
             <div class="user">
                 
                 <% if (c.members[1].displayPicture) {%> 
-                    <img  src="/image/<%= c.members[1].displayPicture %>" alt="altt" style="border-radius: 50%;">
+                    <img  src="/image/<%= c.members[1].displayPicture %>" alt="altt" style="border-radius: 50%; object-fit: cover;">
                     <% }else{ %> 
                     <img  src="https://i.pinimg.com/originals/fd/14/a4/fd14a484f8e558209f0c2a94bc36b855.png"  alt="" style="border-radius: 50%;">
                     <% } %> 

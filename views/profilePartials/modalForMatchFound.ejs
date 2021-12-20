@@ -22,7 +22,7 @@
           <div class="match">
 
             <% if (user.displayPicture) {%>
-              <img src="/image/<%= user.displayPicture %>" class="match-img" alt="altt">
+              <img src="/image/<%= user.displayPicture %>" class="match-img" alt="altt" style="object-fit: cover;">
               <%}else{%>
                 <img src="https://img1.pnghut.com/1/16/10/nrdkyKR0fe/symbol-figure-icon-portrait-customer-redm.jpg"
                   class="match-img" alt="altt">
@@ -31,7 +31,7 @@
                   <%if(likedUser!=null){%>
 
                     <% if (likedUser.displayPicture) {%>
-                      <img src="/image/<%= likedUser.displayPicture %>" class="match-img" alt="altt">
+                      <img src="/image/<%= likedUser.displayPicture %>" class="match-img" alt="altt" style="object-fit: cover;">
                       <%}else{%>
                         <img
                           src="https://img1.pnghut.com/1/16/10/nrdkyKR0fe/symbol-figure-icon-portrait-customer-redm.jpg"

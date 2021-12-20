@@ -103,6 +103,7 @@ app.use('/showProfile',require('./routes/showProfile'));
 app.use('/location',require('./routes/location'));
 app.use('/post',require('./routes/post'));
 app.use('/comment',require('./routes/comment'));
+app.use('/scheduleDate',require('./routes/scheduleDate'));
 
 
 

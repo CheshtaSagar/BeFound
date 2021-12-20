@@ -31,7 +31,7 @@
   <%- include ('indexPartials/nav2') %>
     <section>
       <div>
-        <img src="/images/bc-about.jpg" alt="">
+        <img width=100% src="/images/bc-about.jpg" alt="">
 
 
       </div>
@@ -42,7 +42,7 @@
         <div class="container-fluid">
           <div class="row">
             <!----------------------------------------------------------------------->
-            <div class="col-12 col-lg-4" id="left">
+            <div class="col-sm-12 col-lg-4" id="left">
               <%- include ('Partials/profileCard') %>
             </div>
             <!------------------------------------------------------------------------------->
@@ -56,7 +56,7 @@
 
 
               <!------Create post--------------------------------------->
-              <div class="row" id="middle-row2">
+              <div class="row px-0" id="middle-row2">
                 <%- include ('profilePartials/createPosts') %>
               </div>
               <!--------------------------------------------->
@@ -79,7 +79,7 @@
                         <a href="/profile/date"><i class="fas fa-calendar-day"></i> Date</a>
                         <a href="/profile/match"><i class="fab fa-gratipay"></i> Match</a>
                       </div>
-
+                      <%- include ('partials/messages') %>
                       <div>
                         <%- include('profilePartials/options') %>
                       </div>
@@ -222,6 +222,27 @@
     document.getElementById("a3").href = href;
     return true;
   }
+</script>
+
+<script>
+  var matchid,formurl;
+  function setactionval(matid){
+    matchid=matid;
+    console.log(matchid);
+    formurl="/scheduleDate/request/"+matchid;
+    console.log(formurl);
+    $("#dateRequest").attr("action", formurl);
+}
+
+//   $('#dateModalCenter').on('show.bs.modal', function (event) {
+//     var matchid = $(event.relatedTarget).data('matchid');
+//     console.log(matchid);
+//     $(e.currentTarget).find(.dateRequest).val(bookId);
+// //document.getElementById("dateRequest").action = matchid;
+//     // $(".oEbutn").click(function() {
+//     // $(this).closest("form").attr("action", "/shop/extras.php");       
+// //});
+//   });
 </script>
 
 <script src="https://kit.fontawesome.com/fba7a05067.js" crossorigin="anonymous"></script>
