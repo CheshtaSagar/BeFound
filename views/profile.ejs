@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles/login.css" type="text/css" />
   <link rel="stylesheet" href="/styles/profile.css" type="text/css" />
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
@@ -48,9 +49,9 @@
 
 
 
-            <!----col2-->
+            <!----col2 contains create post,recommendations,newsfeed-->
             <div class="col-12 col-lg-5 py-0 shadow rounded overflow-hidden" id="middle">
-              <!------column that shows cards for recommended people------------------>
+             
 
 
 
@@ -61,6 +62,7 @@
               <!--------------------------------------------->
 
 
+               <!------column that shows cards for recommended people------------------>
               <%if(recommendedUsers) {%>
 
                 <!----or include /recommendedCards ------->
@@ -82,41 +84,8 @@
                         <%- include('profilePartials/options') %>
                       </div>
 
-                      <!-----rows that will show newsfeed- entry1-----loop will be used here--------------->
-                      <!-- <div class="row" id="middle-row2">
-              <div class="col">
-                <div class="card text-center">
-                  <div class="card-body">
-                    <h5 class="card-title">News Feed</h5>
-                    <p class="card-text">
-                      With supporting text below as a natural lead-in to
-                      additional content.
-                    </p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                  </div>
-                  <div class="card-footer text-muted">2 days ago</div>
-                </div>
-              </div>
-            </div> -->
-
-                      <!------------news feed entry 2-->
-                      <!-- <div class="row" id="middle-row2">
-              <div class="col">
-                <div class="card text-center">
-                  <div class="card-body">
-                    <h5 class="card-title">News Feed</h5>
-                    <p class="card-text">
-                      With supporting text below as a natural lead-in to
-                      additional content.
-                    </p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                  </div>
-                  <div class="card-footer text-muted">2 days ago</div>
-                </div>
-              </div>
-            </div> -->
-            </div>
-
+                     
+                    </div>
             <!-----------third column starts here----------------------------------------------------------->
             <div class="col-12 col-lg-3" id="right">
               <!---chat box-->
@@ -198,6 +167,8 @@
 
 <!-- Initialize Swiper -->
 <script>
+
+  //for recommended cards
   var swiper = new Swiper(".mySwiper", {
     slidesPerView: "auto",
     spaceBetween: 30,
@@ -205,8 +176,17 @@
     grabCursor: true,
     loop: true,
     pagination: {
-      el: ".swiper-pagination",
+      el: ".swiper-pagination1",
       clickable: true,
+    },
+  });
+
+
+  //for newsfeed images
+  var swiper2 = new Swiper(".mySwiper2", {
+    grabCursor: true,
+    pagination: {
+      el: ".swiper-pagination2 ",
     },
   });
 </script>

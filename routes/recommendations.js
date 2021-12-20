@@ -95,7 +95,7 @@ router.get("/likeRecommendedUser/:id", isUser, (req, res) => {
 
                     console.log("new match created");
                     console.log("user1: " + user1.username + " matched with user2: " + user2.username);
-                    console.log(user1.matchedUsers);
+                    //console.log(user1.matchedUsers);
                     res.render("profile", {
                       user: req.user,
                       loggedIn: loggedIn,
@@ -137,7 +137,7 @@ router.get("/likeRecommendedUser/:id", isUser, (req, res) => {
                 }
 
                 console.log("user1: " + user1.username + " likes user2: " + likedUser.username);
-                console.log(user1.matchedUsers);
+                //console.log(user1.matchedUsers);
                 //render profile 
                 res.render("profile", {
                   user: req.user,

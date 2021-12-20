@@ -103,7 +103,7 @@ router.get("/:opttitle", isUser, async (req, res) => {
         }
         else {
 
-          Post.find({ "postedBy": { $in: docs.matchedUsers } }).populate("postedBy").sort({ Date: -1 })
+          Post.find({ "postedBy": { $in: docs.matchedUsers } }).populate("postedBy").populate("comments.createdBy").sort({ Date: -1 })
             .exec(function (err, posts) {
               if (err) {
                 console.log(err);
@@ -120,8 +120,10 @@ router.get("/:opttitle", isUser, async (req, res) => {
                   opttitle: opttitle,
                   posts: posts,
                 });
+
+                console.log(posts);
               }
-              console.log(posts);
+              
             });
         }
       });
@@ -130,21 +132,6 @@ router.get("/:opttitle", isUser, async (req, res) => {
 });
 
 
-
-
-/*
-
-router.get("/findmatch/matches", async (req, res) => {
-  try {
-    var optresult = await User.findOne({ _id: req.user.id }).populate("matches");
-    console.log(optresult.matches);
-    console.log("hi");
-    res.status(200).json(optresult);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-*/
 
 module.exports = router;
 

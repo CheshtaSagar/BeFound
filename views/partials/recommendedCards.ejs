@@ -1,31 +1,31 @@
 <div>
 
     <style>
-        .swiper-container {
+        .swiper mySwiper {
             height: 350px;
            
         }
 
-        .swiper-wrapper {
+        .mySwiper .swiper-wrapper {
             align-items: center;
         }
 
-        .swiper-slide {
+        .mySwiper .swiper-slide {
             width: 250px;
             height: 180px;
         }
 
-        .swiper-slide img {
+        .mySwiper .swiper-slide img {
             width: 250px;
             height: 180px;
         }
 
-        .swiper-slide-active {
+        .mySwiper .swiper-slide-active {
             transform: scale(1, 1.5);
             transition: .4s;
         }
 
-        .info {
+        .mySwiper .info {
             width: 100%;
             padding: 8px 0;
             background: rgba(0, 0, 0, 0.6);
@@ -35,20 +35,20 @@
             border-radius: 0 0 5px 5px;
         }
 
-        .info h3 {
+        .mySwiper .info h3 {
             font-size: 15px;
             margin-left: 7px;
             font-weight: 100;
             color: #fff;
         }
 
-        .info p {
+        .mySwiper .info p {
             font-size: 10px;
             margin-left: 7px;
             color: #fff;
         }
 
-        .info #a1 {
+        .mySwiper .info #a1 {
             text-decoration: none;
             color: #fff;
             float: right;
@@ -59,7 +59,7 @@
             font-size: 10px;
             padding: 2px 8px;
         }
-        .info #i1
+        .mySwiper .info #i1
         {
             float: right;
             margin-right: 140px;
@@ -67,17 +67,16 @@
             font-size: 25px;
             color: red;
             border-radius: 100%;
-         
             padding: 2px 8px;
         }
-        .info #i1:hover
+        .mySwiper .info #i1:hover
         {
             background: #000000;
             opacity: 0.8;
             color: white;
             transform: scale(1.2, 1.1);
         }
-        .info #i2
+        .mySwiper .info #i2
         {
             float: right;
             margin-right: 95px;
@@ -87,15 +86,15 @@
             border-radius: 100%;
             padding: 2px 8px;
         }
-        .info #i2:hover
+        .mySwiper .info #i2:hover
         {
             background: #000000;
             opacity: 0.8;
             color: rgb(247, 21, 108);
             transform: scale(1.2, 1.1);
         }
-        .swiper-pagination {
-            bottom: 0 !important;
+        .mySwiper .swiper-pagination{
+            bottom:0 !important;
         }
     </style>
 
@@ -143,10 +142,7 @@
                         <% }});%>
             </div>
 
-            <div class="swiper-pagination"></div>
-
-
-
+            <div class="swiper-pagination swiper-pagination1"></div>
         </div>
     </div>
 
