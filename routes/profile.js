@@ -74,7 +74,10 @@ router.get("/:opttitle", isUser, async (req, res) => {
             else if (doc.matchedUsers) //if we are updating loation then previous matches still exist
             {
               //finding posts of matched users for newsfeed
-              Post.find({ "postedBy": { $in: doc.matchedUsers } }).populate("postedBy").sort({ Date: -1 })
+              var creators=doc.matchedUsers;
+              creators.push(req.user._id);
+              //console.log(creators);
+              Post.find({ "postedBy": { $in: creators } }).populate("postedBy").sort({ Date: -1 })
                 .exec(function (err, posts) {
                   if (err) {
                     console.log(err);
@@ -122,8 +125,10 @@ router.get("/:opttitle", isUser, async (req, res) => {
           throw err;
         }
         else {
-
-          Post.find({ "postedBy": { $in: docs.matchedUsers } }).populate("postedBy").populate("comments.createdBy").sort({ Date: -1 })
+          var creators=docs.matchedUsers;
+          creators.push(docs);
+          //console.log(creators);
+          Post.find({ "postedBy": { $in: creators } }).populate("postedBy").populate("comments.createdBy").sort({ Date: -1 })
             .exec(function (err, posts) {
               if (err) {
                 console.log(err);

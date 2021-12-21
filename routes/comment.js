@@ -19,7 +19,7 @@ router.post("/post/:id", (req, res) => {
           if (err) console.log(err);
           else {
             console.log("Commented");
-            console.log(post);
+            //console.log(post);
             res.redirect("/profile/newsfeed");
           }
         }

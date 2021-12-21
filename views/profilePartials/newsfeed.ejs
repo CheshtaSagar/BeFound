@@ -99,14 +99,29 @@
 
 
           </div>
+
+
+          <!----Liking and disliking a post--------------------------------------------------------------->
           <div class="card-footer py-0">
             <div class="icons row">
               <div class="col-9">
-                <i class="bi bi-heart fa-2x px-2"></i>
+                <a href="javascript:void(0)" onclick="increaseLikes('<%= post.id%>','<%= post.likes %>')"
+                  style="text-decoration: none;">
+
+
+                  <!--if post is already liked by user show it in red-->
+                  <% if(post.likedBy.indexOf(user.id) !==-1){ %>
+                    <i id="icon-<%= post.id%>" class="bi bi-heart-fill fa-2x px-2" style="color:red"></i>
+                    <%}else{%>
+                      <i id="icon-<%= post.id%>" class="bi bi-heart fa-2x px-2" style="color:black"></i>
+                      <%}%>
+                </a>
               </div>
             </div>
             <div class="about-post">
-              <h6>104,424 likes</h6>
+              <h6 id="likeCount-<%= post.id %>">
+                <%= post.likes %> likes
+              </h6>
               <p></p>
               <h5>
                 <%= post.postedBy.username%>
@@ -117,46 +132,24 @@
                   </span>
               </h5>
 
+
+
+              <!---For Comments----------->
               <%if(post.comments.length>0){%>
-              <!-------View comments-->
-              <a class="text-muted" onClick="showComments('<%= post.id %>')" id="show-comments-tag"
-                href="javascript:void(0)" style="text-decoration: none;">View all comments</a>
+                <!-------View comments-->
+                <a class="text-muted" onClick="showComments('<%= post.id %>')" id="show-comments-tag"
+                  href="javascript:void(0)" style="text-decoration: none;">View all comments</a>
 
 
-              <!--All comments-------------------------------------------------------------------------->
-              <div id="show-comments<%= post.id %>" style="display: none;">
-                <% post.comments.forEach(function(com){ %>
-                  <div class="row">
-                    <%if(com.createdBy.id==user.id ){%>
-                      <div class="col-6"></div>
+                <!--All comments-------------------------------------------------------------------------->
+                <div id="show-comments<%= post.id %>" style="display: none;">
+                  <% post.comments.forEach(function(com){ %>
+                    <div class="row">
+                      <%if(com.createdBy.id==user.id ){%>
+                        <div class="col-6"></div>
 
-                      <div class="col-6">
-
-                        <h5 style="text-transform: capitalize;">
-
-                          <% if (com.createdBy.displayPicture) {%>
-                            <img class="commentimg" src="/image/<%= com.createdBy.displayPicture %>" alt="altt"
-                              style="border-radius: 50%" />
-                            <% }else{ %>
-                              <img class="commentimg"
-                                src="https://pbs.twimg.com/card_img/1472392722673811457/wMz62V7-?format=png&name=360x360"
-                                alt="" style="border-radius: 50%" />
-                              <% } %>
-
-                                <span style="font-size:medium;">
-                                  <%= com.createdBy.username %>
-                                </span>
-                                <span class="comment-content" style="font-size: small; 
-                    color: rgb(39, 39, 38);
-                    text-transform: capitalize;">
-                                  <%= com.comment %>
-                                </span>
-                        </h5>
-                      </div>
-
-
-                      <%}else{%>
                         <div class="col-6">
+
                           <h5 style="text-transform: capitalize;">
 
                             <% if (com.createdBy.displayPicture) {%>
@@ -172,65 +165,93 @@
                                     <%= com.createdBy.username %>
                                   </span>
                                   <span class="comment-content" style="font-size: small; 
-                      color: rgb(39, 39, 38);
-                      text-transform: capitalize;">
+                                     color: rgb(39, 39, 38);
+                                      text-transform: capitalize;">
                                     <%= com.comment %>
                                   </span>
                           </h5>
                         </div>
-                        <%}%>
 
-                  </div>
-                  <%});%>
-              </div>
-              <!---------------------------------------------------------------------------------------->
 
-             
-              <!-------hide comments-->
-              <a class="text-muted" onClick="hideComments('<%= post.id %>')" id="hide-comments-tag<%=post.id%>"
-                href="javascript:void(0)" style="text-decoration: none; display: none;">Hide all comments</a>
-              <%}else{%>
-                <a class="text-muted"  href="javascript:void(0)" style="text-decoration: none;">No Comments</a>
-              <%}%>
-              <!--------Form for posting comment-------------->
-              <h4>
+                        <%}else{%>
+                          <div class="col-6">
+                            <h5 style="text-transform: capitalize;">
 
-                <form action="/comment/post/<%= post.id %>" method="POST">
-                  <div class="row">
+                              <% if (com.createdBy.displayPicture) {%>
+                                <img class="commentimg" src="/image/<%= com.createdBy.displayPicture %>" alt="altt"
+                                  style="border-radius: 50%" />
+                                <% }else{ %>
+                                  <img class="commentimg"
+                                    src="https://img1.pnghut.com/1/16/10/nrdkyKR0fe/symbol-figure-icon-portrait-customer-redm.jpg"
+                                    alt="" style="border-radius: 50%" />
+                                  <% } %>
 
-                    <div class="col-10 pr-0">
-                      <% if (user.displayPicture) {%>
-                        <img class="commentimg" src="/image/<%= user.displayPicture %>" alt="altt"
-                          style="border-radius: 50%" />
-                        <% }else{ %>
-                          <img class="commentimg"
-                            src="https://pbs.twimg.com/card_img/1472392722673811457/wMz62V7-?format=png&name=360x360"
-                            alt="" style="border-radius: 50%" />
-                          <% } %>
-                            <form-group>
-                              <input type="text" name="comment" placeholder="Add a comment " style="margin-top: -10px; 
-                            border-radius:20px; 
-                              font-size:18px;
-                               font-family:'Times New Roman', Times, serif;
-                               color: rgb(14, 5, 24);
-                               padding: auto;" />
-                            </form-group>
-                    </div>
-
-                    <div class="col-2" style="padding:2px 0px 2px 0px;">
-
-                      <div class="form-group">
-                        <input type="image" id="post-comment" class="commentimg" src="/images/send.png" alt="alt" />
-                      </div>
+                                    <span style="font-size:medium;">
+                                      <%= com.createdBy.username %>
+                                    </span>
+                                    <span class="comment-content" style="font-size: small; 
+                                        color: rgb(39, 39, 38);
+                                        text-transform: capitalize;">
+                                      <%= com.comment %>
+                                    </span>
+                            </h5>
+                          </div>
+                          <%}%>
 
                     </div>
-                  </div>
-                </form>
-              </h4>
-              <!------------------------------------------------------------------------------------------>
-              <p class="text-muted">26 minutes ago</p>
+                    <%});%>
+                </div>
+                <!---------------------------------------------------------------------------------------->
+
+
+                <!-------hide comments-->
+                <a class="text-muted" onClick="hideComments('<%= post.id %>')" id="hide-comments-tag<%=post.id%>"
+                  href="javascript:void(0)" style="text-decoration: none; display: none;">Hide all comments</a>
+                <%}else{%>
+                  <a class="text-muted" href="javascript:void(0)" style="text-decoration: none;">No Comments</a>
+                  <%}%>
+                    <!--------Form for posting comment-------------->
+                    <h4>
+
+                      <form action="/comment/post/<%= post.id %>" method="POST">
+                        <div class="row">
+
+                          <div class="col-10 pr-0">
+                            <% if (user.displayPicture) {%>
+                              <img class="commentimg" src="/image/<%= user.displayPicture %>" alt="altt"
+                                style="border-radius: 50%" />
+                              <% }else{ %>
+                                <img class="commentimg"
+                                  src="https://img1.pnghut.com/1/16/10/nrdkyKR0fe/symbol-figure-icon-portrait-customer-redm.jpg"
+                                  alt="" style="border-radius: 50%" />
+                                <% } %>
+                                  <form-group>
+                                    <input type="text" name="comment" placeholder="Add a comment " style="margin-top: -10px; 
+                                     border-radius:20px; 
+                                     font-size:18px;
+                                     font-family:'Times New Roman', Times, serif;
+                                     color: rgb(14, 5, 24);
+                                     padding: auto;" />
+                                  </form-group>
+                          </div>
+
+                          <div class="col-2" style="padding:2px 0px 2px 0px;">
+
+                            <div class="form-group">
+                              <input type="image" id="post-comment" class="commentimg" src="/images/send.png"
+                                alt="alt" />
+                            </div>
+
+                          </div>
+                        </div>
+                      </form>
+                    </h4>
+                    <!------------------------------------------------------------------------------------------>
+                    <p class="text-muted">26 minutes ago</p>
             </div>
           </div>
+          <!---------------------------------------------------------------------------------------------->
+
         </div>
       </div>
     </div>
@@ -259,5 +280,61 @@
             document.getElementById(currentPost).style.display = "none";
             document.getElementById(hidetag).style.display = "none";
             return true;
+          }
+
+          //when a post is liked 
+          function increaseLikes(curPost, curLikes) {
+            var e = 'icon-' + curPost;
+            var info = 'likeCount-' + curPost;
+            //console.log(info);
+            var iconTag = document.getElementById(e);
+
+            if (iconTag.className == 'bi bi-heart fa-2x px-2') {
+              
+              likePost('inc', curPost,(likes)=>{
+              //console.log('inc='+likes);
+              document.getElementById(info).textContent = likes + ' likes';
+              iconTag.className = 'bi bi-heart-fill fa-2x px-2';
+              document.getElementById(e).style.color = 'red';
+
+              //console.log("1");
+              });
+            }
+            else {
+              likePost('dec', curPost, (likes) =>{
+              //console.log('dec='+likes);
+              document.getElementById(info).textContent = likes + ' likes';
+              iconTag.className = 'bi bi-heart fa-2x px-2';
+              document.getElementById(e).style.color = 'black';
+
+             
+              //console.log('2');
+              });
+            }
+
+
+          }
+           //sending request to server to inc/dec likes
+           function likePost(status, curPost,callback) {
+            var http = new XMLHttpRequest();
+            var url = '/post/likePost';
+            var likes;
+            var params = 'postid=' + curPost + '&status=' + status;
+            console.log(params);
+
+
+            http.open('POST', url + '?' + params, true);
+
+            //Send the proper header information along with the request
+            http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            
+            http.onload = function (e) {
+              if (this.status == 200) {
+                //console.log('SUCCESS', http.responseText);
+                callback(JSON.parse(http.responseText).likes);
+              }
+            };
+            http.send(null);
+           // console.log('inside likePost');
           }
         </script>
