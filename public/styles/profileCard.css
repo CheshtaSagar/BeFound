@@ -1,7 +1,10 @@
 
 
 .profile {
-    background-image: url(https://images.pexels.com/photos/281260/pexels-photo-281260.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500);
+    background-image: url(https://image.shutterstock.com/image-illustration/abstract-light-pink-gradient-color-600w-1924998395.jpg);
+    /* background-image: url(https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77700376453.jpg); */
+    /* background-image: url(https://www.xmple.com/wallpaper/gradient-white-purple-linear-1920x1080-c2-ffffff-4b0082-a-255-f-14.svg); */
+    /* background-image: url(https://images.pexels.com/photos/281260/pexels-photo-281260.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500); */
     background-repeat: no-repeat;
     background-size: 100% 75%;
 }
@@ -14,3 +17,5 @@
     justify-content: center;
     align-items: center;
   }
+
+  /* https://media.istockphoto.com/videos/4k-blue-pink-purple-neon-square-lights-purple-background-video-id1272936989?s=640x640 */
