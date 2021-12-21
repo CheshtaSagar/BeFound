@@ -10,45 +10,84 @@ const methodOverride = require("method-override");
 const { storage, upload } = require("../config/grid");
 
 //to post updates or info regarding company
-router.post("/createPost", upload.array("file",10), (req, res) => {
-    User.findOne({ _id: req.user._id }, (err, user) => {
-      if (err) console.log(err);
-      else {
+router.post("/createPost", upload.array("file", 10), (req, res) => {
+  User.findOne({ _id: req.user._id }, (err, user) => {
+    if (err) console.log(err);
+    else {
 
-        const pics=[];
-        
-        for(let i=0;i<req.files.length;i++)
+      const pics = [];
+
+      for (let i = 0; i < req.files.length; i++)
         pics.push(req.files[i].filename);
 
-        console.log(pics);
+      console.log(pics);
 
-        const post = new Post({
-          description: req.body.description,
-          pictures: pics,
-          postedBy: user._id,
-        });
+      const post = new Post({
+        description: req.body.description,
+        pictures: pics,
+        postedBy: user._id,
+      });
 
-        post.save().then((user) => {
-          req.flash("success_msg", "Posted successfully ");
-          console.log("Successfully posted");
-          res.redirect("/profile/newsfeed");
-        });
+      post.save().then((user) => {
+        req.flash("success_msg", "Posted successfully ");
+        console.log("Successfully posted");
+        res.redirect("/profile/newsfeed");
+      });
 
-        User.findOneAndUpdate(
-          { _id: user._id },
-          { $push: { posts: post } },
-          { new: true },
-          function (err, doc) {
-            if (err) console.log(err);
-            else {
-              console.log(doc._id);
-            }
+      User.findOneAndUpdate(
+        { _id: user._id },
+        { $push: { posts: post } },
+        { new: true },
+        function (err, doc) {
+          if (err) console.log(err);
+          else {
+            console.log(doc._id);
           }
-        );
-      }
-    });
+        }
+      );
+    }
   });
+});
 
+
+//liking a post in newsfeed
+router.post('/likePost', (req, res) => {
+  var postid = req.query.postid;
+  var status = req.query.status;
+  //console.log(postid);
+  //console.log(status);
 
   
+  if (status == 'inc') {
+    Post.findOneAndUpdate({ _id: postid },
+      {
+        $inc: { likes: 1 },
+        $push: { likedBy: req.user }
+      }, { new: true }, function (err, post) {
+        if (err)
+          console.log(err);
+        else {
+          console.log('liked');
+          res.send({ likes: post.likes });
+        }
+      });
+  }
+  else {
+    Post.findOneAndUpdate({ _id: postid },
+      {
+        $inc: { likes: -1 },
+        $pull: { likedBy: req.user.id }
+      }, {new:true},function (err, post) {
+        if (err)
+          console.log(err);
+        else {
+          console.log('unliked');
+          res.send({ likes: post.likes });
+        }
+
+      });
+  }
+
+});
+
 module.exports = router;
