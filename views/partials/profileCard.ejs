@@ -15,7 +15,7 @@
               alt="..."
               width="60%"
               class="rounded pt-10 img-thumbnail"
-              style="object-fit: cover;"
+              style="object-fit: cover; height: 15vw;"
             />
 
             <% }else{ %>
@@ -61,21 +61,21 @@
       <div class="bg-light text-center" style="color: blueviolet">
         <ul class="list-inline mb-0">
           <li class="list-inline-item">
-            <h5 class="font-weight-bold mb-0 d-block">215</h5>
+            <h5 class="font-weight-bold mb-0 d-block"><%= user.profilePictures.length %> </h5>
             <small class="text-muted">
               <i class="fas fa-image mr-1"></i>Photos</small
             >
           </li>
           <li class="list-inline-item">
-            <h5 class="font-weight-bold mb-0 d-block">745</h5>
+            <h5 class="font-weight-bold mb-0 d-block"><%= user.matchedUsers.length %> </h5>
             <small class="text-muted">
               <i class="fas fa-user mr-1"></i>Matches</small
             >
           </li>
           <li class="list-inline-item">
-            <h5 class="font-weight-bold mb-0 d-block">340</h5>
+            <h5 class="font-weight-bold mb-0 d-block"><%= user.posts.length %> </h5>
             <small class="text-muted">
-              <i class="fas fa-user mr-1"></i>Request</small
+              <i class="fas fa-newspaper mr-1"></i>Posts</small
             >
           </li>
         </ul>

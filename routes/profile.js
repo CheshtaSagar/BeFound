@@ -142,7 +142,7 @@ router.get("/:opttitle", isUser, async (req, res) => {
                   optresult:optresult,
                 });
 
-                console.log(posts);
+               // console.log(posts);
               }
               
             });

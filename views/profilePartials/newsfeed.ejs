@@ -78,7 +78,7 @@
                 <% post.pictures.forEach(function(pic){ %>
                   <div class="swiper-slide">
 
-                    <img src="/image/<%= pic %>" class="card-img-top" alt="Fissure in Sandstone" />
+                    <img src="/image/<%= pic %>" class="card-img " alt="Fissure in Sandstone" style="object-fit: contain;"/>
                   </div>
                   <%});%>
               </div>
@@ -187,7 +187,7 @@
                 <form action="/comment/post/<%= post.id %>" method="POST">
                   <div class="row">
 
-                    <div class="col-11">
+                    <div class="col-10 pr-0">
                       <% if (user.displayPicture) {%>
                         <img class="commentimg" src="/image/<%= user.displayPicture %>" alt="altt"
                           style="border-radius: 50%" />
@@ -206,7 +206,7 @@
                             </form-group>
                     </div>
 
-                    <div class="col-1" style="padding:2px 0px 2px 0px;">
+                    <div class="col-2" style="padding:2px 0px 2px 0px;">
 
                       <div class="form-group">
                         <input type="image" id="post-comment" class="commentimg" src="/images/send.png" alt="alt" />

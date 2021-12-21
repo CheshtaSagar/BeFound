@@ -8,6 +8,8 @@ const isUser = auth.isUser;
 
 //to post updates or info regarding company
 router.post("/request/:user2id", isUser, (req, res) => {
+  console.log(req.body.sdate);
+  console.log(req.body.stime);
     try {
     const scheduleDate = new ScheduleDate({
         user1:req.user._id,
