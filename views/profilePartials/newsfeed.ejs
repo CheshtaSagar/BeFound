@@ -79,8 +79,17 @@
 
                 <% post.pictures.forEach(function(pic){ %>
                   <div class="swiper-slide">
+                    <% if(pic.split('.').pop()=="mp4") {%> 
+                      <!-- <video src="/image/<%= pic %>" class="card-img " style="object-fit: contain;" type="video/mp4"></video> -->
+                      <video width="350" height="350" class="card-img " style="object-fit: contain;" controls>
+                        <source src="/image/<%= pic %>" type="video/mp4">
+                        <source src="movie.ogg" type="video/ogg">
+                        Your browser does not support the video tag.
+                      </video>
+                      <%}else{%>
 
                     <img src="/image/<%= pic %>" class="card-img " alt="Fissure in Sandstone" style="object-fit: contain;"/>
+                    <% } %> 
                   </div>
                   <%});%>
               </div>
