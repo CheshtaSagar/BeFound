@@ -10,6 +10,7 @@ const bcrypt = require("bcryptjs"); //for storing encrypted password
 const passport = require("passport");
 const User = require("../models/User");
 const Post = require("../models/Post");
+const ScheduleDate = require("../models/ScheduleDate");
 const auth = require("../config/auth");
 const isUser = auth.isUser;
 var opttitle;
@@ -35,9 +36,9 @@ router.get("/:opttitle", isUser, async (req, res) => {
   if(opttitle==='match'){
     console.log("inside matches");
     try {
-      optresult = await User.findOne({ _id: req.user.id }).populate("matchedUsers");
+      optresult = await User.findOne({ _id: req.user._id }).populate("matchedUsers");
       //console.log(optresult.matchedUsers);
-      //console.log("hi");
+      console.log("hi");
     } catch (err) {
       optresult=null;
       console.log("error in matches");
@@ -45,6 +46,20 @@ router.get("/:opttitle", isUser, async (req, res) => {
 
     }
     }
+
+
+    if(opttitle==='date'){
+      console.log("inside date");
+      try {
+        optresult = await ScheduleDate.find({ members: { $in: [req.user._id] }, }).populate("members");
+        //console.log(optresult);
+        console.log("hi");
+      } catch (err) {
+        optresult=null;
+        console.log("error in finding dates");
+        console.log(err);
+      }
+      }
 
 
 

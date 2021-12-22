@@ -86,7 +86,15 @@
                         <source src="movie.ogg" type="video/ogg">
                         Your browser does not support the video tag.
                       </video>
-                      <%}else{%>
+                      <%}else if(pic.split('.').pop()=="mp3"){%>
+                        <audio class="card-img text-center" style="object-fit: contain; display: flex;
+                        justify-content: center;
+                        align-items: center;" controls>
+                          <source src="/image/<%= pic %>" type="audio/mpeg">
+                          Your browser does not support the audio element.
+                        </audio>
+
+                        <% }else{ %> 
 
                     <img src="/image/<%= pic %>" class="card-img " alt="Fissure in Sandstone" style="object-fit: contain;"/>
                     <% } %> 
@@ -157,11 +165,11 @@
                                 style="border-radius: 50%" />
                               <% }else{ %>
                                 <img class="commentimg"
-                                  src="https://pbs.twimg.com/card_img/1472392722673811457/wMz62V7-?format=png&name=360x360g"
+                                  src="https://pbs.twimg.com/card_img/1472392722673811457/wMz62V7-?format=png&name=360x360"
                                   alt="" style="border-radius: 50%" />
                                 <% } %>
 
-                                  <span style="font-size:medium;">
+                                  <span style="font-size:medium; text-transform: capitalize;">
                                     <%= com.createdBy.username %>
                                   </span>
                                   <span class="comment-content" style="font-size: small; 
@@ -182,7 +190,7 @@
                                   style="border-radius: 50%" />
                                 <% }else{ %>
                                   <img class="commentimg"
-                                    src="https://img1.pnghut.com/1/16/10/nrdkyKR0fe/symbol-figure-icon-portrait-customer-redm.jpg"
+                                    src="https://pbs.twimg.com/card_img/1472392722673811457/wMz62V7-?format=png&name=360x360"
                                     alt="" style="border-radius: 50%" />
                                   <% } %>
 
@@ -222,7 +230,7 @@
                                 style="border-radius: 50%" />
                               <% }else{ %>
                                 <img class="commentimg"
-                                  src="https://img1.pnghut.com/1/16/10/nrdkyKR0fe/symbol-figure-icon-portrait-customer-redm.jpg"
+                                  src="https://pbs.twimg.com/card_img/1472392722673811457/wMz62V7-?format=png&name=360x360"
                                   alt="" style="border-radius: 50%" />
                                 <% } %>
                                   <form-group>

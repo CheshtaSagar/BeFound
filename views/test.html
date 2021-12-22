@@ -1,66 +1,9 @@
-<html>
-<head>
-<title> Untitled </title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<style type="text/css">
-.menu {
-  position:absolute;
-  top:80px;  left:0px;
-  font-family: Arial;
-  font-size:12px;
-  font-weight:bold;
-}
-#nav { width:920px;  height:30px;  background-color:#B1B3A8; }
-#nav ul { margin:0px; padding:5px; }
-#nav ul li {
-  display:inline; 
-  height:30px; 
-  float:left; 
-  list-style:none;
-  margin-left:30px; 
-  position:relative;
-  color:#000;
-}
-#nav li a { text-decoration:none; color:#000000; }
-#nav li a:hover { text-decoration:underline; color:white; background-color:orange; font-size:1.5em; }
-
-.pg { display:none; }
-.h1 { text-align:center; font-size:2em; }
+<style>
+  
 </style>
 
-</head>
-<body>
-<form id="myForm" action="" method="post" onsubmit="return false">
-<div class="menu">
- <div id="nav">
-  <ul>
-   <li><a href="#" onclick="return toggle('pg0')">AAAA</a></li>
-   <li><a href="#" onclick="return toggle('pg1')">BBBB</a></li>
-   <li><a href="#" onclick="return toggle('pg2')">CCCC</a></li>
-   <li><a href="#" onclick="return toggle('pg3')">DDDD</a></li>
-   <li><a href="#" onclick="return toggle('pg4')">EEEE</a></li>
-  </ul>
- </div>
- <div id="pg">
-  <div id="pg0" class="pg"> <h1 class="h1"> AAAA page </h1> </div>
-  <div id="pg1" class="pg"> <h1 class="h1"> BBBB page </h1> </div>
-  <div id="pg2" class="pg"> <h1 class="h1"> CCCC page </h1> </div>
-  <div id="pg3" class="pg"> <h1 class="h1"> DDDD page </h1> </div>
-  <div id="pg4" class="pg"> <h1 class="h1"> EEEE page </h1> </div>
- </div>
-</div>
-</form>
-<script type="text/javascript">
-function toggle(IDS) {
-  var sel = document.getElementById('pg').getElementsByTagName('div');
-  for (var i=0; i<sel.length; i++) { 
-    if (sel[i].id != IDS) { sel[i].style.display = 'none'; }
-  }
-  var status = document.getElementById(IDS).style.display;
-  if (status == 'block') { document.getElementById(IDS).style.display = 'none'; }
-                    else { document.getElementById(IDS).style.display = 'block'; }
-  return false;
-}
-</script>
-</body>
-</html>
+<li class="mb-0" style="user-select: auto;"><span class="help-hover table-product__item" title="" data-toggle="tooltip"
+    data-placement="top" data-original-title="Calculate the number of work and business days with ease"
+    style="user-select: auto;">How many business days are in a set period?</span></li>
+
+    
