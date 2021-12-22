@@ -16,8 +16,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles/register.css" type="text/css">
     <title>Edit Profile : <%= user.username %>
     </title>
@@ -75,9 +75,24 @@
                                             <label for="gender">Gender</label>
                                             <select class="form-control" id="gender" name="gender" placeholder=""
                                                 value="<%= typeof gender != 'undefined' ? gender : user.gender %>">
-                                                <option>Male</option>
-                                                <option>Female</option>
-                                                <option>Others</option>
+                                                <% if(user.gender==="Male" ){%>
+                                                    <option selected>Male</option>
+                                                    <%}else {%>
+                                                        <option> Male</option>
+                                                        <%}%>
+
+
+                                                            <% if(user.gender==="Female" ){%>
+                                                                <option selected>Female</option>
+                                                                <%}else {%>
+                                                                    <option> Female</option>
+                                                                    <%}%>
+
+                                                                        <% if(user.gender==="Others" ){%>
+                                                                            <option selected>Others</option>
+                                                                            <%}else {%>
+                                                                                <option> Others</option>
+                                                                                <%}%>
                                             </select>
                                         </div>
 
@@ -133,6 +148,27 @@
                                         </div>
 
 
+                                        <!---Age Range-->
+                                        <div class="form-group">
+                                            Age-Range
+                                            <div class="row">
+
+                                                <div class="col-6">
+
+                                                    <input type="number" class="form-control input-lg" id="lowerLimit"
+                                                        name="lowerLimit" placeholder="Enter min-age"
+                                                        required="required" min="18"
+                                                        value="<%= typeof lowerLimit != 'undefined' ? lowerLimit : user.ageRange.lowerLimit %>" />
+                                                </div>
+                                                <div class="col-6">
+                                                    <input type="number" class="form-control input-lg" id="upperLimit"
+                                                        name="upperLimit" placeholder="Enter max-age"
+                                                        required="required" min="18"
+                                                        value="<%= typeof upperLimit != 'undefined' ? upperLimit : user.ageRange.upperLimit %>" />
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <!---preferred radius-->
                                         <div class="form-group">
                                             <label for="radius">Find people within distance of:</label>
@@ -145,7 +181,7 @@
                                         <div class="form-group">
                                             <label for="bio">Edit Bio</label>
                                             <textarea class="form-control ta" id="bio" rows="6"
-                                                placeholder="<%= user.bio %> " name="bio"
+                                                placeholder= <%=user.bio%> name="bio"
                                                 value="<%= typeof bio != 'undefined' ? bio : user.bio %>"></textarea>
                                         </div>
 
@@ -180,61 +216,71 @@
                             </h3>
                             <div class="signup-form " style="overflow: auto;">
 
-                                <form action="/upload/uploadImages" method="POST" enctype="multipart/form-data" >
+                                <form action="/upload/uploadImages" method="POST" enctype="multipart/form-data">
 
                                     <!---importing msgs column-->
                                     <%- include ('partials/messages') %>
 
-                                    <div class="custom-file">
-                                        <h6>Upload your Profile Picture</h6>
-                                        <input type="file" data-file_types="jpg|jpeg|png" class="custom-file-input" id="file" name="file" onchange="readSingleFile(this.files)">
-                                        <label class="custom-file-label" id="file-label" style="border-radius:10px;" for="file">Choose
-                                            profile picture</label>
-                                    </div>
+                                        <div class="custom-file">
+                                            <h6>Upload your Profile Picture</h6>
+                                            <input type="file" data-file_types="jpg|jpeg|png" class="custom-file-input"
+                                                id="file" name="file" onchange="readSingleFile(this.files)">
+                                            <label class="custom-file-label" id="file-label" style="border-radius:10px;"
+                                                for="file">Choose
+                                                profile picture</label>
+                                        </div>
 
-                                </br>
-                                <hr style="width:60%; background-color:rgb(114, 15, 180)">
-                                </br>
+                                        </br>
+                                        <hr style="width:60%; background-color:rgb(114, 15, 180)">
+                                        </br>
 
-                            </br>
-                                    <h6>Upload more images for your profile</h6>
-                                    <!----1------->
-                                    <div class="custom-file">
-                                        <h6>Upload</h6>
-                                        <input type="file" data-file_types="jpg|jpeg|png" class="custom-file-input" id="file1" name="file1" onchange="readSingleFile1(this.files)">
-                                        <label class="custom-file-label" id="file-label1" style="border-radius:10px;" for="file1">Choose
-                                            image</label>
-                                    </div>
+                                        </br>
+                                        <h6>Upload more images for your profile</h6>
+                                        <!----1------->
+                                        <div class="custom-file">
+                                            <h6>Upload</h6>
+                                            <input type="file" data-file_types="jpg|jpeg|png" class="custom-file-input"
+                                                id="file1" name="file1" onchange="readSingleFile1(this.files)">
+                                            <label class="custom-file-label" id="file-label1"
+                                                style="border-radius:10px;" for="file1">Choose
+                                                image</label>
+                                        </div>
 
-                                    <!----2------->
-                                    <div class="custom-file">
-                                        <h6>Upload</h6>
-                                        <input type="file" data-file_types="jpg|jpeg|png" class="custom-file-input" id="file2" name="file2" onchange="readSingleFile2(this.files)">
-                                        <label class="custom-file-label" id="file-label2" style="border-radius:10px;" for="file2">Choose
-                                            image</label>
-                                    </div>
+                                        <!----2------->
+                                        <div class="custom-file">
+                                            <h6>Upload</h6>
+                                            <input type="file" data-file_types="jpg|jpeg|png" class="custom-file-input"
+                                                id="file2" name="file2" onchange="readSingleFile2(this.files)">
+                                            <label class="custom-file-label" id="file-label2"
+                                                style="border-radius:10px;" for="file2">Choose
+                                                image</label>
+                                        </div>
 
-                                    <!----3------->
-                                    <div class="custom-file">
-                                        <h6>Upload</h6>
-                                        <input type="file" data-file_types="jpg|jpeg|png" class="custom-file-input" id="file3" name="file3" onchange="readSingleFile3(this.files)">
-                                        <label class="custom-file-label" id="file-label3" style="border-radius:10px;" for="file3">Choose
-                                            image</label>
-                                    </div>
+                                        <!----3------->
+                                        <div class="custom-file">
+                                            <h6>Upload</h6>
+                                            <input type="file" data-file_types="jpg|jpeg|png" class="custom-file-input"
+                                                id="file3" name="file3" onchange="readSingleFile3(this.files)">
+                                            <label class="custom-file-label" id="file-label3"
+                                                style="border-radius:10px;" for="file3">Choose
+                                                image</label>
+                                        </div>
 
 
 
-                                    <!----4------->
-                                    <div class="custom-file">
-                                        <h6>Upload</h6>
-                                        <input type="file" data-file_types="jpg|jpeg|png" class="custom-file-input" id="file4" name="file4" onchange="readSingleFile4(this.files)">
-                                        <label class="custom-file-label" id="file-label4" style="border-radius:10px;" for="file4">Choose image
-                                        </label>
-                                    </div>
+                                        <!----4------->
+                                        <div class="custom-file">
+                                            <h6>Upload</h6>
+                                            <input type="file" data-file_types="jpg|jpeg|png" class="custom-file-input"
+                                                id="file4" name="file4" onchange="readSingleFile4(this.files)">
+                                            <label class="custom-file-label" id="file-label4"
+                                                style="border-radius:10px;" for="file4">Choose image
+                                            </label>
+                                        </div>
 
-                                </br>
-                                    <hr style="width:60%; background-color:rgb(114, 15, 180)">
-                                </br>
+                                        </br>
+                                        <hr style="width:60%; background-color:rgb(114, 15, 180)">
+                                        </br>
                                         <div class="form-group">
                                             <button type="submit"
                                                 class="btn btn-primary btn-lg btn-block signup-btn">Upload</button>
@@ -255,7 +301,7 @@
 
                 <!----Show profile preview button-->
                 <button class="btn btn-default" data-toggle="modal" data-target=".bd-example-modal-lg">
-                <img src="/images/preview1.jpg" class="img-fluid" style="border-radius: 50%; object-fit: contain;
+                    <img src="/images/preview1.jpg" class="img-fluid" style="border-radius: 50%; object-fit: contain;
                     border:3px solid black; height:70px ;width:70px;
                      box-shadow: 7px 5px 10px rgb(161, 113, 250);
                      position: fixed;
@@ -268,40 +314,40 @@
 
         </div>
 
-         
 
-        
+
+
         <%- include ('partials/footer') %>
 
 </body>
 <!-------->
-  <script>
+<script>
     //script for changing "choose file" to file name
     function readSingleFile(e) {
-      const name = e[0].name;
-      document.getElementById("file-label").textContent = name;
+        const name = e[0].name;
+        document.getElementById("file-label").textContent = name;
     }
 
     function readSingleFile1(e) {
-      const name = e[0].name;
-      document.getElementById("file-label1").textContent = name;
+        const name = e[0].name;
+        document.getElementById("file-label1").textContent = name;
     }
 
     function readSingleFile2(e) {
-      const name = e[0].name;
-      document.getElementById("file-label2").textContent = name;
+        const name = e[0].name;
+        document.getElementById("file-label2").textContent = name;
     }
 
     function readSingleFile3(e) {
-      const name = e[0].name;
-      document.getElementById("file-label3").textContent = name;
+        const name = e[0].name;
+        document.getElementById("file-label3").textContent = name;
     }
 
     function readSingleFile4(e) {
-      const name = e[0].name;
-      document.getElementById("file-label4").textContent = name;
+        const name = e[0].name;
+        document.getElementById("file-label4").textContent = name;
     }
-  </script>
+</script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>

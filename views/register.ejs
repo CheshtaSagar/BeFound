@@ -122,6 +122,28 @@
                   <option>Others</option>
                 </select>
               </div>
+              
+             
+
+
+              <!---Age Range-->
+              <div class="form-group">
+                Age-Range
+                <div class="row">
+                
+                <div class="col-6">
+                
+                <input type="number" class="form-control input-lg" id="lowerLimit" name="lowerLimit"
+                  placeholder="Enter min-age" required="required" min="18"
+                  value="<%= typeof lowerLimit != 'undefined' ? lowerLimit : '' %>" />
+                </div>
+                <div class="col-6">
+                <input type="number" class="form-control input-lg" id="upperLimit" name="upperLimit"
+                  placeholder="Enter max-age" required="required" min="18"
+                  value="<%= typeof upperLimit != 'undefined' ? upperLimit : '' %>" />
+                </div>
+                </div>
+              </div>
 
 
               <!---preferred radius-->

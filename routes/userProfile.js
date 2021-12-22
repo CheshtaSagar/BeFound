@@ -25,6 +25,10 @@ router.post("/editProfile",isUser, (req, res)=> {
      city: req.body.city,
      age: req.body.age,
      preferences: req.body.preferences,
+     ageRange: {
+      lowerLimit: req.body.lowerLimit, 
+      upperLimit:req.body.upperLimit
+     },
      radius: req.body.radius,
      bio: req.body.bio,
  };

@@ -37,7 +37,7 @@ router.get("/:opttitle", isUser, async (req, res) => {
     console.log("inside matches");
     try {
       optresult = await User.findOne({ _id: req.user._id }).populate("matchedUsers");
-      //console.log(optresult.matchedUsers);
+      console.log(optresult.matchedUsers.length);
       console.log("hi");
     } catch (err) {
       optresult=null;
@@ -52,7 +52,7 @@ router.get("/:opttitle", isUser, async (req, res) => {
       console.log("inside date");
       try {
         optresult = await ScheduleDate.find({ members: { $in: [req.user._id] }, }).populate("members");
-        //console.log(optresult);
+        console.log(optresult);
         console.log("hi");
       } catch (err) {
         optresult=null;
@@ -123,7 +123,7 @@ router.get("/:opttitle", isUser, async (req, res) => {
                 likedUser: null,
                 opttitle: opttitle,
                 posts: null,
-                optresult: null,
+                optresult: optresult,
               });
             }
           });
@@ -151,6 +151,10 @@ router.get("/:opttitle", isUser, async (req, res) => {
               else {
                 console.log("Already visited profile before");
                 //console.log(docs.recommendedUsers);
+                if(opttitle=="match"){
+                console.log(optresult.matchedUsers);
+                console.log(optresult.matchedUsers.length);
+                }
                 res.render("profile", {
                   user: req.user,
                   loggedIn: loggedIn,
