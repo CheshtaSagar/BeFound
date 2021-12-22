@@ -9,7 +9,7 @@ const Grid = require("gridfs-stream");
 const methodOverride = require("method-override");
 const { storage, upload } = require("../config/grid");
 
-//to post updates or info regarding company
+//for creating a post
 router.post("/createPost", upload.array("file", 10), (req, res) => {
   User.findOne({ _id: req.user._id }, (err, user) => {
     if (err) console.log(err);

@@ -45,6 +45,17 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required:true,
   },
+  ageRange:
+  {
+    lowerLimit:{
+      type:Number,
+      default:18
+    },
+    upperLimit:{
+      type:Number,
+      defualt:100
+    }
+  },
   radius:
   {
     type:Number,

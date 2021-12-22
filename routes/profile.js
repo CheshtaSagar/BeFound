@@ -13,7 +13,7 @@ const Post = require("../models/Post");
 const auth = require("../config/auth");
 const isUser = auth.isUser;
 var opttitle;
-var optresult=null;
+var optresult = null;
 
 //profile
 router.get("/:opttitle", isUser, async (req, res) => {
@@ -31,21 +31,18 @@ router.get("/:opttitle", isUser, async (req, res) => {
   var lt = req.user.location.coordinates[1];
   opttitle = req.params.opttitle;
   //console.log(opttitle);
+
   
-  if(opttitle==='match'){
-    console.log("inside matches");
-    try {
-      optresult = await User.findOne({ _id: req.user.id }).populate("matchedUsers");
-      //console.log(optresult.matchedUsers);
-      //console.log("hi");
-    } catch (err) {
-      optresult=null;
-      console.log("error in matches");
-      console.log(err);
 
-    }
-    }
 
+  try {
+    demoUser = await User.findOne({ _id: req.user.id });
+    //console.log(optresult.matchedUsers);
+    //console.log("hi");
+  } catch (err) {
+     console.log(err);
+
+  }
 
 
   var popup = 0;
@@ -53,9 +50,19 @@ router.get("/:opttitle", isUser, async (req, res) => {
     location: {
       $geoWithin: {
         $centerSphere: [[lg, lt], kmToRadian(req.user.radius)],
-      },
+      }
     },
+    _id :{ 
+      $nin : demoUser.likedUsers
+    },
+    gender:
+    { 
+      $in : demoUser.preferences
+    }
+     
   };
+
+
 
   if (req.user.recommendedUsers.length == 0)//if we are fetching users based on location for the first time or
   // have updated location 
@@ -63,8 +70,8 @@ router.get("/:opttitle", isUser, async (req, res) => {
 
     //data contains all users which are near to given latitude and longitude
     User.find(option).then(data => {
-      
 
+      console.log(data);
       User.findOneAndUpdate({ _id: req.user._id }, { $set: { recommendedUsers: data } }, { new: true })
         .populate("matchedUsers").exec(
           function (err, doc) {
@@ -74,7 +81,7 @@ router.get("/:opttitle", isUser, async (req, res) => {
             else if (doc.matchedUsers) //if we are updating loation then previous matches still exist
             {
               //finding posts of matched users for newsfeed
-              var creators=doc.matchedUsers;
+              var creators = doc.matchedUsers;
               creators.push(req.user._id);
               //console.log(creators);
               Post.find({ "postedBy": { $in: creators } }).populate("postedBy").sort({ Date: -1 })
@@ -83,6 +90,8 @@ router.get("/:opttitle", isUser, async (req, res) => {
                     console.log(err);
                   }
                   else {
+
+                    console.log(doc.matchedUsers);
                     res.render("profile", {
                       user: req.user,
                       loggedIn: loggedIn,
@@ -91,7 +100,7 @@ router.get("/:opttitle", isUser, async (req, res) => {
                       likedUser: null,
                       opttitle: opttitle,
                       posts: posts,
-                      optresult: optresult
+                      optresult: doc.matchedUsers
                     });
 
                   }
@@ -100,6 +109,7 @@ router.get("/:opttitle", isUser, async (req, res) => {
             else //in case of new user ,matches will be null
             {
               console.log("Visiting profile for the first time");
+              console.log(doc.matchedUsers);
               res.render("profile", {
                 user: req.user,
                 loggedIn: loggedIn,
@@ -125,9 +135,10 @@ router.get("/:opttitle", isUser, async (req, res) => {
           throw err;
         }
         else {
-          var creators=docs.matchedUsers;
-          creators.push(docs);
-          //console.log(creators);
+          
+          //console.log(docs.matchedUsers);
+          let creators = docs.matchedUsers.slice();
+         
           Post.find({ "postedBy": { $in: creators } }).populate("postedBy").populate("comments.createdBy").sort({ Date: -1 })
             .exec(function (err, posts) {
               if (err) {
@@ -136,6 +147,14 @@ router.get("/:opttitle", isUser, async (req, res) => {
               else {
                 console.log("Already visited profile before");
                 //console.log(docs.recommendedUsers);
+                //console.log(docs.matchedUsers);
+                
+                if(docs.matchedUsers.length>0)
+                optresult=docs.matchedUsers;
+                else
+                optresult="";
+                
+                //console.log(optresult);
                 res.render("profile", {
                   user: req.user,
                   loggedIn: loggedIn,
@@ -144,12 +163,12 @@ router.get("/:opttitle", isUser, async (req, res) => {
                   likedUser: null,
                   opttitle: opttitle,
                   posts: posts,
-                  optresult:optresult,
+                  optresult: optresult,
                 });
 
-               // console.log(posts);
+                // console.log(posts);
               }
-              
+
             });
         }
       });

@@ -108,7 +108,7 @@
         </div>
             <div class="swiper-wrapper">
                 <% recommendedUsers.forEach(function(recUser){ %>
-                    <%if(recUser.id !=user.id && recUser.gender==user.preferences){%>
+                    <%if(recUser.id !=user.id ){%>
                         <div class="swiper-slide" id="slider">
 
                             <% if (recUser.displayPicture) {%>

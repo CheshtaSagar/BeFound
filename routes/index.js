@@ -35,9 +35,9 @@ router.post("/register/:lat/:long", (req, res) => {
   
    console.log(req.params.long);
    console.log(req.params.lat);
-  const { username, email, password, password2, gender, city, age, preferences, radius, bio } = req.body;
+  const { username, email, password, password2, gender, city, age, preferences, lowerLimit, upperLimit,radius, bio } = req.body;
   const location = {"type":"Point","coordinates":[longitude, latitude]};
-  
+  const ageRange = { lowerLimit ,upperLimit};
   let errors = [];
   //validation for email
   function isLowerCase(str) {
@@ -63,6 +63,9 @@ router.post("/register/:lat/:long", (req, res) => {
   if (password.length < 5) {
     errors.push({ msg: "Password must be at least 5 characters" });
   }
+  if (lowerLimit > upperLimit ) {
+    errors.push({ msg: "Maximum age preference should be greater." });
+  }
 
   if (errors.length > 0) {
     res.render("register", {
@@ -75,9 +78,11 @@ router.post("/register/:lat/:long", (req, res) => {
       city,
       age,
       preferences,
+      lowerLimit,
+      upperLimit,
       radius,
       bio,
-      
+
     });
   } else {
     //if Validations passed
@@ -94,6 +99,8 @@ router.post("/register/:lat/:long", (req, res) => {
             city,
             age,
             preferences,
+            lowerLimit,
+            upperLimit,
             radius,
             bio,
 
@@ -113,6 +120,8 @@ router.post("/register/:lat/:long", (req, res) => {
             city,
             age,
             preferences,
+            lowerLimit,
+            upperLimit,
             radius,
             bio,
 
@@ -129,6 +138,7 @@ router.post("/register/:lat/:long", (req, res) => {
                     city,
                     age,
                     preferences,
+                    ageRange,
                     radius,
                     bio,
                     location,
