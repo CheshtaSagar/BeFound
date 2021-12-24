@@ -8,17 +8,62 @@
     <%- include('message') %> 
   
 </div>
-<div class="chatBottomBox">
-    <div class="row">
-    <div class="col-11 ">
-    <textarea class="chatMessageInput" placeholder="Write something..."></textarea>
-    </div>
-    <div class="col-1 text-center" style="margin-top: 18px; padding-left: 0px;">
-    <button class="chatSubmitButton ">Send</button>
-    </div>
+<div class="message-box" id="mymsg">
+     <form >
+    <!-- <textarea class="message-input" id ="MSG" name="MSG" placeholder="Write something..."></textarea> -->
+    <input type="text" id="MSG" name="MSG" class="message-input" placeholder="Type message..." >
+       
+    <!-- <i class="fas fa-microphone" id="start-record-btn"></i> -->
+
+    <!-- <div class="col-1 text-center" style="margin-top: 18px; padding-left: 0px;"> -->
+    <button  type ="submit" class="message-submit">Send</button>
+</form>
+    <!-- <form class="message-box" id="mymsg" method="POST">
+        <input type="text" id="MSG" name="MSG" class="message-input" placeholder="Type message..." >
+       
+        <i class="fas fa-microphone" id="start-record-btn"></i>
+        <button type="submit" class="message-submit">Send</button>
+      </form> -->
+    <!-- </div> -->
 </div>
-</div>
+
 <% }else{ %> 
     <h1 class="text-center" style="color: rgb(100, 97, 97);">click on user to start conversation...</h1>
 <% } %> 
 </div>
+
+
+<script>
+
+var $messages = $('.chatBoxTop'); 
+
+function updateScrollbar() {
+  $messages.mCustomScrollbar("update").mCustomScrollbar('scrollTo', 'bottom', {
+    scrollInertia: 10,
+    timeout: 0
+  });
+}
+
+
+function insertMessage() {
+  msg = $('.message-input').val();
+  if ($.trim(msg) == '') {
+    return false;
+  }
+  $('<div class="message own">' + msg + '</div>').appendTo($('.mCSB_container')).addClass('new');
+  fetchmsg() 
+  
+  $('.message-input').val(null);
+  updateScrollbar();
+
+}
+
+document.getElementById("mymsg").onsubmit = (e)=>{
+  e.preventDefault() 
+  insertMessage();
+  
+}
+
+
+</script>
+

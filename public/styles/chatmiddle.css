@@ -30,3 +30,65 @@
     background-color: blue;
     color: white;
 }
+
+/*--------------------
+Custom Srollbar
+--------------------*/
+.mCSB_scrollTools {
+    margin: 1px -3px 1px 0;
+    opacity: 0;
+  }
+  
+  .mCSB_inside > .mCSB_container {
+    margin-right: 0px;
+    padding: 0 10px;
+  }
+  
+  .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+    background-color:rgba(0, 0, 0, 0.5) !important;
+  }
+
+
+  /*--------------------
+Message Box
+--------------------*/
+.message-box {
+    flex: 0 1 40px;
+    width: 100%;
+    background: #4e2cca;
+    padding: 10px;
+    position: relative;
+  }
+  .message-box .message-input {
+    background: #4e2cca;
+    border: none;
+    outline: none !important;
+    resize: none;
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    height: 17px;
+    margin: 0;
+    padding-right: 30px;
+    width: 85%;
+  }
+  .message-box textarea:focus:-webkit-placeholder {
+    color: transparent;
+  }
+  .message-box .message-submit {
+    position: absolute;
+    z-index: 1;
+    top: 9px;
+    right: 10px;
+    color: #fff;
+    border: none;
+    background:black;
+    font-size: 13px;
+    text-transform: uppercase;
+    line-height: 1;
+    padding: 6px 6px;
+    border-radius: 10px;
+    outline: none !important;
+  }
+  .message-box .message-submit:hover {
+    background: #9772cf;
+  }

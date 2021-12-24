@@ -14,6 +14,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Bungee+Inline&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script src="https://cdn.tiny.cloud/1/fkuf7632wiheheudqyjx3m3c68smfga50n37zcgqzmtdiwx3/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
   <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles/register.css" type="text/css">
   <title>Register</title>
@@ -157,7 +158,7 @@
               <!----Add Bio-->
               <div class="form-group">
               <label for="bio">Add Bio</label>
-              <textarea class="form-control ta" id="bio" rows="6" placeholder="Add words that define you..."
+              <textarea class="form-control ta editor" id="bio" rows="6" placeholder="Add words that define you..."
               name="bio" value="<%= typeof bio != 'undefined' ? bio : '' %>"></textarea>
             </div>
 
@@ -184,6 +185,8 @@
 </div>
 
 <%- include ('partials/footer') %>
+<%- include ('partials/editor') %>
+
 <script>
   var lat,long,url;
 function getLocation()

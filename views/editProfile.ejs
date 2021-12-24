@@ -19,6 +19,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles/register.css" type="text/css">
+    <script src="https://cdn.tiny.cloud/1/fkuf7632wiheheudqyjx3m3c68smfga50n37zcgqzmtdiwx3/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <title>Edit Profile : <%= user.username %>
     </title>
 </head>
@@ -180,8 +181,8 @@
                                         <!----Add Bio-->
                                         <div class="form-group">
                                             <label for="bio">Edit Bio</label>
-                                            <textarea class="form-control ta" id="bio" rows="6"
-                                                placeholder= <%=user.bio%> name="bio"
+                                            <textarea class="form-control ta editor" id="bio" rows="6"
+                                                placeholder=" " name="bio"
                                                 value="<%= typeof bio != 'undefined' ? bio : user.bio %>"></textarea>
                                         </div>
 
@@ -318,6 +319,9 @@
 
 
         <%- include ('partials/footer') %>
+
+
+        <%- include ('partials/editor') %>
 
 </body>
 <!-------->
