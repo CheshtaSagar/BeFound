@@ -21,7 +21,7 @@ var optresult = null;
 router.get("/:opttitle", isUser, async (req, res) => {
   const loggedIn = req.isAuthenticated() ? true : false;
 
-
+  
 
   let kmToRadian = function (miles) {
     var earthRadiusInMiles = 6378;
