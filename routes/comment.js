@@ -21,6 +21,7 @@ router.post("/post/:id", (req, res) => {
             console.log("Commented");
             //console.log(post);
             res.redirect("/profile/newsfeed");
+            // res.send(post);
           }
         }
       );  

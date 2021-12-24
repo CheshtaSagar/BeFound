@@ -21,6 +21,9 @@ router.post(
       { name: "file3", maxCount: 1 },
       { name: "file4", maxCount: 1 },
     ]),(req, res) => {
+
+      // upload.chunks.deleteMany( {"files_id" : "ObjectId('61c23d7666a0ee0c6078be81')"} );
+      // upload.Delete("ObjectId('61c23d7666a0ee0c6078be81')");
       
        let errors=[];
 

@@ -23,6 +23,7 @@ if(err) throw err;
 console.log('Connected to MongoDB!!!')
 });
 
+
 // Passport Config
 require('./config/passport')(passport);
 
