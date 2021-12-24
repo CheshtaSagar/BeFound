@@ -4,14 +4,12 @@ const User = require('./User');
 const ScheduleDateSchema = new mongoose.Schema(
     {
 
-        user1: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
-        },
-        user2: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
-        },
+        members: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "User"
+            }
+        ],
         sdate: {
             type: Date
         },

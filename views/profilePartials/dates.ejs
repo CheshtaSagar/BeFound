@@ -1,132 +1,302 @@
-<div class=" px-3 " style="display: flex; justify-content: space-between;">
-    <a href="#" onclick="return toggle('pg0')">Confirmed</a>
-   <a href="#" onclick="return toggle('pg1')">Requested</a>
-   <a href="#" onclick="return toggle('pg2')">Received</a>
+<link rel="stylesheet" href="/styles/optDates.css" type="text/css" />
+
+
+
+<div class=" dtopt px-3 " style="display: flex; justify-content: space-between;">
+  <a href="#" onclick="return toggle('pg0')">
+    <h5 style="color: #f52776;">Confirmed</h5>
+  </a>
+  <a href="#" onclick="return toggle('pg1')">
+    <h5 style="color: #942dd9;">Requested</h5>
+  </a>
+  <a href="#" onclick="return toggle('pg2')">
+    <h5 style="color: #4730ad;">Received</h5>
+  </a>
 </div>
 <div id="datesOpt">
-    <div id="pg0" class="datesOpt">Confirmed dates
-        <div id="c-pg0" class="container">
-            <div class="row">
-              <div class="col">
-                <div class="matches-card">
-                  <div class="match-user">
-                    <div class="row">
-                      <div class="col-3">
-      
-                        
-      
-                      </div>
-                      <div class="col-7 pl-5">
-                        <h5><a href="#" class="profile-link">
-                             match.username
-                          </a></h5>
-                        <p class="text-muted">500m away</p>
-                      </div>
-                      <div class="col-2">
-                        <a href="#" class="btn btn-primary" style="
-                            color: rgb(255, 255, 255);
-                            background-image: linear-gradient(
-                              166deg,
-                              #f22876 0%,
-                              #942dd9 100%
-                            );
-                          " data-toggle="modal" data-target="#dateModalCenter"><i class="fas fa-comments"
-                            style="user-select: auto;"></i></a>
-                      </div>
-                      
+  <div id="pg0" class="datesOpt">
+    <div id="c-pg0" class="container">
+      <% optresult.forEach(function(optdate){ if(optdate.status=="confirmed" ) {%>
+        <div class="row">
+          <div class="col">
+            <div class="dates-card shadow rounded"
+              style="background: rgb(255,255,255);
+          background: linear-gradient(270deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 79%, #f52776 91%);">
+              <div class="date-use mt-2 pt-2 pb-0">
+                <div class="row">
+                  <div class="col-3">
+                    <div class="row-8" style="color: #ffffff;  text-align: center;">
+                      <h2 id="sd" style="font-weight:900; ">
+                        <% var res=optdate.sdate.toLocaleDateString('en-US'); var day=res.split('/')[1];
+                          console.log(res); %>
+                          <%=day%>
+                      </h2>
                     </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-      
-          </div>
-      
-    </div>
 
+                    <div class="row-4" style="color: #ffffff; font-weight: bold; text-align: center;">
+                      <h5>
+                        <% const monthNames=["Jan", "Feb" , "March" , "April" , "May" , " June" , "July" , "Aug"
+                          , "Sept" , "Oct" , "Nov" , "Dec" ]; var mon=monthNames[(res.split('/')[0]-'0')-1]; %>
+                          <%=mon%>
+                    </div>
 
-    <div id="pg1" class="datesOpt">Requested Dates
-      <div id="c-pg1" class="container">
-        <div class="row">
-          <div class="col">
-            <div class="matches-card">
-              <div class="match-user">
-                <div class="row">
-                  <div class="col-3">
-  
-                    
-  
                   </div>
-                  <div class="col-7 pl-5">
-                    <h5><a href="#" class="profile-link">
-                         match.username
-                      </a></h5>
-                    <p class="text-muted">501m away</p>
+                  <div class="col-7 px-2" style="text-transform: capitalize;">
+                    <h5 class="profile-link" style="color: black;">
+                      at <%= optdate.stime %>
+                        with
+                        <% if(optdate.members[1]._id.toString()===user._id.toString()){ %>
+                          <%= optdate.members[0].username %>
+                            <% }else{ %>
+                              <%= optdate.members[1].username %>
+                                <% } %>
+                    </h5>
+                    <p class="text-muted"><i class="fas fa-map-marker-alt  small mr-2"></i>
+                      <%= optdate.location %>
+                    </p>
                   </div>
-                  <div class="col-2">
-                    <a href="#" class="btn btn-primary" style="
-                        color: rgb(255, 255, 255);
-                        background-image: linear-gradient(
-                          166deg,
-                          #f22876 0%,
-                          #942dd9 100%
-                        );
-                      " data-toggle="modal" data-target="#dateModalCenter"><i class="fas fa-comments"
-                        style="user-select: auto;"></i></a>
+                  <div class="col-2 pt-2" data-toggle="tooltip" data-placement="top" title="Delete">
+                    <a href="/scheduleDate/delete/<%= optdate._id%>" class="btn btn-primary " style="
+                            color: rgb(255, 255, 255);
+                            background-color: #f52776;"><i
+                        class="fas fa-calendar-times"></i></a>
                   </div>
-                  
+
                 </div>
               </div>
             </div>
           </div>
         </div>
-  
-      </div>
-  
+        <% }}); %>
+
     </div>
 
+  </div>
 
 
-    <div id="pg2" class="datesOpt">Received Dates 
+  <div id="pg1" class="datesOpt">
+    <div id="c-pg1" class="container">
 
-      <div id="c-pg2" class="container">
+      <% optresult.forEach(function(optdate){ if(optdate.status=="not confirmed" &&
+        optdate.members[0]._id.toString()===user._id.toString()) {%>
         <div class="row">
           <div class="col">
-            <div class="matches-card">
-              <div class="match-user">
+            <div class="dates-card shadow rounded"
+              style="background: rgb(255,255,255);
+          background: linear-gradient(270deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 79%, #942dd9 91%);">
+              <div class="date-use mt-2 pt-2 pb-0">
                 <div class="row">
                   <div class="col-3">
-  
-                    
-  
+                    <div class="row-8" style="color: #ffffff;  text-align: center;">
+                      <h2 id="sd" style="font-weight:900; ">
+                        <% var res=optdate.sdate.toLocaleDateString('en-US'); var day=res.split('/')[1];
+                          console.log(res); %>
+                          <%=day%>
+                      </h2>
+                    </div>
+
+                    <div class="row-4" style="color: #ffffff; font-weight: bold; text-align: center;">
+                      <h5>
+                        <% const monthNames=["Jan", "Feb" , "March" , "April" , "May" , " June" , "July" , "Aug"
+                          , "Sept" , "Oct" , "Nov" , "Dec" ]; var mon=monthNames[(res.split('/')[0]-'0')-1]; %>
+                          <%=mon%>
+                    </div>
+
                   </div>
-                  <div class="col-7 pl-5">
-                    <h5><a href="#" class="profile-link">
-                         match.username
-                      </a></h5>
-                    <p class="text-muted">502m away</p>
+                  <div class="col-7 px-2" style="text-transform: capitalize;">
+                    <h5 class="profile-link" style="color: black;">
+                      at <%= optdate.stime %>
+                        with
+                        <% if(optdate.members[1]._id.toString()===user._id.toString()){ %>
+                          <%= optdate.members[0].username %>
+                            <% }else{ %>
+                              <%= optdate.members[1].username %>
+                                <% } %>
+                    </h5>
+                    <p class="text-muted"><i class="fas fa-map-marker-alt  small mr-2"></i>
+                      <%= optdate.location %> for <%= optdate.theme %>
+                    </p>
                   </div>
-                  <div class="col-2">
-                    <a href="#" class="btn btn-primary" style="
-                        color: rgb(255, 255, 255);
-                        background-image: linear-gradient(
-                          166deg,
-                          #f22876 0%,
-                          #942dd9 100%
-                        );
-                      " data-toggle="modal" data-target="#dateModalCenter"><i class="fas fa-comments"
-                        style="user-select: auto;"></i></a>
+                  <div class="col-2 pt-2">
+                    <a href="/scheduleDate/delete<%= optdate._id%>" class="btn btn-primary " style="
+                            color: rgb(255, 255, 255);
+                            background-color: #942dd9;
+                          "><i
+                        class="fas fa-calendar-times"></i></a>
                   </div>
-                  
+
                 </div>
               </div>
             </div>
           </div>
         </div>
-  
-      </div>
+        <% }}); %>
+
 
     </div>
+
+  </div>
+
+
+
+  <div id="pg2" class="datesOpt">
+
+    <div id="c-pg2" class="container">
+
+      <% optresult.forEach(function(optdate){ if(optdate.status=="not confirmed" &&
+        optdate.members[1]._id.toString()===user._id.toString() ) {%>
+        <div id="<%= optdate._id%>" class="row">
+          <div class="col">
+            <div class="dates-card shadow rounded"
+              style="background: rgb(255,255,255);
+              background: linear-gradient(270deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 79%, rgba(78,44,202,1) 91%);">
+              <div class="date-use mt-2 pt-2 pb-0">
+                <div class="row">
+                  <div class="col-3">
+                    <div class="row-8" style="color: #ffffff;  text-align: center;">
+                      <h2 id="sd" style="font-weight:900; ">
+                        <% var res=optdate.sdate.toLocaleDateString('en-US'); var day=res.split('/')[1];
+                          console.log(res); %>
+                          <%=day%>
+                      </h2>
+                    </div>
+
+                    <div class="row-4" style="color: #ffffff; font-weight: bold; text-align: center;">
+                      <h5>
+                        <% const monthNames=["Jan", "Feb" , "March" , "April" , "May" , " June" , "July" , "Aug"
+                          , "Sept" , "Oct" , "Nov" , "Dec" ]; var mon=monthNames[(res.split('/')[0]-'0')-1]; %>
+                          <%=mon%>
+                    </div>
+
+                  </div>
+                  <div class="col-6 px-2" style="text-transform: capitalize;">
+                    <h5 class="profile-link" style="color: black;">
+                      at <%= optdate.stime %>
+                        from
+                        <% if(optdate.members[1]._id.toString()===user._id.toString()){ %>
+                          <%= optdate.members[0].username %>
+                            <% }else{ %>
+                              <%= optdate.members[1].username %>
+                                <% } %>
+                    </h5>
+                    <p class="text-muted"><i class="fas fa-map-marker-alt  small mr-2"></i>
+                      <%= optdate.location %> for <%= optdate.theme %>
+                    </p>
+                  </div>
+                  <div class="col-1 py-3 pl-1 text-center  " data-toggle="tooltip" data-placement="top" title="Accept">
+                    <a href="/scheduleDate/set/accept/<%= optdate._id%>" class="btn  " style="
+                            color: rgb(255, 255, 255);
+                            background-color: rgba(78,44,202,1);">
+                      <i class="fas fa-calendar-check"></i>
+                    </a>
+                  </div>
+                  <div class="col-2 py-3 pl-1 text-center " data-toggle="tooltip" data-placement="top" title="Reject">
+                    <a href="/scheduleDate/set/reject/<%= optdate._id%>" class="btn " style="
+                            color: rgb(255, 255, 255);
+                            background-color: rgba(78,44,202,1);
+                          ">
+                      <i class="fas fa-calendar-times"></i>
+                    </a>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% }}); %>
+
+    </div>
+  </div>
 </div>
 
 
+
+
+<script>
+function acceptDate(curDate) {
+    console.log("inside accept date")
+    //var e = 'icon-' + curPost;
+   // var info = 'likeCount-' + curPost;
+    //console.log(info);
+   var element = document.getElementById(curDate);
+   console.log(element);
+   //var element = el;
+   
+//   url="/scheduleDate/accept/"+curDate;
+
+//   fetch(url).then(function(response) {
+//   return response.json();
+// }).then(function(data) {
+//   console.log(data);
+//   $('#dateModalCenter').modal('show');
+//      element.remove();
+
+// }).catch(function() {
+//   $('#dateModalCenter').modal('show');
+//   element.remove();
+//   console.log("Booo");
+// });
+
+    //if (iconTag.className == 'bi bi-heart fa-2x px-2') {
+accept(curDate);
+    //   accept( curDate, (optresult) => {
+    //     //console.log('inc='+likes);
+    //     //document.getElementById(info).textContent = likes + ' likes';
+    //     //iconTag.className = 'bi bi-heart-fill fa-2x px-2';
+    //     //document.getElementById(e).style.color = 'red';
+    //     // $('#dateModalCenter').modal('show');
+    //     // element.remove();
+
+    //     console.log("1");
+    //  });
+   // }
+    // else {
+    //   likePost('dec', curPost, (likes) => {
+    //     //console.log('dec='+likes);
+    //     document.getElementById(info).textContent = likes + ' likes';
+    //     iconTag.className = 'bi bi-heart fa-2x px-2';
+    //     document.getElementById(e).style.color = 'black';
+
+
+    //     //console.log('2');
+    //   });
+    // }
+
+
+  }
+
+
+
+  function accept(curDate) {
+    var element = document.getElementById(curDate);
+   console.log(element);
+    var http = new XMLHttpRequest();
+    var url = '/scheduleDate/accept';
+   // var likes;
+    var params = 'postid=' + curDate;
+    console.log(params);
+
+
+    http.open('POST', url + '?' + params, true);
+
+    //Send the proper header information along with the request
+    http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+    // http.onload = function (e) {
+    //   if (this.status == 200) {
+    //    // console.log('SUCCESS', http.responseText);
+    //     //callback(JSON.parse(http.responseText));
+    //   }
+    // };
+    http.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+     console.log(http.responseText);
+     $('#dateModalCenter').modal('show');
+        element.remove();
+  }
+};
+    http.send();
+   console.log('inside likePost');
+  }
+</script>

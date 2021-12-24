@@ -1,5 +1,8 @@
 const router = require("express").Router();
 const Conversation = require("../models/Conversation");
+const auth = require("../config/auth");
+const isUser = auth.isUser;
+
 
 //new conv
 
@@ -18,7 +21,7 @@ router.post("/", async (req, res) => {
 
 //get conv of a user
 
-router.get("/:userId", async (req, res) => {
+router.get("/:userId",isUser, async (req, res) => {
   try {
     const conversation = await Conversation.find({
       members: { $in: [req.params.userId] },
@@ -36,7 +39,7 @@ router.get("/:userId", async (req, res) => {
 
 
 
-router.get("/find/:firstUserId/:secondUserId", (req, res) => {
+router.get("/find/:firstUserId/:secondUserId", isUser, (req, res) => {
 
   Conversation.find({ members: { $in: [req.user._id] }, }).populate("members").exec(function (err, conversation) {
     if (err) {
@@ -46,6 +49,8 @@ router.get("/find/:firstUserId/:secondUserId", (req, res) => {
         if (err) {
           console.log(err);
         } else {
+          //console.log(conversation);
+          console.log(personalchat);
           res.render("chat", {
             conversation: conversation,
             personalchat: personalchat,

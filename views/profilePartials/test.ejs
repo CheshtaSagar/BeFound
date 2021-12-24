@@ -1,0 +1,49 @@
+<% optresult.forEach(function(optdate){ %>
+    <% if(optdate.status=="not confirmed") {%> 
+  <div class="row">
+    <div class="col">
+      <div class="dates-card shadow rounded" style="background: rgb(255,255,255);
+      background: linear-gradient(270deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 81%, #f52776 94%);">
+        <div class="date-use mt-2 pt-2 pb-0">
+          <div class="row">
+            <div class="col-3">
+              <div class="row-8" style="color: #ffffff;  text-align: center;">
+                <h2 style="font-weight:900; "><%= optdate.sdate.split('T')[0].split('-')[2] %>  </h2>
+              </div>
+
+              <div class="row-4" style="color: #ffffff; font-weight: bold; text-align: center;">
+                <h5>   <% getMonth(optdate.sdate) %>  </h5>
+              </div>
+
+            </div>
+            <div class="col-7 pl-5">
+              <h5 class="profile-link" style="color: black;">
+                at <%= optdate.stime %>
+                 with
+                  username
+              </h5>
+              <p class="text-muted">at <%= optdate.location %> </p>
+            </div>
+            <div class="col-2 pt-2">
+              <a href="#" class="btn btn-primary " style="
+                        color: rgb(255, 255, 255);
+                        background-color: #f52776;
+                      " data-toggle="modal" data-target="#dateModalCenter"><i
+                  class="fas fa-calendar-times"></i></a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% }} %> 
+
+
+
+  <h2 style="font-weight:900; ">
+    <% var res= optdate.sdate;
+    console.log("hi");
+    console.log( getDate(res));
+    %>
+    </h2>

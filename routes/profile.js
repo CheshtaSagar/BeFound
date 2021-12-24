@@ -10,10 +10,11 @@ const bcrypt = require("bcryptjs"); //for storing encrypted password
 const passport = require("passport");
 const User = require("../models/User");
 const Post = require("../models/Post");
+const ScheduleDate = require("../models/ScheduleDate");
 const auth = require("../config/auth");
 const isUser = auth.isUser;
 var opttitle;
-var optresult = null;
+var optresult=null;
 
 
 
@@ -35,6 +36,7 @@ router.get("/:opttitle", isUser, async (req, res) => {
   var lt = req.user.location.coordinates[1];
   opttitle = req.params.opttitle;
 
+    
 
   try {
     demoUser = await User.findOne({ _id: req.user.id });
@@ -42,6 +44,20 @@ router.get("/:opttitle", isUser, async (req, res) => {
   catch (err) {
     console.log(err);
   }
+
+    if(opttitle==='date'){
+      console.log("inside date");
+      try {
+        optresult = await ScheduleDate.find({ members: { $in: [req.user._id] }, }).populate("members");
+        console.log(optresult);
+        console.log("hi");
+      } catch (err) {
+        optresult=null;
+        console.log("error in finding dates");
+        console.log(err);
+      }
+      }
+
 
   let notToBeIncluded = demoUser.matchedUsers.slice();
   notToBeIncluded.push.apply(notToBeIncluded, demoUser.likedUsers);
@@ -70,14 +86,13 @@ router.get("/:opttitle", isUser, async (req, res) => {
 
   };
 
-
-
   if (req.user.recommendedUsers.length == 0)//if we are fetching users based on location for the first time or
   // have updated location 
   {
 
     //data contains all users which are near to given latitude and longitude
     User.find(option).then(data => {
+      
 
     
       User.findOneAndUpdate({ _id: req.user._id }, { $set: { recommendedUsers: data } }, { new: true })
@@ -89,7 +104,7 @@ router.get("/:opttitle", isUser, async (req, res) => {
             else if (doc.matchedUsers) //if we are updating loation then previous matches still exist
             {
               //finding posts of matched users for newsfeed
-              var creators = doc.matchedUsers;
+              var creators=doc.matchedUsers;
               creators.push(req.user._id);
               //console.log(creators);
               Post.find({ "postedBy": { $in: creators } }).populate("postedBy").sort({ Date: -1 })
@@ -108,7 +123,7 @@ router.get("/:opttitle", isUser, async (req, res) => {
                       likedUser: null,
                       opttitle: opttitle,
                       posts: posts,
-                      optresult: doc.matchedUsers
+                      optresult: optresult
                     });
 
                   }
@@ -126,7 +141,7 @@ router.get("/:opttitle", isUser, async (req, res) => {
                 likedUser: null,
                 opttitle: opttitle,
                 posts: null,
-                optresult: null,
+                optresult: optresult,
               });
             }
           });
@@ -172,12 +187,12 @@ router.get("/:opttitle", isUser, async (req, res) => {
                   likedUser: null,
                   opttitle: opttitle,
                   posts: posts,
-                  optresult: optresult,
+                  optresult:optresult,
                 });
 
-                // console.log(posts);
+               // console.log(posts);
               }
-
+              
             });
         }
       });
