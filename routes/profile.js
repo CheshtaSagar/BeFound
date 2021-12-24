@@ -16,9 +16,13 @@ const isUser = auth.isUser;
 var opttitle;
 var optresult=null;
 
+
+
 //profile
 router.get("/:opttitle", isUser, async (req, res) => {
   const loggedIn = req.isAuthenticated() ? true : false;
+
+  
 
   let kmToRadian = function (miles) {
     var earthRadiusInMiles = 6378;
@@ -31,22 +35,15 @@ router.get("/:opttitle", isUser, async (req, res) => {
   var lg = req.user.location.coordinates[0];
   var lt = req.user.location.coordinates[1];
   opttitle = req.params.opttitle;
-  //console.log(opttitle);
-  
-  if(opttitle==='match'){
-    console.log("inside matches");
-    try {
-      optresult = await User.findOne({ _id: req.user._id }).populate("matchedUsers");
-      console.log(optresult.matchedUsers.length);
-      console.log("hi");
-    } catch (err) {
-      optresult=null;
-      console.log("error in matches");
-      console.log(err);
 
-    }
-    }
+    
 
+  try {
+    demoUser = await User.findOne({ _id: req.user.id });
+  }
+  catch (err) {
+    console.log(err);
+  }
 
     if(opttitle==='date'){
       console.log("inside date");
@@ -62,14 +59,31 @@ router.get("/:opttitle", isUser, async (req, res) => {
       }
 
 
+  let notToBeIncluded = demoUser.matchedUsers.slice();
+  notToBeIncluded.push.apply(notToBeIncluded, demoUser.likedUsers);
+  notToBeIncluded.push.apply(notToBeIncluded, demoUser.unlikedUsers);
 
+  
   var popup = 0;
   var option = {
     location: {
       $geoWithin: {
         $centerSphere: [[lg, lt], kmToRadian(req.user.radius)],
-      },
+      }
     },
+    _id: {
+      $nin: notToBeIncluded
+      //excluding people who are already in liked array of user
+    },
+    gender:
+    {
+      $in: demoUser.preferences //selecting people of reqd preference
+    },
+    age: {
+      $gte: demoUser.ageRange.lowerLimit,
+      $lte: demoUser.ageRange.upperLimit
+    }
+
   };
 
   if (req.user.recommendedUsers.length == 0)//if we are fetching users based on location for the first time or
@@ -80,6 +94,7 @@ router.get("/:opttitle", isUser, async (req, res) => {
     User.find(option).then(data => {
       
 
+    
       User.findOneAndUpdate({ _id: req.user._id }, { $set: { recommendedUsers: data } }, { new: true })
         .populate("matchedUsers").exec(
           function (err, doc) {
@@ -98,6 +113,8 @@ router.get("/:opttitle", isUser, async (req, res) => {
                     console.log(err);
                   }
                   else {
+
+                    //console.log(doc.matchedUsers);
                     res.render("profile", {
                       user: req.user,
                       loggedIn: loggedIn,
@@ -115,6 +132,7 @@ router.get("/:opttitle", isUser, async (req, res) => {
             else //in case of new user ,matches will be null
             {
               console.log("Visiting profile for the first time");
+              // console.log(doc.matchedUsers);
               res.render("profile", {
                 user: req.user,
                 loggedIn: loggedIn,
@@ -140,9 +158,11 @@ router.get("/:opttitle", isUser, async (req, res) => {
           throw err;
         }
         else {
-          var creators=docs.matchedUsers;
+
+          //console.log(docs.matchedUsers);
+          let creators = docs.matchedUsers.slice();
           creators.push(docs);
-          //console.log(creators);
+
           Post.find({ "postedBy": { $in: creators } }).populate("postedBy").populate("comments.createdBy").sort({ Date: -1 })
             .exec(function (err, posts) {
               if (err) {
@@ -151,10 +171,14 @@ router.get("/:opttitle", isUser, async (req, res) => {
               else {
                 console.log("Already visited profile before");
                 //console.log(docs.recommendedUsers);
-                if(opttitle=="match"){
-                console.log(optresult.matchedUsers);
-                console.log(optresult.matchedUsers.length);
-                }
+                //console.log(docs.matchedUsers);
+
+                if (docs.matchedUsers.length > 0)
+                  optresult = docs.matchedUsers;
+                else
+                  optresult = "";
+
+                //console.log(optresult);
                 res.render("profile", {
                   user: req.user,
                   loggedIn: loggedIn,

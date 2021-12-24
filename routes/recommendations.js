@@ -11,29 +11,45 @@ const isUser = auth.isUser;
 router.get("/deleteRecommendedUser/:id", isUser, (req, res) => {
   const loggedIn = req.isAuthenticated() ? true : false;
   var popup = 0;
-  User.findOneAndUpdate(
-    { _id: req.user.id },
-    { $pull: { recommendedUsers: req.params.id } },
-    { new: true }).populate("recommendedUsers").exec(
-      function (err, docs) {
-        if (err) {
-          console.log(err);
-          throw err;
-        }
-        else {
-          console.log(req.params.id + " deleted");
-          res.render("profile", {
-            user: req.user,
-            loggedIn: loggedIn,
-            recommendedUsers: docs.recommendedUsers,
-            popup: popup,
-            likedUser: null,
-            opttitle: "newsfeed",
-            posts: []
-          });
-        }
 
-      });
+  User.findOne(
+    { _id: req.params.id },
+    function (err, unlikedUser) {
+      if (err) {
+        console.log(err);
+        throw err;
+      }
+      else {
+
+        User.findOneAndUpdate(
+          { _id: req.user.id },
+          {
+            $pull: { recommendedUsers: req.params.id },
+            $push: { unlikedUsers: unlikedUser },
+          },
+          { new: true }).populate("recommendedUsers").exec(
+            function (err, docs) {
+              if (err) {
+                console.log(err);
+                throw err;
+              }
+              else {
+                console.log(req.params.id + " deleted");
+                res.render("profile", {
+                  user: req.user,
+                  loggedIn: loggedIn,
+                  recommendedUsers: docs.recommendedUsers,
+                  popup: popup,
+                  likedUser: null,
+                  opttitle: "newsfeed",
+                  posts: []
+                });
+              }
+
+            });
+
+      }
+    });
 
 });
 
@@ -104,7 +120,7 @@ router.get("/likeRecommendedUser/:id", isUser, (req, res) => {
                       likedUser: user2,
                       popup: popup,//will use this to show popup on frontend for match found
                       opttitle: "newsfeed",
-                      posts:[]
+                      posts: []
                     });
 
 
@@ -147,7 +163,7 @@ router.get("/likeRecommendedUser/:id", isUser, (req, res) => {
                   popup: popup,
                   likedUser: null,
                   opttitle: "newsfeed",
-                  posts:[]
+                  posts: []
                 });
               });
 

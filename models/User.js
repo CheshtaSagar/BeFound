@@ -40,12 +40,12 @@ const UserSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  preferences: //to be made array later
+  preferences: //gender preference
   {
     type: String,
     required:true,
   },
-  ageRange:
+  ageRange:  //age preference
   {
     lowerLimit:{
       type:Number,
@@ -56,7 +56,7 @@ const UserSchema = new mongoose.Schema({
       defualt:100
     }
   },
-  radius:
+  radius: //distance preference
   {
     type:Number,
     required: true,
@@ -110,6 +110,12 @@ const UserSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref:'User'
      }
+  ],
+  unlikedUsers: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref:'User'
+     } 
   ],
   resetPasswordToken: String,
   resetPasswordExpire: Date,
