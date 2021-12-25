@@ -29,7 +29,7 @@
 <body>
   <!--importing navbar-->
   <%- include ('indexPartials/nav2') %>
-    <section>
+    <section id="profile-main-section">
       <div>
         <img width=100% src="/images/bc-about.jpg" alt="">
 
@@ -115,7 +115,7 @@
         <!---relocation button on bottom right corner------------------------------------------------------->
         <a href="" id="a3" onclick="return submit()"><img src="/images/location.png" class="img-fluid" style="
               border-radius: 50%;
-              border: 1px solid black;
+              /* border: 1px solid black; */
               height: 70px;
               width: 70px;
               box-shadow: 7px 5px 10px rgb(161, 113, 250);
@@ -124,6 +124,15 @@
               right: 50px;
             " /></a>
         <!--------------------------------------------------------------------------------------------------------->
+        <a href="#profile-main-section"  ><img src="https://cdn2.iconfinder.com/data/icons/gradient-purple-navigation-and-transactional-for-w/40/up-purp-512.png" class="img-fluid" style="
+          border-radius: 50%;
+          height: 70px;
+          width: 70px;
+          box-shadow: 7px 5px 10px rgb(161, 113, 250);
+          position: fixed;
+          bottom: 100px;
+          right: 50px;
+        " /></a>
       </div>
     </section>
 
