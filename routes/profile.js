@@ -14,8 +14,8 @@ const ScheduleDate = require("../models/ScheduleDate");
 const auth = require("../config/auth");
 const isUser = auth.isUser;
 var opttitle;
-var optresult=null;
-
+var optresult;
+var optdate;
 
 
 //profile
@@ -44,15 +44,15 @@ router.get("/:opttitle", isUser, async (req, res) => {
   catch (err) {
     console.log(err);
   }
-
+  
     if(opttitle==='date'){
       console.log("inside date");
       try {
-        optresult = await ScheduleDate.find({ members: { $in: [req.user._id] }, }).populate("members");
+        optdate = await ScheduleDate.find({ members: { $in: [req.user._id] }, }).populate("members");
         console.log(optresult);
         console.log("hi");
       } catch (err) {
-        optresult=null;
+        optdate=null;
         console.log("error in finding dates");
         console.log(err);
       }
@@ -62,7 +62,7 @@ router.get("/:opttitle", isUser, async (req, res) => {
   let notToBeIncluded = demoUser.matchedUsers.slice();
   notToBeIncluded.push.apply(notToBeIncluded, demoUser.likedUsers);
   notToBeIncluded.push.apply(notToBeIncluded, demoUser.unlikedUsers);
-
+  console.log(notToBeIncluded);
   
   var popup = 0;
   var option = {
@@ -86,10 +86,12 @@ router.get("/:opttitle", isUser, async (req, res) => {
 
   };
 
+  console.log(req.user.recommendedUsers.length);
+
   if (req.user.recommendedUsers.length == 0)//if we are fetching users based on location for the first time or
   // have updated location 
   {
-
+      console.log("Location updated");
     //data contains all users which are near to given latitude and longitude
     User.find(option).then(data => {
       
@@ -104,8 +106,8 @@ router.get("/:opttitle", isUser, async (req, res) => {
             else if (doc.matchedUsers) //if we are updating loation then previous matches still exist
             {
               //finding posts of matched users for newsfeed
-              var creators=doc.matchedUsers;
-              creators.push(req.user._id);
+              let creators = doc.matchedUsers.slice();
+              creators.push(doc);
               //console.log(creators);
               Post.find({ "postedBy": { $in: creators } }).populate("postedBy").sort({ Date: -1 })
                 .exec(function (err, posts) {
@@ -113,6 +115,10 @@ router.get("/:opttitle", isUser, async (req, res) => {
                     console.log(err);
                   }
                   else {
+                    if (doc.matchedUsers.length > 0)
+                    optresult = doc.matchedUsers;
+                  else
+                    optresult = "";
 
                     //console.log(doc.matchedUsers);
                     res.render("profile", {
@@ -123,7 +129,8 @@ router.get("/:opttitle", isUser, async (req, res) => {
                       likedUser: null,
                       opttitle: opttitle,
                       posts: posts,
-                      optresult: optresult
+                      optresult: optresult,
+                      optdate:optdate
                     });
 
                   }
@@ -142,6 +149,7 @@ router.get("/:opttitle", isUser, async (req, res) => {
                 opttitle: opttitle,
                 posts: null,
                 optresult: optresult,
+                optdate:optdate
               });
             }
           });
@@ -188,6 +196,7 @@ router.get("/:opttitle", isUser, async (req, res) => {
                   opttitle: opttitle,
                   posts: posts,
                   optresult:optresult,
+                  optdate:optdate
                 });
 
                // console.log(posts);

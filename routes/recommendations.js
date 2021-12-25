@@ -4,9 +4,10 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
 const Match = require("../models/Match");
+const Post = require("../models/Post");
 const auth = require('../config/auth');
 const isUser = auth.isUser;
-
+var optresult="";
 
 router.get("/deleteRecommendedUser/:id", isUser, (req, res) => {
   const loggedIn = req.isAuthenticated() ? true : false;
@@ -34,6 +35,23 @@ router.get("/deleteRecommendedUser/:id", isUser, (req, res) => {
                 throw err;
               }
               else {
+
+                let creators = docs.matchedUsers.slice();
+                creators.push(docs);
+      
+                Post.find({ "postedBy": { $in: creators } }).populate("postedBy").populate("comments.createdBy").sort({ Date: -1 })
+                  .exec(function (err, posts) {
+                    if (err) {
+                      console.log(err);
+                    }
+                    else {
+                      
+                      //console.log(docs.recommendedUsers);
+                      //console.log(docs.matchedUsers);
+                     
+                      if (docs.matchedUsers.length > 0)
+                        optresult = docs.matchedUsers;
+                     
                 console.log(req.params.id + " deleted");
                 res.render("profile", {
                   user: req.user,
@@ -42,8 +60,11 @@ router.get("/deleteRecommendedUser/:id", isUser, (req, res) => {
                   popup: popup,
                   likedUser: null,
                   opttitle: "newsfeed",
-                  posts: []
+                  posts: posts,
+                  optresult:optresult,
                 });
+
+              }});
               }
 
             });
@@ -67,7 +88,7 @@ router.get("/likeRecommendedUser/:id", isUser, (req, res) => {
   const loggedIn = req.isAuthenticated() ? true : false;
 
   var popup = 0;
-
+  var optresult="";
   User.findOne(
     { _id: req.params.id, likedUsers: req.user.id },
     function (err, matchFound) {
@@ -112,18 +133,37 @@ router.get("/likeRecommendedUser/:id", isUser, (req, res) => {
                     console.log("new match created");
                     console.log("user1: " + user1.username + " matched with user2: " + user2.username);
                     //console.log(user1.matchedUsers);
+
+                    let creators = user1.matchedUsers.slice();
+                    creators.push(user1);
+          
+                    Post.find({ "postedBy": { $in: creators } }).populate("postedBy").populate("comments.createdBy").sort({ Date: -1 })
+                      .exec(function (err, posts) {
+                        if (err) {
+                          console.log(err);
+                        }
+                        else {
+                          
+                          //console.log(docs.recommendedUsers);
+                          //console.log(docs.matchedUsers);
+                         
+                          if (user1.matchedUsers.length > 0)
+                            optresult = user1.matchedUsers;
+                         
+
                     res.render("profile", {
                       user: req.user,
                       loggedIn: loggedIn,
                       recommendedUsers: user1.recommendedUsers,
                       matchedUsers: user1.matchedUsers,
+                      optresult: optresult,
                       likedUser: user2,
                       popup: popup,//will use this to show popup on frontend for match found
                       opttitle: "newsfeed",
-                      posts: []
+                      posts: posts
                     });
 
-
+                        }});
 
                   });
 
@@ -155,16 +195,33 @@ router.get("/likeRecommendedUser/:id", isUser, (req, res) => {
                 console.log("user1: " + user1.username + " likes user2: " + likedUser.username);
                 //console.log(user1.matchedUsers);
                 //render profile 
+
+                let creators = user1.matchedUsers.slice();
+                    creators.push(user1);
+          
+                    Post.find({ "postedBy": { $in: creators } }).populate("postedBy").populate("comments.createdBy").sort({ Date: -1 })
+                      .exec(function (err, posts) {
+                        if (err) {
+                          console.log(err);
+                        }
+                        else {
+                          if (user1.matchedUsers.length > 0)
+                          optresult = user1.matchedUsers;
+                          else
+                          optresult="";
                 res.render("profile", {
                   user: req.user,
                   loggedIn: loggedIn,
                   recommendedUsers: user1.recommendedUsers,
                   matchedUsers: user1.matchedUsers,
+                  optresult:user1.matchedUsers,
                   popup: popup,
                   likedUser: null,
                   opttitle: "newsfeed",
-                  posts: []
+                  posts: posts,
                 });
+
+              }});
               });
 
 

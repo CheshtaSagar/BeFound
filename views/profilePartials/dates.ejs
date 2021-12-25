@@ -16,7 +16,7 @@
 <div id="datesOpt">
   <div id="pg0" class="datesOpt">
     <div id="c-pg0" class="container">
-      <% optresult.forEach(function(optdate){ if(optdate.status=="confirmed" ) {%>
+      <% optdate.forEach(function(optdate){ if(optdate.status=="confirmed" ) {%>
         <div class="row">
           <div class="col">
             <div class="dates-card shadow rounded"
@@ -77,7 +77,7 @@
   <div id="pg1" class="datesOpt">
     <div id="c-pg1" class="container">
 
-      <% optresult.forEach(function(optdate){ if(optdate.status=="not confirmed" &&
+      <% optdate.forEach(function(optdate){ if(optdate.status=="not confirmed" &&
         optdate.members[0]._id.toString()===user._id.toString()) {%>
         <div class="row">
           <div class="col">
@@ -118,7 +118,7 @@
                     </p>
                   </div>
                   <div class="col-2 pt-2">
-                    <a href="/scheduleDate/delete<%= optdate._id%>" class="btn btn-primary " style="
+                    <a href="/scheduleDate/delete/<%= optdate._id%>" class="btn btn-primary " style="
                             color: rgb(255, 255, 255);
                             background-color: #942dd9;
                           "><i
@@ -143,7 +143,7 @@
 
     <div id="c-pg2" class="container">
 
-      <% optresult.forEach(function(optdate){ if(optdate.status=="not confirmed" &&
+      <% optdate.forEach(function(optdate){ if(optdate.status=="not confirmed" &&
         optdate.members[1]._id.toString()===user._id.toString() ) {%>
         <div id="<%= optdate._id%>" class="row">
           <div class="col">
