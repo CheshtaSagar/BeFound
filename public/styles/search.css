@@ -1,0 +1,33 @@
+#field{
+    border-color: #4618ec;
+    border-width:2px;
+    
+}
+#popup-button1,#filter-btn{
+    border-color: #4e2cca;
+    border-width:2px; 
+    background-color: #3700ff;
+    color: #fafafc;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-style: bold;
+    
+}
+#popup-button1:hover,#filter-btn:hover{
+    border-color:#3700ff;
+    border-width:2px; 
+    background-color: #fafafa;
+    color: #2c08ad;
+    font-style: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    
+}
+#show-profile-btn:hover{
+    
+    color: rgb(255, 255, 255);
+    background-image: linear-gradient(166deg, #f22876 0%,  #942dd9 100%);
+    border-radius: 20px;
+    text-decoration: none;
+    padding: 2px 8px;
+    height: 30px;
+    transform: scale(1.1); 
+}

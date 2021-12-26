@@ -1,0 +1,107 @@
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #4e2cca; padding-left: 30%; justify-content: center;">
+                <h5 class="modal-title"
+                    style="font-family: 'Libre Baskerville', serif; color: cornsilk; font-style: bold;">Filter your
+                    search</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form action="/search/searchByFilters" method="GET">
+
+                <div class="modal-body" style="position: relative;">
+
+                    <!--gender select-->
+                    <fieldset class="form-group">
+                        <div class="row">
+                            <legend class="col-form-label col-sm-3 pt-0">Looking for:</legend>
+                            <div class="col-sm-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gender" id="gridRadios1"
+                                        value="Male">
+                                    <label class="form-check-label" for="gridRadios1">
+                                        Male
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gender" id="gridRadios2"
+                                        value="Female">
+                                    <label class="form-check-label" for="gridRadios2">
+                                        Female
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gender" id="gridRadios3"
+                                        value="Others">
+                                    <label class="form-check-label" for="gridRadios3">
+                                        Others
+                                    </label>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </fieldset>
+
+                    <!----Ages-->
+                    <div class="form-group">
+                        <div class="row">
+                            <legend class="col-form-label col-sm-2 col-2 pt-0">Age: </legend>
+                            <div class="col-sm-4 col-3">
+                                <input type="number" class="form-control input-lg" id="lowerLimit" name="lowerLimit"
+                                    placeholder="18" value="18" min="18" />
+                            </div>
+                            <div>--</div>
+                            <div class="col-sm-4 col-3">
+                                <input type="number" class="form-control input-lg" id="upperLimit" name="upperLimit"
+                                    placeholder="18"  min="18" />
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <!--for state and city-->
+                    <div class="form-group">
+                        <div class="row">
+                            <legend class="col-form-label col-sm-2 pt-0">Location: </legend>
+                            
+
+                            <div class="col-sm-5">
+                            <select onchange="print_city('state', this.selectedIndex);" id="sts" name="stt"
+                                class="form-control" ></select>
+
+                            </div> 
+                            
+                            <div class="col-sm-5">
+                            <select id="state" class="form-control" name="city"></select>
+                            <script language="javascript">print_state("sts");</script>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="post1" data-dismiss="modal">Discard</button>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary" id="post2">Search</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
