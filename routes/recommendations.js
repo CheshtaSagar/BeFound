@@ -5,14 +5,21 @@ const router = express.Router();
 const User = require("../models/User");
 const Match = require("../models/Match");
 const Post = require("../models/Post");
+const ScheduleDate = require("../models/ScheduleDate");
 const auth = require('../config/auth');
 const isUser = auth.isUser;
 var optresult="";
 
-router.get("/deleteRecommendedUser/:id", isUser, (req, res) => {
+router.get("/deleteRecommendedUser/:id", isUser, async(req, res) => {
   const loggedIn = req.isAuthenticated() ? true : false;
   var popup = 0;
 
+  try {
+    optdate = await ScheduleDate.find({ members: { $in: [req.user._id] }, }).populate("members").sort({ sdate : 1 });
+  } catch (err) {
+    optdate=null;
+    console.log("error in finding dates");
+  }
   User.findOne(
     { _id: req.params.id },
     function (err, unlikedUser) {
@@ -62,6 +69,7 @@ router.get("/deleteRecommendedUser/:id", isUser, (req, res) => {
                   opttitle: "newsfeed",
                   posts: posts,
                   optresult:optresult,
+                  optdate:optdate,
                 });
 
               }});
@@ -84,11 +92,20 @@ router.get("/deleteRecommendedUser/:id", isUser, (req, res) => {
 //7)   From user1,remove user2 from recommendedUsers and add it in likedUsers
 //8)   Direct to profile
 
-router.get("/likeRecommendedUser/:id", isUser, (req, res) => {
+router.get("/likeRecommendedUser/:id", isUser, async(req, res) => {
   const loggedIn = req.isAuthenticated() ? true : false;
 
   var popup = 0;
   var optresult="";
+
+  try {
+    optdate = await ScheduleDate.find({ members: { $in: [req.user._id] }, }).populate("members").sort({ sdate : 1 });
+  } catch (err) {
+    optdate=null;
+    console.log("error in finding dates");
+  }
+
+
   User.findOne(
     { _id: req.params.id, likedUsers: req.user.id },
     function (err, matchFound) {
@@ -160,7 +177,8 @@ router.get("/likeRecommendedUser/:id", isUser, (req, res) => {
                       likedUser: user2,
                       popup: popup,//will use this to show popup on frontend for match found
                       opttitle: "newsfeed",
-                      posts: posts
+                      posts: posts,
+                      optdate:optdate,
                     });
 
                         }});
@@ -219,6 +237,7 @@ router.get("/likeRecommendedUser/:id", isUser, (req, res) => {
                   likedUser: null,
                   opttitle: "newsfeed",
                   posts: posts,
+                  optdate:optdate,
                 });
 
               }});
