@@ -12,7 +12,6 @@
 
 
 #right{
-    border-color: rgb(0, 0, 0);
     border-width: 90%;
     background-color: white;
     height:90%;
@@ -117,8 +116,30 @@
   }
 
 
-  .datesOpt{
+  /* .datesOpt{
       display:none;
+  } */
+  #pg0{
+        display: block;
+  }
+  #pg1{
+        display: none;
+  }
+  #pg2{
+        display: none;
+  }
+
+  #opt-profile{
+      display: none;
+  }
+  #opt-date{
+      display: none;
+  }
+  #opt-match{
+      display: none;
+  }
+  #opt-newsfeed{
+      display: block;
   }
 
 

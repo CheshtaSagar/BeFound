@@ -12,23 +12,27 @@
             <div class="match-user">
               <div class="row">
                 <div class="col-2">
-
+                    <a href="/showProfile/<%= match._id %>">
                   <% if (match.displayPicture) {%>
+                    
                     <img src="/image/<%= match.displayPicture %>" alt="user" class="profile-photo-lg img-responsive"
                       style="object-fit: cover;" />
                     <% }else{ %>
                       <img src="/images/dprofile.jpg" alt="user" class="profile-photo-lg" />
 
                       <% } %>
+                    </a>
 
                 </div>
-                <div class="col-4 pl-5">
+                <div class="col-5 pl-5">
                   <h5><a href="#" class="profile-link">
                       <%= match.username %>
                     </a></h5>
-                  <p class="text-muted">500m away</p>
+                    <p class="text-muted"><i class="fas fa-map-marker-alt  small mr-2"></i>
+                      <%= match.city %> 
+                    </p>
                 </div>
-                <div class="col-2">
+                <!-- <div class="col-2">
                   <a href="#" class="btn btn-primary" style="
                       color: rgb(255, 255, 255);
                       background-image: linear-gradient(
@@ -38,8 +42,8 @@
                       );
                     " data-toggle="modal" data-target="#dateModalCenter"><i class="fas fa-comments"
                       style="user-select: auto;"></i></a>
-                </div>
-                <div class="col-4">
+                </div> -->
+                <div class="col-5">
 
                   <button type="button" id=<%= match._id %>  onclick="setactionval('<%= match._id %>')" class="btn btn-sm " data-matchid="/scheduleDate/request/<%= match._id %>"
                     data-toggle="modal" data-target="#dateModalCenter" style="

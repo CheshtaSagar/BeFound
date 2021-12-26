@@ -2,18 +2,20 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
+const Post = require("../models/Post");
 const auth = require('../config/auth');
 const {headingDistanceTo} = require("geolocation-utils");
 const isUser=auth.isUser;
 
 
-router.get('/:id',isUser, (req, res) => {
+router.get('/:id',isUser, async (req, res) => {
     const loggedIn = req.isAuthenticated() ? true : false;
-    User.findOne({_id: req.params.id},(err, doc) => {
+    User.findOne({ _id: req.params.id})
+    .populate("posts").sort({posts:-1}).exec(
+      function (err, doc)  {
         if (err) {
             console.log("Something went wrong!");
-        }
-
+        }else{
         const location1 = [ req.user.location.coordinates[1], req.user.location.coordinates[0]];
         const location2 = [ doc.location.coordinates[1],doc.location.coordinates[0]];
        // const location2 =[28.374373861864143, 79.43329499987898];
@@ -30,6 +32,8 @@ router.get('/:id',isUser, (req, res) => {
           doc: doc,
           distance: rounded,
           });
+
+        }
         
     });
 });

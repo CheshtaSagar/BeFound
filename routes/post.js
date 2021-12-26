@@ -8,6 +8,8 @@ const GridFsStorage = require("multer-gridfs-storage");
 const Grid = require("gridfs-stream");
 const methodOverride = require("method-override");
 const { storage, upload } = require("../config/grid");
+const auth = require("../config/auth");
+const isUser = auth.isUser;
 
 //for creating a post
 router.post("/createPost", upload.array("file", 10), (req, res) => {
@@ -88,6 +90,21 @@ router.post('/likePost', (req, res) => {
       });
   }
 
+});
+
+
+//for deleting  
+router.get("/delete/:id", isUser, function (req, res) {
+  console.log("delete");
+  Post.findByIdAndRemove(req.params.id, function (err) {
+    if (err) {
+      req.flash("error_msg", "Error while deleting");
+      console.log(err);
+    } else {
+      req.flash("success_msg", "Date deleted!");
+      res.redirect("/profile/newsfeed");
+    }
+  });
 });
 
 module.exports = router;

@@ -87,7 +87,7 @@ audio::-webkit-media-controls-play-button:hover {
           <div class="card-header py-0 px-0">
             <div class="row">
               <div class="col-10 row py-2">
-                <a href="#" class="pl-4 pr-1">
+                <a href="/showProfile/<%= post.postedBy._id %>" class="pl-4 pr-1">
                   <% if (post.postedBy.displayPicture) {%>
                     <img class="navimg" src="/image/<%= post.postedBy.displayPicture %>" alt="altt"
                       style="border-radius: 50%; object-fit: cover;"  />

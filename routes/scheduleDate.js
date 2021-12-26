@@ -51,8 +51,7 @@ router.get('/set/:str/:dateid', (req, res) => {
     statusToBeSet="canceled";
   }
 
-  
-  //if (status == 'inc') {
+
 ScheduleDate.findOneAndUpdate({ _id: req.params.dateid },
   {
     "$set": { "status": statusToBeSet},

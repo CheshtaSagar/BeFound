@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="/styles/login.css" type="text/css" />
   <link rel="stylesheet" href="/styles/profile.css" type="text/css" />
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
   <title>
     <%= user.username %>
@@ -50,7 +51,7 @@
 
 
             <!----col2 contains create post,recommendations,newsfeed-->
-            <div class="col-12 col-lg-5 py-0 shadow rounded overflow-hidden" id="middle">
+            <div class="col-12 col-lg-6 py-0 shadow rounded overflow-hidden" id="middle">
              
 
 
@@ -73,11 +74,11 @@
                       <br />
 
                       <!-- option -->
-                      <div class="px-0 options shadow rounded overflow-hidden">
-                        <a class="active" href="/profile/newsfeed"><i class="far fa-newspaper"></i> Newsfeed</a>
-                        <a href="/profile/detailedProfile"><i class="fas fa-user-circle"></i>Profile</a>
-                        <a href="/profile/date"><i class="fas fa-calendar-day"></i> Date</a>
-                        <a href="/profile/match"><i class="fab fa-gratipay"></i> Match</a>
+                      <div class="px-0 options shadow rounded overflow-hidden" id="options">
+                        <a href="javascript:void(0)" onclick="showDetails('opt-newsfeed')"><i class="far fa-newspaper"></i> Newsfeed</a>
+                        <a href="javascript:void(0)" onclick="showDetails('opt-profile')"><i class="fas fa-user-circle"></i>Recent Posts</a>
+                        <a href="javascript:void(0)" onclick="showDetails('opt-date')"><i class="fas fa-calendar-day"></i> Date</a>
+                        <a href="javascript:void(0)" onclick="showDetails('opt-match')" ><i class="fab fa-gratipay"></i> Match</a>
                       </div>
                       <%- include ('partials/messages') %>
                       <div>
@@ -87,24 +88,41 @@
                      
                     </div>
             <!-----------third column starts here----------------------------------------------------------->
-            <div class="col-12 col-lg-3" id="right">
+            <div class="col-12 col-lg-2 " id="right">
               <!---chat box-->
-              <div class="card">
-                <img class="card-img-top rounded" src="/images/intro.jpg" alt="Card image cap" />
+              <div class="card shadow rounded overflow-hidden" style="background: rgb(255,255,255);
+              background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 60%, rgba(78,44,202,1) 95%);">
+                <!-- <img class="card-img-top rounded" src="/images/intro.jpg" alt="Card image cap" /> -->
                 <div class="card-body">
-                  <h5 class="card-title">Recent Chats</h5>
-                  <p class="card-text">
+                  <h5 class="card-title text-center" style="color:white; font-weight: bolder;">Upcoming Dates </h5>
+                  <!-- <p class="card-text">
                     Some quick example text to build on the card title and make
                     up the bulk of the card's content.
-                  </p>
-                  <a href="#" class="btn btn-primary" style="
-                      color: rgb(255, 255, 255);
-                      background-image: linear-gradient(
-                        166deg,
-                        #f22876 0%,
-                        #942dd9 100%
-                      );
-                    ">See More Chats</a>
+                  </p> -->
+                  <div >
+
+                    <%- include ('profilePartials/upcomingDates') %>
+                  </div>
+
+
+<div class="text-center pt-2">
+  <a
+  href="#options" onclick="showDetails('opt-match')"
+    class="btn btn-sm text-center"
+    style="
+      width: 100%;
+      color: rgb(255, 255, 255);
+      background-image: linear-gradient(
+        166deg,
+        #f22876 0%,
+        #942dd9 100%
+      );
+    "
+    >Schedule a new date</a
+  >
+</div>
+
+
                 </div>
               </div>
             </div>
@@ -116,8 +134,8 @@
         <a href="" id="a3" onclick="return submit()"><img src="/images/location.png" class="img-fluid" style="
               border-radius: 50%;
               /* border: 1px solid black; */
-              height: 70px;
-              width: 70px;
+              height: 50px;
+              width: 50px;
               box-shadow: 7px 5px 10px rgb(161, 113, 250);
               position: fixed;
               bottom: 9px;
@@ -126,11 +144,11 @@
         <!--------------------------------------------------------------------------------------------------------->
         <a href="#profile-main-section"  ><img src="https://cdn2.iconfinder.com/data/icons/gradient-purple-navigation-and-transactional-for-w/40/up-purp-512.png" class="img-fluid" style="
           border-radius: 50%;
-          height: 70px;
-          width: 70px;
+          height: 50px;
+          width: 50px;
           box-shadow: 7px 5px 10px rgb(161, 113, 250);
           position: fixed;
-          bottom: 100px;
+          bottom: 70px;
           right: 50px;
         " /></a>
       </div>
@@ -250,18 +268,64 @@
     console.log(formurl);
     $("#dateRequest").attr("action", formurl);
 }
-
-//   $('#dateModalCenter').on('show.bs.modal', function (event) {
-//     var matchid = $(event.relatedTarget).data('matchid');
-//     console.log(matchid);
-//     $(e.currentTarget).find(.dateRequest).val(bookId);
-// //document.getElementById("dateRequest").action = matchid;
-//     // $(".oEbutn").click(function() {
-//     // $(this).closest("form").attr("action", "/shop/extras.php");       
-// //});
-//   });
 </script>
 
+<script>
+   function showDetails(IDS) {
+      //var tagId='c-'+ IDS;
+      //var sel = document.getElementById(tagId);
+      //console.log(sel);
+       
+       var optnew=document.getElementById('opt-newsfeed');
+       var optpro=document.getElementById('opt-profile'); 
+       console.log(optnew);    
+       console.log(optpro);    
+        optpro.style.display='unset';
+           optnew.style.display='none';
+      
+    }
+</script>
+<script>
+   function showDetails(IDS) {
+      //var tagId='c-'+ IDS;
+      //var sel = document.getElementById(tagId);
+      //console.log(sel);
+       
+       var optnew=document.getElementById('opt-newsfeed');
+       var optpro=document.getElementById('opt-profile');
+       var optdate=document.getElementById('opt-date');
+       var optmatch=document.getElementById('opt-match');
+                     
+       if(IDS=='opt-newsfeed')
+       {
+           optnew.style.display='unset';
+           optpro.style.display='none';
+           optdate.style.display='none';
+           optmatch.style.display='none';
+       }
+       else if(IDS=='opt-profile')
+       {
+        optnew.style.display='none';
+           optpro.style.display='unset';
+           optdate.style.display='none';
+           optmatch.style.display='none';
+       }
+       else if(IDS=='opt-date')
+       {
+        optnew.style.display='none';
+           optpro.style.display='none';
+           optdate.style.display='unset';
+           optmatch.style.display='none';
+       }
+       else if(IDS=='opt-match')
+       {
+        optnew.style.display='none';
+           optpro.style.display='none';
+           optdate.style.display='none';
+           optmatch.style.display='unset';
+       }
+    }
+</script>
 
 <script>
     function toggle(IDS) {
@@ -272,14 +336,7 @@
        var confirmTag=document.getElementById('pg0');
        var reqTag=document.getElementById('pg1');
        var recTag=document.getElementById('pg2');
-     
-      var status = document.getElementById(IDS).style.display;
-      if (status == 'unset') 
-      { 
-        document.getElementById(IDS).style.display = 'none'; 
-      }
-      else
-      {                 
+                   
        if(IDS=='pg0')
        {
            confirmTag.style.display='unset';
@@ -299,7 +356,6 @@
            recTag.style.display='unset';
        }
 
-      }
       
       return false;
     }

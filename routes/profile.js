@@ -45,10 +45,10 @@ router.get("/:opttitle", isUser, async (req, res) => {
     console.log(err);
   }
   
-    if(opttitle==='date'){
-      console.log("inside date");
+    // if(opttitle==='date'){
+    //   console.log("inside date");
       try {
-        optdate = await ScheduleDate.find({ members: { $in: [req.user._id] }, }).populate("members");
+        optdate = await ScheduleDate.find({ members: { $in: [req.user._id] }, }).populate("members").sort({ sdate : 1 });
         console.log(optresult);
         console.log("hi");
       } catch (err) {
@@ -56,7 +56,7 @@ router.get("/:opttitle", isUser, async (req, res) => {
         console.log("error in finding dates");
         console.log(err);
       }
-      }
+      //}
 
 
   let notToBeIncluded = demoUser.matchedUsers.slice();
