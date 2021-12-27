@@ -3,9 +3,11 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
 const Post = require("../models/Post");
+const auth = require('../config/auth');
+const isUser=auth.isUser;
 
 //to post comment on given post
-router.post("/post/:id", (req, res) => {
+router.post("/post/:id",isUser, (req, res) => {
 
     const comment={
         comment:req.body.comment,
@@ -30,7 +32,7 @@ router.post("/post/:id", (req, res) => {
 
 
  //to view comments on given post
-router.get("/viewAllComments/:id", (req, res) => {
+router.get("/viewAllComments/:id",isUser, (req, res) => {
 
   
   Post.findOne(

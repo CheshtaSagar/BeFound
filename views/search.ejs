@@ -66,7 +66,9 @@
         <div class="container-fluid">
           <div class="row" style="align-items: center">
             <!----search By Name---------------------------------------------------------------->
-            <div class="col-md-6 col-sm-10 d-flex justify-content-center">
+            <div class="col-md-6 col-sm-6 d-flex justify-content-center">
+                <div class="row">
+                    <div class="">
               <form
                 class="form-inline"
                 method="GET"
@@ -80,15 +82,19 @@
                   placeholder="Search By Name"
                   aria-label="Search"
                 />
+            </div>
+            <div class="">
                 <button class="btn" id="popup-button1" type="submit">
                   <i class="fa fa-search"></i>
                 </button>
+            </div>
+            </div>
               </form>
             </div>
             <!------------------------------------------------------------------------------------->
 
             <!---add filters---------------------------------------------------------------------->
-            <div class="col-md-6 col-sm-12 d-flex justify-content-center">
+            <div class="col-md-6 col-sm-6  d-flex justify-content-center">
               <button
                 type="button"
                 id="filter-btn"
@@ -104,18 +110,19 @@
 
           <br />
           <!--result cards-->
-          <div class="container" style="width: 400px">
-            <%if(data.length>0){%> <%data.forEach(function(result){%>
+          <div class="container" style="">
+              <div class="row">
+            <%if(data.length>0){%>
+             <%for(var i=0;i< Math.min(data.length, 6);i++){%>
 
-            <div class="row">
-              <div class="col">
-                <div class="matches-card">
+              <div class="col-lg-6 cl-xs-12">
+                <div class="matches-card shadow rounded">
                   <div class="match-user">
                     <div class="row">
-                      <div class="col-2">
-                        <% if (result.displayPicture) {%>
+                      <div class="col-3">
+                        <% if (data[i].displayPicture) {%>
                         <img
-                          src="/image/<%= result.displayPicture %>"
+                          src="/image/<%= data[i].displayPicture %>"
                           alt="user"
                           class="profile-photo-lg img-responsive"
                           style="object-fit: cover"
@@ -129,7 +136,7 @@
 
                         <% } %>
                       </div>
-                      <div class="col-4 pl-5">
+                      <div class="col-5 ">
                         <h5>
                           <a
                             class="profile-link"
@@ -138,15 +145,16 @@
                               text-decoration: none;
                             "
                           >
-                            <%= result.username %>
+                            <%= data[i].username %>
                           </a>
                         </h5>
-                        <p class="text-muted"><%= result.city %></p>
+                        <p class="text-muted"><%= data[i].city %></p>
                       </div>
-                      <div class="col-4 d-flex justify-content-center">
+                      <div class="col-4 d-flex justify-content-center py-3">
+                          <% if(data[i]._id.toString()!==user._id.toString()){ %> 
                         <a
                           id="show-profile-btn"
-                          href="/showProfile/<%= result.id %>"
+                          href="/showProfile/<%= data[i].id %>"
                           style="
                             color: rgb(255, 255, 255);
                             background-image: linear-gradient(
@@ -162,14 +170,38 @@
                         >
                           See Profile</a
                         >
+                        
+                                <% }else{ %>
+                                    <a
+                                    id="show-profile-btn"
+                                    href="/profile/newsfeed"
+                                    style="
+                                      color: rgb(255, 255, 255);
+                                      background-image: linear-gradient(
+                                        166deg,
+                                        #f22876 0%,
+                                        #942dd9 100%
+                                      );
+                                      border-radius: 20px;
+                                      text-decoration: none;
+                                      padding: 2px 8px;
+                                      height: 30px;
+                                    "
+                                  >
+                                    See Profile</a
+                                  >
+
+                                    <% } %> 
+
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+              
+              <%}%> <%}%>
             </div>
-
-            <%});%> <%}%>
+          </div>
           </div>
         </div>
       </div>
@@ -178,9 +210,10 @@
     <!-----Modal for selecting filetrs-->
     <%- include ('searchPartials/modalForFilters') %>
 
-    <div>
+   
+    
       <%- include ('partials/footer') %>
-    </div>
+    
   </body>
 
   <script

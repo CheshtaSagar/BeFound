@@ -37,7 +37,7 @@ router.post("/request/:user2id", isUser, (req, res) => {
   });
 
 
-router.get('/set/:str/:dateid', (req, res) => {
+router.get('/set/:str/:dateid',isUser, (req, res) => {
   //var dtid = req.params.dateid;
   //var optresult;
   //console.log(dtid);

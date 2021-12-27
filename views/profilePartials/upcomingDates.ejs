@@ -1,31 +1,30 @@
 
 <%  var flag=0; %> 
     <div class="container" style="text-align: center;">
-        <% optdate.forEach(function(optdate){ 
-            if(optdate.status=="confirmed" ) {
+      <%for(var i=0;i< Math.min(optdate.length, 4);i++){
+            if(optdate[i].status=="confirmed" ) {
                 flag=1;
                 %>
                 
         <div class="card img-fluid col-xs-6 " style=" border-color: white;border-radius:20px;text-align: center; text-decoration-color: #f22876;" >
           <img class="card-img-top" style="border-radius: 20px;" src="/images/calender.jpg" alt="Card image" style="width:100%">
           <div class="card-img-overlay" style="word-wrap:inherit;">
-            <h5 class="card-title pt-2" style="color: #f22876;font-weight:800;">
-                <% var res=optdate.sdate.toLocaleDateString('en-US'); var day=res.split('/')[1];
-                console.log(res); %>
+            <h5 class="card-title pt-1" style="color: #f22876;font-weight:800;">
+                <% var res=optdate[i].sdate.toLocaleDateString('en-US'); var day=res.split('/')[1]; console.log(res); %>
                 <%=day%> 
                 <% const monthNames=["Jan", "Feb" , "March" , "April" , "May" , " June" , "July" , "Aug"
                 , "Sept" , "Oct" , "Nov" , "Dec" ]; var mon=monthNames[(res.split('/')[0]-'0')-1]; %>
                 <%=mon%>
             </h5>
-            <p class="card-text" style="color: #f22876;"><h6 style="color: #f22876;text-transform: capitalize;">with <span style="text-transform: capitalize;"><% if(optdate.members[1]._id.toString()===user._id.toString()){ %>
-                <%= optdate.members[0].username %>
+            <p class="" style="color: #f22876;"><h6 style="color: #f22876;">with <span style="text-transform: capitalize;"><% if(optdate[i].members[1]._id.toString()===user._id.toString()){ %>
+                <%= optdate[i].members[0].username.split(" ")[0] %>
                   <% }else{ %>
-                    <%= optdate.members[1].username %>
+                    <%= optdate[i].members[1].username.split(" ")[0] %>
                       <% } %> </span> </h6> </p>
           </div>
         </div>
         <br>
-        <% } }); %> 
+        <% } } %> 
         <% if(flag==0){%>
 
 <h5 class="fs-3x text-muted">No Dates are scheduled in the recent future...</h5>
