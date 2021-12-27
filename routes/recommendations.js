@@ -61,7 +61,7 @@ router.get("/deleteRecommendedUser/:id", isUser, async(req, res) => {
                      
                 console.log(req.params.id + " deleted");
                 res.render("profile", {
-                  user: req.user,
+                  user: docs,
                   loggedIn: loggedIn,
                   recommendedUsers: docs.recommendedUsers,
                   popup: popup,
@@ -169,7 +169,7 @@ router.get("/likeRecommendedUser/:id", isUser, async(req, res) => {
                          
 
                     res.render("profile", {
-                      user: req.user,
+                      user: user1,
                       loggedIn: loggedIn,
                       recommendedUsers: user1.recommendedUsers,
                       matchedUsers: user1.matchedUsers,
@@ -228,7 +228,7 @@ router.get("/likeRecommendedUser/:id", isUser, async(req, res) => {
                           else
                           optresult="";
                 res.render("profile", {
-                  user: req.user,
+                  user: user1,
                   loggedIn: loggedIn,
                   recommendedUsers: user1.recommendedUsers,
                   matchedUsers: user1.matchedUsers,

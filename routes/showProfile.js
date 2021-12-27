@@ -10,12 +10,22 @@ const isUser=auth.isUser;
 
 router.get('/:id',isUser, async (req, res) => {
     const loggedIn = req.isAuthenticated() ? true : false;
+
+    try {
+      posts = await Post.find({ "postedBy":  req.params.id }).populate("comments.createdBy").sort({ Date: -1 });
+      
+    } catch (err) {
+     
+      console.log("error in finding dates");
+      
+    }
     User.findOne({ _id: req.params.id})
-    .populate("posts").sort({posts:-1}).exec(
+    .populate("posts").exec(
       function (err, doc)  {
         if (err) {
             console.log("Something went wrong!");
         }else{
+
         const location1 = [ req.user.location.coordinates[1], req.user.location.coordinates[0]];
         const location2 = [ doc.location.coordinates[1],doc.location.coordinates[0]];
        // const location2 =[28.374373861864143, 79.43329499987898];
@@ -31,6 +41,7 @@ router.get('/:id',isUser, async (req, res) => {
           loggedIn: loggedIn,
           doc: doc,
           distance: rounded,
+          posts:posts
           });
 
         }

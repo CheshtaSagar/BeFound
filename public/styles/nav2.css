@@ -1,24 +1,4 @@
-/* .header-purple {
-    /* background:linear-gradient(135deg, #172a74, #21a9af);
-    background-color:#184e8e; */
-    /* padding: 0px 0 120px;
-    position: relative;
-    background: url(http://pixner.net/peyamba/peyamba/assets/images/banner/hero-banner.png);
-    background-repeat: no-repeat;
-    background-position: bottom;
-    background-size: cover;
-    position: relative;
-    overflow: hidden;
-    padding-bottom:80px;
-    font-family:'Source Sans Pro', sans-serif;
-  }
-  
-  @media (min-width:768px) {
-    .header-purple {
-      padding-bottom:120px;
-    }
-  } */ 
-  
+
   .header-purple .navbar {
     /* background:transparent; */
     background-color: #4e2cca;
