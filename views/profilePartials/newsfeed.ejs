@@ -87,16 +87,31 @@ audio::-webkit-media-controls-play-button:hover {
           <div class="card-header py-0 px-0">
             <div class="row">
               <div class="col-10 row py-2">
+                <% if(post.postedBy._id.toString()===user._id.toString()){ %> 
+                <a href="#" class="pl-4 pr-1">
+                  <% if (post.postedBy.displayPicture) {%>
+                    <img class="navimg" src="/image/<%= post.postedBy.displayPicture %>" alt="altt"
+                      style="border-radius: 50%; object-fit: cover;"  />
+                    <% }else{ %>
+                      <img class="navimg"
+                        src="/images/defaultDp.png"
+                        alt="" style="border-radius: 50% ;object-fit: cover;" />
+                      <% } %>
+                </a>
+                <% }else{ %> 
                 <a href="/showProfile/<%= post.postedBy._id %>" class="pl-4 pr-1">
                   <% if (post.postedBy.displayPicture) {%>
                     <img class="navimg" src="/image/<%= post.postedBy.displayPicture %>" alt="altt"
                       style="border-radius: 50%; object-fit: cover;"  />
                     <% }else{ %>
                       <img class="navimg"
-                        src="https://pbs.twimg.com/card_img/1472392722673811457/wMz62V7-?format=png&name=360x360"
+                        src="/images/defaultDp.png"
                         alt="" style="border-radius: 50% ;object-fit: cover;" />
                       <% } %>
                 </a>
+                <% } %> 
+
+
                 <div class="col">
                   <h6 class="py-0 px-0 mb-0" style="text-transform: capitalize;
                   font-weight:bolder;">
@@ -221,7 +236,7 @@ audio::-webkit-media-controls-play-button:hover {
                                 style="border-radius: 50%" />
                               <% }else{ %>
                                 <img class="commentimg"
-                                  src="https://pbs.twimg.com/card_img/1472392722673811457/wMz62V7-?format=png&name=360x360"
+                                  src="/images/defaultDp.png"
                                   alt="" style="border-radius: 50%" />
                                 <% } %>
 
@@ -246,7 +261,7 @@ audio::-webkit-media-controls-play-button:hover {
                                   style="border-radius: 50%" />
                                 <% }else{ %>
                                   <img class="commentimg"
-                                    src="https://pbs.twimg.com/card_img/1472392722673811457/wMz62V7-?format=png&name=360x360"
+                                    src="/images/defaultDp.png"
                                     alt="" style="border-radius: 50%" />
                                   <% } %>
 
@@ -286,7 +301,7 @@ audio::-webkit-media-controls-play-button:hover {
                                 style="border-radius: 50%" />
                               <% }else{ %>
                                 <img class="commentimg"
-                                  src="https://pbs.twimg.com/card_img/1472392722673811457/wMz62V7-?format=png&name=360x360"
+                                  src="/images/defaultDp.png"
                                   alt="" style="border-radius: 50%" />
                                 <% } %>
                                   <form-group>
@@ -355,7 +370,9 @@ audio::-webkit-media-controls-play-button:hover {
     </div>
     <!------------------------------------->
     <%});}else{%>
-      <img src="/images/NoPosts.jpg" height="200px" alt=" ..." class="rounded pt-10 img-thumbnail" />
+      <div class="text-canter">
+      <img src="/images/state_no_activity.jpg" height="" alt=" ..." class="rounded pt-10 img-thumbnail" />
+    </div>
       <%}%>
 
 

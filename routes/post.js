@@ -12,7 +12,7 @@ const auth = require("../config/auth");
 const isUser = auth.isUser;
 
 //for creating a post
-router.post("/createPost", upload.array("file", 10), (req, res) => {
+router.post("/createPost",isUser, upload.array("file", 10), (req, res) => {
   User.findOne({ _id: req.user._id }, (err, user) => {
     if (err) console.log(err);
     else {
