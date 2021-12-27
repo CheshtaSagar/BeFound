@@ -81,7 +81,7 @@ router.post(
            }
            else if (docs) {
              console.log("updated");
-             req.flash("success_msg", "Profile Updated");
+             req.flash("success_msg", "Media uploaded");
             
              res.redirect("/userProfile/editProfile");
            }
