@@ -5,7 +5,7 @@ const Post = require("../models/Post");
 const auth = require("../config/auth");
 const isUser = auth.isUser;
 
-router.get('/', (req, res) => {
+router.get('/',isUser, (req, res) => {
     const loggedIn = req.isAuthenticated() ? true : false;
     
     res.render('search', {
@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/searchByName', (req, res) => {
+router.get('/searchByName',isUser, (req, res) => {
     const searchFields = req.query.userName;
     const loggedIn = req.isAuthenticated() ? true : false;
 
@@ -43,7 +43,7 @@ router.get('/searchByName', (req, res) => {
 });
 
 
-router.get('/searchByFilters', (req, res) => {
+router.get('/searchByFilters',isUser, (req, res) => {
 
     const {gender,lowerLimit,upperLimit,stt,city}=req.query;
     
