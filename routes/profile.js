@@ -122,7 +122,7 @@ router.get("/:opttitle", isUser, async (req, res) => {
 
                     //console.log(doc.matchedUsers);
                     res.render("profile", {
-                      user: req.user,
+                      user: doc,
                       loggedIn: loggedIn,
                       recommendedUsers: data,//all users within radius are passed to ejs, 
                       popup: popup,         // where we are filtering based on preference.
@@ -141,7 +141,7 @@ router.get("/:opttitle", isUser, async (req, res) => {
               console.log("Visiting profile for the first time");
               // console.log(doc.matchedUsers);
               res.render("profile", {
-                user: req.user,
+                user: doc,
                 loggedIn: loggedIn,
                 recommendedUsers: data,//all users within radius are passed to ejs, 
                 popup: popup,         // where we are filtering based on preference.
@@ -188,7 +188,7 @@ router.get("/:opttitle", isUser, async (req, res) => {
 
                 //console.log(optresult);
                 res.render("profile", {
-                  user: req.user,
+                  user: docs,
                   loggedIn: loggedIn,
                   recommendedUsers: docs.recommendedUsers,//all users within radius are passed to ejs, 
                   popup: popup,                          // where we are filtering based on preference.

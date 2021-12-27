@@ -93,13 +93,14 @@
 
 
       <div class="info" style="text-align: center;">
-
+         <%if(user.matchedUsers.indexOf(doc._id)==-1 && user.likedUsers.indexOf(doc._id)==-1 ){%>
         <a href="/recommendations/likeRecommendedUser/<%= doc.id %>">
           <i class="fa fa-heart" id="i2"></i>
         </a>
         <a href="/recommendations/deleteRecommendedUser/<%= doc.id %>">
           <i class="fa fa-times-circle" id="i1"></i>
         </a>
+        <%}%>
       </div>
     </div>
 

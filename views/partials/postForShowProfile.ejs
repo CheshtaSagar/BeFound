@@ -75,8 +75,8 @@ audio::-webkit-media-controls-play-button:hover {
 
 
 <!--------------newsfeed starts here-->
-<%if(doc.posts.length>0){%>
-  <% doc.posts.forEach(function(post){ %>
+<%if(posts.length>0){%>
+  <% posts.forEach(function(post){ %>
    
 
 
@@ -102,7 +102,7 @@ audio::-webkit-media-controls-play-button:hover {
                   font-weight:bolder;">
                     <%=doc.username%>
                   </h6>
-                  <p class="mb-0" style="font-size: smaller;text-transform: capitalize;">Some place</p>
+                  
                 </div>
               </div>
 

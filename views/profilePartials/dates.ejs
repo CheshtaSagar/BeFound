@@ -56,9 +56,10 @@
                     </p>
                   </div>
                   <div class="col-2 pt-2" data-toggle="tooltip" data-placement="top" title="Delete">
-                    <a href="/scheduleDate/delete/<%= optdate._id%>" class="btn btn-primary " style="
+                    <a href="javascript:void(0)"  onclick="showConfirmation('/scheduleDate/delete/<%= optdate._id%>')" class="btn btn-primary " style="
                             color: rgb(255, 255, 255);
-                            background-color: #f52776;"><i
+                            background-color: #f52776;" 
+                           ><i
                         class="fas fa-calendar-times"></i></a>
                   </div>
 
@@ -118,10 +119,10 @@
                     </p>
                   </div>
                   <div class="col-2 pt-2">
-                    <a href="/scheduleDate/delete/<%= optdate._id%>" class="btn btn-primary " style="
+                    <a href="javascript:void(0)" class="btn btn-primary " style="
                             color: rgb(255, 255, 255);
-                            background-color: #942dd9;
-                          "><i
+                            background-color: #942dd9; 
+                          "  onclick="showConfirmation('/scheduleDate/delete/<%= optdate._id %>')"><i
                         class="fas fa-calendar-times"></i></a>
                   </div>
 
@@ -131,7 +132,6 @@
           </div>
         </div>
         <% }}); %>
-
 
     </div>
 
@@ -191,10 +191,10 @@
                     </a>
                   </div>
                   <div class="col-2 py-3 pl-1 text-center " data-toggle="tooltip" data-placement="top" title="Reject">
-                    <a href="/scheduleDate/set/reject/<%= optdate._id%>" class="btn " style="
+                    <a href="javascript:void(0)" class="btn " style="
                             color: rgb(255, 255, 255);
                             background-color: rgba(78,44,202,1);
-                          ">
+                          " onclick="showConfirmation('/scheduleDate/set/reject/<%= optdate._id%>')">
                       <i class="fas fa-calendar-times"></i>
                     </a>
                   </div>
@@ -210,58 +210,15 @@
   </div>
 </div>
 
-
+<%- include ('./modalForDeleteDate') %>
 
 
 <script>
 function acceptDate(curDate) {
     console.log("inside accept date")
-    //var e = 'icon-' + curPost;
-   // var info = 'likeCount-' + curPost;
-    //console.log(info);
    var element = document.getElementById(curDate);
    console.log(element);
-   //var element = el;
-   
-//   url="/scheduleDate/accept/"+curDate;
 
-//   fetch(url).then(function(response) {
-//   return response.json();
-// }).then(function(data) {
-//   console.log(data);
-//   $('#dateModalCenter').modal('show');
-//      element.remove();
-
-// }).catch(function() {
-//   $('#dateModalCenter').modal('show');
-//   element.remove();
-//   console.log("Booo");
-// });
-
-    //if (iconTag.className == 'bi bi-heart fa-2x px-2') {
-accept(curDate);
-    //   accept( curDate, (optresult) => {
-    //     //console.log('inc='+likes);
-    //     //document.getElementById(info).textContent = likes + ' likes';
-    //     //iconTag.className = 'bi bi-heart-fill fa-2x px-2';
-    //     //document.getElementById(e).style.color = 'red';
-    //     // $('#dateModalCenter').modal('show');
-    //     // element.remove();
-
-    //     console.log("1");
-    //  });
-   // }
-    // else {
-    //   likePost('dec', curPost, (likes) => {
-    //     //console.log('dec='+likes);
-    //     document.getElementById(info).textContent = likes + ' likes';
-    //     iconTag.className = 'bi bi-heart fa-2x px-2';
-    //     document.getElementById(e).style.color = 'black';
-
-
-    //     //console.log('2');
-    //   });
-    // }
 
 
   }
@@ -299,4 +256,6 @@ accept(curDate);
     http.send();
    console.log('inside likePost');
   }
+
+
 </script>
