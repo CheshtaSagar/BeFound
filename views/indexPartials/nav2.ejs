@@ -23,9 +23,9 @@
                                 class="form-control search-field" type="search" name="search" id="search-field" disabled></div>
                     </form>
                     <% if (user) { %>
-                        <a href="/chat/<%= user._id %>  ">
+                        <!-- <a href="/chat/<%= user._id %>  ">
                         <i class="fa fa-envelope-o" style="font-size:25px;color:rgb(248, 244, 244); margin-right: 20px;"></i>
-                    </a>
+                    </a> -->
                         <a href="/profile/newsfeed">
                             <% if (user.displayPicture) {%> 
                             <img class="navimg" src="/image/<%= user.displayPicture %>" alt="altt" style="border-radius: 50%; object-fit: cover;">
