@@ -75,8 +75,10 @@ audio::-webkit-media-controls-play-button:hover {
 
 
 <%if(posts.length>0){%>
+  <% var postflag=0; %> 
   <% posts.forEach(function(post){ %>
     <% if(post.postedBy._id.toString()===user._id.toString()){ %>
+      <% postflag=1; %> 
 
 
     <!----Card starts here------------------>
@@ -356,7 +358,7 @@ audio::-webkit-media-controls-play-button:hover {
       </div>
     </div>
     <!------------------------------------->
-    <%}});}else{%>
+    <%}});}if(postflag===0){%>
       <img src="/images/no_post.png" height="200px" alt=" ..." class="rounded pt-10 img-thumbnail" />
       <%}%>
 
