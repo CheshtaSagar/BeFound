@@ -53,7 +53,7 @@ router.post("/createPost",isUser, upload.array("file", 10), (req, res) => {
 
 
 //liking a post in newsfeed
-router.post('/likePost', (req, res) => {
+router.post('/likePost',isUser, (req, res) => {
   var postid = req.query.postid;
   var status = req.query.status;
   //console.log(postid);

@@ -14,8 +14,9 @@
                 <div class="collapse navbar-collapse" id="navcol-1">
                     <ul class="nav navbar-nav">
                         <li class="nav-item" role="presentation"><a class="nav-link active" href="/profile/newsfeed">Home</a></li>
+                        <% if (user) { %>
                         <li class="nav-item" role="presentation"><a class="nav-link active" href="/search"><i class="fa fa-search"></i> Search</a></li>
-                        
+                        <% } %> 
                     </ul>
                     <form class="form-inline mr-auto" target="_self">
                         <div class="form-group"><label for="search-field"></label><input

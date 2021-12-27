@@ -38,7 +38,11 @@ console.log(person);
     { $set: person },
     function (err, docs) {
       if (err) {
-        throw err;
+        //throw err;
+        req.flash("error_msg", "error while updating!! Please update again.");
+        console.log(req.user._id);
+        res.redirect("editProfile");
+        
       }
       else if (docs) {
         console.log("updated");
