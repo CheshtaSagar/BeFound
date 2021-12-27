@@ -12,6 +12,7 @@ const multer=require('multer');
 const {GridFsStorage}=require('multer-gridfs-storage');
 const Grid=require('gridfs-stream');
 const methodOverride=require('method-override');
+require('dotenv').config();
 
 // DB Config
 const db = require('./config/db').mongoURI;
@@ -106,6 +107,7 @@ app.use('/post',require('./routes/post'));
 app.use('/comment',require('./routes/comment'));
 app.use('/scheduleDate',require('./routes/scheduleDate'));
 app.use('/search',require('./routes/search'));
+app.use('/forgetPassword',require('./routes/forgetPassword'));
 
 
 

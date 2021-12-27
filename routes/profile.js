@@ -49,7 +49,7 @@ router.get("/:opttitle", isUser, async (req, res) => {
     //   console.log("inside date");
       try {
         optdate = await ScheduleDate.find({ members: { $in: [req.user._id] }, }).populate("members").sort({ sdate : 1 });
-        console.log(optresult);
+        //console.log(optresult);
         console.log("hi");
       } catch (err) {
         optdate=null;

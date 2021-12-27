@@ -59,7 +59,7 @@ router.post('/likePost', (req, res) => {
   //console.log(postid);
   //console.log(status);
 
-  
+
   if (status == 'inc') {
     Post.findOneAndUpdate({ _id: postid },
       {
@@ -79,7 +79,7 @@ router.post('/likePost', (req, res) => {
       {
         $inc: { likes: -1 },
         $pull: { likedBy: req.user.id }
-      }, {new:true},function (err, post) {
+      }, { new: true }, function (err, post) {
         if (err)
           console.log(err);
         else {
@@ -101,10 +101,29 @@ router.get("/delete/:id", isUser, function (req, res) {
       req.flash("error_msg", "Error while deleting");
       console.log(err);
     } else {
-      req.flash("success_msg", "Date deleted!");
-      res.redirect("/profile/newsfeed");
-    }
-  });
-});
 
-module.exports = router;
+      User.findOneAndUpdate(
+        { _id: req.user.id },
+        {
+          $pull: { posts: req.params.id },
+        },
+        { new: true }).exec(
+          function (err, user1) {
+            if (err) {
+              console.log(err);
+              throw err;
+            }
+            else {
+              console.log(user1.posts);
+              req.flash("success_msg", "Post deleted!");
+              res.redirect("/profile/newsfeed");
+
+            }
+          });
+    
+        }
+
+      });
+
+    });
+  module.exports = router;
