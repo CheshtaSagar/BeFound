@@ -42,6 +42,10 @@
       <div class="profile__body px-5">
         <div class="container-fluid">
           <div class="row">
+
+            <div style="width:250px;  position:fixed; top:12%; right:0;z-index:2" >
+              <%- include ('partials/messages') %> 
+          </div>
             <!----------------------------------------------------------------------->
             <div class="col-sm-12 col-lg-4" id="left">
               <%- include ('Partials/profileCard') %>
@@ -80,7 +84,7 @@
                         <a href="javascript:void(0)" onclick="showDetails('opt-date')"><i class="fas fa-calendar-day"></i> Date</a>
                         <a href="javascript:void(0)" onclick="showDetails('opt-match')" ><i class="fab fa-gratipay"></i> Match</a>
                       </div>
-                      <%- include ('partials/messages') %>
+                      
                       <div>
                         <%- include('profilePartials/options') %>
                       </div>
