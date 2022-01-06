@@ -89,13 +89,15 @@ audio::-webkit-media-controls-play-button:hover {
             <div class="row">
               <div class="col-10 row py-2">
                 <a href="#" class="pl-4 pr-1">
-                  <% if (post.postedBy.displayPicture) {%>
-                    <img class="navimg" src="/image/<%= post.postedBy.displayPicture %>" alt="altt"
-                      style="border-radius: 50%; object-fit: cover;"  />
-                    <% }else{ %>
-                      <img class="navimg"
+                  <% if (post.postedBy.displayPicture == '{}') {%>
+                    <img class="navimg"
                         src="/images/defaultDp.png"
                         alt="" style="border-radius: 50% ;object-fit: cover;" />
+                    <% }else{ %>
+                      
+
+                        <img class="navimg" src="<%= post.postedBy.displayPicture.image %>" alt="altt"
+                      style="border-radius: 50%; object-fit: cover;"  />
                       <% } %>
                 </a>
                 <div class="col">
@@ -103,7 +105,7 @@ audio::-webkit-media-controls-play-button:hover {
                   font-weight:bolder;">
                     <%= post.postedBy.username%>
                   </h6>
-                  <p class="mb-0" style="font-size: smaller;text-transform: capitalize;">Some place</p>
+                 
                 </div>
               </div>
               <div class="col2 pl-5 pt-3" >
@@ -120,13 +122,13 @@ audio::-webkit-media-controls-play-button:hover {
 
                 <% post.pictures.forEach(function(pic){ %>
                   <div class="swiper-slide">
-                    <% if(pic.split('.').pop()=="mp4") {%> 
+                    <% if(pic.image.split('.')[3]=="mp4") {%> 
                       <!-- <video src="/image/<%= pic %>" class="card-img " style="object-fit: contain;" type="video/mp4"></video> -->
                       <video width="350" height="350" class="card-img " style="object-fit: contain;" controls>
-                        <source src="/image/<%= pic %>" type="video/mp4">
+                        <source src="<%= pic.image %>" type="video/mp4">
                         Your browser does not support the video tag.
                       </video>
-                      <%}else if(pic.split('.').pop()=="mp3"){%>
+                      <%}else if(pic.image.split('.')[3]=="mp3"){%>
                         <div class="col">
                           <!-- <div>
                         <img src="https://media.pitchfork.com/photos/6022badb3d879bcfdcd6aa45/master/w_1600%2Cc_limit/vinyl101-2-mid-2.gif"
@@ -138,7 +140,7 @@ audio::-webkit-media-controls-play-button:hover {
                         <audio class="card-img text-center" style="object-fit: contain; display: flex;
                         justify-content: center;
                         align-items: center;" controls>
-                          <source src="/image/<%= pic %>" type="audio/mpeg">
+                          <source src="<%= pic.image %>" type="audio/mpeg">
                           Your browser does not support the audio element.
                         </audio>
                       </div>
@@ -146,7 +148,7 @@ audio::-webkit-media-controls-play-button:hover {
 
                         <% }else{ %> 
 
-                    <img src="/image/<%= pic %>" ondblclick="increaseLikes('<%= post.id%>','<%= post.likes %>')" class="card-img " alt="Fissure in Sandstone" style="object-fit: contain;"/>
+                    <img src="<%= pic.image %>" ondblclick="increaseLikes('<%= post.id%>','<%= post.likes %>')" class="card-img " alt="Fissure in Sandstone" style="object-fit: contain;"/>
                     <% } %> 
                   </div>
                   <%});%>
@@ -220,13 +222,15 @@ audio::-webkit-media-controls-play-button:hover {
 
                           <h5 style="text-transform: capitalize;">
 
-                            <% if (com.createdBy.displayPicture) {%>
-                              <img class="commentimg" src="/image/<%= com.createdBy.displayPicture %>" alt="altt"
-                                style="border-radius: 50%" />
+                            <% if (com.createdBy.displayPicture == '{}') {%>
+                              <img class="commentimg"
+                              src="/images/defaultDp.png"
+                              alt="" style="border-radius: 50%" />
                               <% }else{ %>
-                                <img class="commentimg"
-                                  src="/images/defaultDp.png"
-                                  alt="" style="border-radius: 50%" />
+                               
+
+                                  <img class="commentimg" src="<%= com.createdBy.displayPicture.image %>" alt="altt"
+                                style="border-radius: 50%" />
                                 <% } %>
 
                                   <span style="font-size:medium; text-transform: capitalize;">
@@ -245,13 +249,16 @@ audio::-webkit-media-controls-play-button:hover {
                           <div class="col-6">
                             <h5 style="text-transform: capitalize;">
 
-                              <% if (com.createdBy.displayPicture) {%>
-                                <img class="commentimg" src="/image/<%= com.createdBy.displayPicture %>" alt="altt"
-                                  style="border-radius: 50%" />
-                                <% }else{ %>
-                                  <img class="commentimg"
+                              <% if (com.createdBy.displayPicture == '{}') {%>
+
+                                <img class="commentimg"
                                     src="/images/defaultDp.png"
                                     alt="" style="border-radius: 50%" />
+
+                                
+                                <% }else{ %>
+                                  <img class="commentimg" src="<%= com.createdBy.displayPicture.image %>" alt="altt"
+                                  style="border-radius: 50%" />
                                   <% } %>
 
                                     <span style="font-size:medium;">
@@ -285,13 +292,15 @@ audio::-webkit-media-controls-play-button:hover {
                         <div class="row">
 
                           <div class="col-10 pr-0">
-                            <% if (user.displayPicture) {%>
-                              <img class="commentimg" src="/image/<%= user.displayPicture %>" alt="altt"
-                                style="border-radius: 50%" />
+                            <% if (user.displayPicture == '{}') {%>
+                              <img class="commentimg"
+                              src="/images/defaultDp.png"
+                              alt="" style="border-radius: 50%" />
                               <% }else{ %>
-                                <img class="commentimg"
-                                  src="/images/defaultDp.png"
-                                  alt="" style="border-radius: 50%" />
+
+                                <img class="commentimg" src="<%= user.displayPicture.image %>" alt="altt"
+                                style="border-radius: 50%" />
+                                
                                 <% } %>
                                   <form-group>
                                     <input type="text" name="comment" placeholder="Add a comment " style="margin-top: -10px; 
@@ -363,80 +372,80 @@ audio::-webkit-media-controls-play-button:hover {
       <%}%>
 
 
-        <script>
+      <script>
 
-          function showComments(id) {
-            var currentPost = 'show-comments' + id;
-            var hidetag = 'hide-comments-tag' + id;
-            console.log(currentPost);
-            document.getElementById(currentPost).style.display = "unset";
-            document.getElementById(hidetag).style.display = "unset";
-            return true;
-          }
-          console.log("here");
+        function showComments(id) {
+          var currentPost = 'show-comments' + id;
+          var hidetag = 'hide-comments-tag' + id;
+          console.log(currentPost);
+          document.getElementById(currentPost).style.display = "unset";
+          document.getElementById(hidetag).style.display = "unset";
+          return true;
+        }
+        console.log("here");
 
-          function hideComments(id) {
-            var currentPost = 'show-comments' + id;
-            var hidetag = 'hide-comments-tag' + id;
-            console.log(currentPost);
-            document.getElementById(currentPost).style.display = "none";
-            document.getElementById(hidetag).style.display = "none";
-            return true;
-          }
+        function hideComments(id) {
+          var currentPost = 'show-comments' + id;
+          var hidetag = 'hide-comments-tag' + id;
+          console.log(currentPost);
+          document.getElementById(currentPost).style.display = "none";
+          document.getElementById(hidetag).style.display = "none";
+          return true;
+        }
 
-          //when a post is liked 
-          function increaseLikes(curPost, curLikes) {
-            var e = 'icon-' + curPost;
-            var info = 'likeCount-' + curPost;
-            //console.log(info);
-            var iconTag = document.getElementById(e);
+        //when a post is liked 
+        function increaseLikes(curPost, curLikes) {
+          var e = 'icon-' + curPost;
+          var info = 'likeCount-' + curPost;
+          //console.log(info);
+          var iconTag = document.getElementById(e);
 
-            if (iconTag.className == 'bi bi-heart fa-2x px-2') {
-              
-              likePost('inc', curPost,(likes)=>{
-              //console.log('inc='+likes);
-              document.getElementById(info).textContent = likes + ' likes';
-              iconTag.className = 'bi bi-heart-fill fa-2x px-2';
-              document.getElementById(e).style.color = 'red';
-
-              //console.log("1");
-              });
-            }
-            else {
-              likePost('dec', curPost, (likes) =>{
-              //console.log('dec='+likes);
-              document.getElementById(info).textContent = likes + ' likes';
-              iconTag.className = 'bi bi-heart fa-2x px-2';
-              document.getElementById(e).style.color = 'black';
-
-             
-              //console.log('2');
-              });
-            }
-
-
-          }
-           //sending request to server to inc/dec likes
-           function likePost(status, curPost,callback) {
-            var http = new XMLHttpRequest();
-            var url = '/post/likePost';
-            var likes;
-            var params = 'postid=' + curPost + '&status=' + status;
-            console.log(params);
-
-
-            http.open('POST', url + '?' + params, true);
-
-            //Send the proper header information along with the request
-            http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+          if (iconTag.className == 'bi bi-heart fa-2x px-2') {
             
-            http.onload = function (e) {
-              if (this.status == 200) {
-                //console.log('SUCCESS', http.responseText);
-                callback(JSON.parse(http.responseText).likes);
-              }
-            };
-            http.send(null);
-           // console.log('inside likePost');
+            likePost('inc', curPost,(likes)=>{
+            //console.log('inc='+likes);
+            document.getElementById(info).textContent = likes + ' likes';
+            iconTag.className = 'bi bi-heart-fill fa-2x px-2';
+            document.getElementById(e).style.color = 'red';
+
+            //console.log("1");
+            });
           }
-        </script>
+          else {
+            likePost('dec', curPost, (likes) =>{
+            //console.log('dec='+likes);
+            document.getElementById(info).textContent = likes + ' likes';
+            iconTag.className = 'bi bi-heart fa-2x px-2';
+            document.getElementById(e).style.color = 'black';
+
+           
+            //console.log('2');
+            });
+          }
+
+
+        }
+         //sending request to server to inc/dec likes
+         function likePost(status, curPost,callback) {
+          var http = new XMLHttpRequest();
+          var url = '/post/likePost';
+          var likes;
+          var params = 'postid=' + curPost + '&status=' + status;
+          console.log(params);
+
+
+          http.open('POST', url + '?' + params, true);
+
+          //Send the proper header information along with the request
+          http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+          
+          http.onload = function (e) {
+            if (this.status == 200) {
+              //console.log('SUCCESS', http.responseText);
+              callback(JSON.parse(http.responseText).likes);
+            }
+          };
+          http.send(null);
+         // console.log('inside likePost');
+        }
+      </script>

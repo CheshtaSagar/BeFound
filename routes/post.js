@@ -7,26 +7,44 @@ const multer = require("multer");
 const GridFsStorage = require("multer-gridfs-storage");
 const Grid = require("gridfs-stream");
 const methodOverride = require("method-override");
-const { storage, upload } = require("../config/grid");
+const upload = require("../config/multer");
+const cloudinary = require("../config/cloudinary");
 const auth = require("../config/auth");
 const isUser = auth.isUser;
 
 //for creating a post
-router.post("/createPost",isUser, upload.array("file", 10), (req, res) => {
-  User.findOne({ _id: req.user._id }, (err, user) => {
+router.post("/createPost",isUser, upload.array("file", 10), async(req, res) => {
+  User.findOne({ _id: req.user._id }, async(err, user) => {
     if (err) console.log(err);
     else {
+      
 
-      const pics = [];
+      try
+      {
 
-      for (let i = 0; i < req.files.length; i++)
-        pics.push(req.files[i].filename);
+      var imageList = [];
+  
+      for (var i = 0; i < req.files.length; i++) {
+          var locaFilePath = req.files[i].path;
 
-      console.log(pics);
+          // Upload the local image to Cloudinary
+          // and get image url as response
+          const result = await cloudinary.uploader.upload(locaFilePath,{resource_type:"auto"});
+          imageList.push({
+             image: result.secure_url,
+             cloudinary_id: result.public_id
+            });
+      }
+    }
+    catch(err)
+      {
+        console.log(err);
+      }
+
 
       const post = new Post({
         description: req.body.description,
-        pictures: pics,
+        pictures: imageList,
         postedBy: user._id,
       });
 
@@ -47,7 +65,11 @@ router.post("/createPost",isUser, upload.array("file", 10), (req, res) => {
           }
         }
       );
-    }
+
+
+      }
+      
+    
   });
 });
 
@@ -96,11 +118,28 @@ router.post('/likePost',isUser, (req, res) => {
 //for deleting  
 router.get("/delete/:id", isUser, function (req, res) {
   console.log("delete");
-  Post.findByIdAndRemove(req.params.id, function (err) {
+  Post.findByIdAndRemove(req.params.id, async function (err,post) {
     if (err) {
       req.flash("error_msg", "Error while deleting");
       console.log(err);
     } else {
+
+      let ids=[];
+
+      for(let i=0;i<post.pictures.length;i++)
+      {
+        ids.push(post.pictures[i].cloudinary_id);
+      }
+
+      try
+      {
+      await cloudinary.api.delete_resources(ids);
+      }
+      catch(err)
+      {
+        console.log(err);
+      }
+
 
       User.findOneAndUpdate(
         { _id: req.user.id },

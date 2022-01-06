@@ -1,6 +1,7 @@
-<% if (user.displayPicture) {%> 
-    <img src="/image/<%= user.displayPicture %>" alt="altt" style="border-radius: 50%; object-fit: cover;">
-    <% }else{ %> 
+<% if (user.displayPicture == '{}') {%> 
     <img  src="/images/defaultDp.png"  alt="" style="border-radius: 50%;">
+    
+    <% }else{ %> 
+        <img src="<%= user.displayPicture.image %>" alt="altt" style="border-radius: 50%; object-fit: cover;">
     <% } %> 
 </a>

@@ -1,3 +1,4 @@
+/*
 //middleware for uploading and storing files
 const util = require("util")
 const crypto=require('crypto'); //to generate file names
@@ -41,3 +42,5 @@ const storage = new GridFsStorage({
 
 
 module.exports={storage:storage,upload:upload};
+
+*/

@@ -88,13 +88,16 @@ audio::-webkit-media-controls-play-button:hover {
             <div class="row">
               <div class="col-10 row py-2">
                 <a href="#" class="pl-4 pr-1">
-                  <% if (doc.displayPicture) {%>
-                    <img class="navimg" src="/image/<%= doc.displayPicture %>" alt="altt"
-                      style="border-radius: 50%; object-fit: cover;"  />
-                    <% }else{ %>
-                      <img class="navimg"
+                  <% if (doc.displayPicture == '{}') {%>
+
+                    <img class="navimg"
                         src="/images/defaultDp.png"
                         alt="" style="border-radius: 50% ;object-fit: cover;" />
+                   
+                    <% }else{ %>
+                      
+                      <img class="navimg" src="<%= doc.displayPicture.image %>" alt="altt"
+                      style="border-radius: 50%; object-fit: cover;"  />
                       <% } %>
                 </a>
                 <div class="col">
@@ -116,13 +119,13 @@ audio::-webkit-media-controls-play-button:hover {
 
                 <% post.pictures.forEach(function(pic){ %>
                   <div class="swiper-slide">
-                    <% if(pic.split('.').pop()=="mp4") {%> 
+                    <% if(pic.image.split('.').pop()=="mp4") {%> 
                       <!-- <video src="/image/<%= pic %>" class="card-img " style="object-fit: contain;" type="video/mp4"></video> -->
                       <video width="350" height="350" class="card-img " style="object-fit: contain;" controls>
-                        <source src="/image/<%= pic %>" type="video/mp4">
+                        <source src="<%= pic.image %>" type="video/mp4">
                         Your browser does not support the video tag.
                       </video>
-                      <%}else if(pic.split('.').pop()=="mp3"){%>
+                      <%}else if(pic.image.split('.').pop()=="mp3"){%>
                         <div class="col">
                           <!-- <div>
                         <img src="https://media.pitchfork.com/photos/6022badb3d879bcfdcd6aa45/master/w_1600%2Cc_limit/vinyl101-2-mid-2.gif"
@@ -134,7 +137,7 @@ audio::-webkit-media-controls-play-button:hover {
                         <audio class="card-img text-center" style="object-fit: contain; display: flex;
                         justify-content: center;
                         align-items: center;" controls>
-                          <source src="/image/<%= pic %>" type="audio/mpeg">
+                          <source src="<%= pic.image %>" type="audio/mpeg">
                           Your browser does not support the audio element.
                         </audio>
                       </div>
@@ -142,7 +145,7 @@ audio::-webkit-media-controls-play-button:hover {
 
                         <% }else{ %> 
 
-                    <img src="/image/<%= pic %>" ondblclick="increaseLikes('<%= post.id%>','<%= post.likes %>')" class="card-img " alt="Fissure in Sandstone" style="object-fit: contain;"/>
+                    <img src="<%= pic.image %>" ondblclick="increaseLikes('<%= post.id%>','<%= post.likes %>')" class="card-img " alt="Fissure in Sandstone" style="object-fit: contain;"/>
                     <% } %> 
                   </div>
                   <%});%>
@@ -216,13 +219,16 @@ audio::-webkit-media-controls-play-button:hover {
 
                           <h5 style="text-transform: capitalize;">
 
-                            <% if (com.createdBy.displayPicture) {%>
-                              <img class="commentimg" src="/image/<%= com.createdBy.displayPicture %>" alt="altt"
-                                style="border-radius: 50%" />
+                            <% if (com.createdBy.displayPicture == '{}') {%>
+                               
+                              <img class="commentimg"
+                              src="/images/defaultDp.png"
+                              alt="" style="border-radius: 50%" />
                               <% }else{ %>
-                                <img class="commentimg"
-                                  src="/images/defaultDp.png"
-                                  alt="" style="border-radius: 50%" />
+
+                                <img class="commentimg" src="<%= com.createdBy.displayPicture.image %>" alt="altt"
+                                style="border-radius: 50%" />
+                               
                                 <% } %>
 
                                   <span style="font-size:medium; text-transform: capitalize;">
@@ -241,13 +247,14 @@ audio::-webkit-media-controls-play-button:hover {
                           <div class="col-6">
                             <h5 style="text-transform: capitalize;">
 
-                              <% if (com.createdBy.displayPicture) {%>
-                                <img class="commentimg" src="/image/<%= com.createdBy.displayPicture %>" alt="altt"
-                                  style="border-radius: 50%" />
+                              <% if (com.createdBy.displayPicture == '{}') {%>
+                                <img class="commentimg"
+                                src="/images/defaultDp.png"
+                                alt="" style="border-radius: 50%" />
                                 <% }else{ %>
-                                  <img class="commentimg"
-                                    src="/images/defaultDp.png"
-                                    alt="" style="border-radius: 50%" />
+                                
+                                    <img class="commentimg" src="<%= com.createdBy.displayPicture.image %>" alt="altt"
+                                  style="border-radius: 50%" />
                                   <% } %>
 
                                     <span style="font-size:medium;">
@@ -281,13 +288,15 @@ audio::-webkit-media-controls-play-button:hover {
                         <div class="row">
 
                           <div class="col-10 pr-0">
-                            <% if (user.displayPicture) {%>
-                              <img class="commentimg" src="/image/<%= user.displayPicture %>" alt="altt"
-                                style="border-radius: 50%" />
-                              <% }else{ %>
-                                <img class="commentimg"
+                            <% if (user.displayPicture == '{}') {%>
+                              <img class="commentimg"
                                   src="/images/defaultDp.png"
                                   alt="" style="border-radius: 50%" />
+
+                              
+                              <% }else{ %>
+                                <img class="commentimg" src="<%= user.displayPicture.image %>" alt="altt"
+                                style="border-radius: 50%" />
                                 <% } %>
                                   <form-group>
                                     <input type="text" name="comment" placeholder="Add a comment " style="margin-top: -10px; 

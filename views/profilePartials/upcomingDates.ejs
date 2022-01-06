@@ -16,7 +16,7 @@
                 , "Sept" , "Oct" , "Nov" , "Dec" ]; var mon=monthNames[(res.split('/')[0]-'0')-1]; %>
                 <%=mon%>
             </h5>
-            <p class="" style="color: #f22876;"><h6 style="color: #f22876;">with <span style="text-transform: capitalize;"><% if(optdate[i].members[1]._id.toString()===user._id.toString()){ %>
+            <p class="" style="color: #f22876;"><h6 style="color: #f22876;font-size: small;">with <span style="text-transform: capitalize;"><% if(optdate[i].members[1]._id.toString()===user._id.toString()){ %>
                 <%= optdate[i].members[0].username.split(" ")[0] %>
                   <% }else{ %>
                     <%= optdate[i].members[1].username.split(" ")[0] %>

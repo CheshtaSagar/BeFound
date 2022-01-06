@@ -13,12 +13,12 @@
               <div class="row">
                 <div class="col-2">
                     <a href="/showProfile/<%= match._id %>">
-                  <% if (match.displayPicture) {%>
+                  <% if (match.displayPicture == '{}') {%>
+                    <img src="/images/dprofile.jpg" alt="user" class="profile-photo-lg" />
                     
-                    <img src="/image/<%= match.displayPicture %>" alt="user" class="profile-photo-lg img-responsive"
-                      style="object-fit: cover;" />
                     <% }else{ %>
-                      <img src="/images/dprofile.jpg" alt="user" class="profile-photo-lg" />
+                      <img src="<%= match.displayPicture.image %>" alt="user" class="profile-photo-lg img-responsive"
+                      style="object-fit: cover;" />
 
                       <% } %>
                     </a>

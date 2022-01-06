@@ -68,11 +68,21 @@ const UserSchema = new mongoose.Schema({
   } ,
   displayPicture:
   {
-    type: String,
-  },
+      image:{
+         type: String,
+      },
+      cloudinary_id:{
+         type:String,
+      }
+},
   profilePictures:[
     {
-      type: String
+      image:{
+        type: String,
+     },
+      cloudinary_id:{
+        type:String,
+     }
     }
   ],
    location:{

@@ -21,26 +21,24 @@
         <div class="modal-body">
           <div class="match">
 
-            <% if (user.displayPicture) {%>
-              <img src="/image/<%= user.displayPicture %>" class="match-img" alt="altt" style="object-fit: cover;">
+            <% if (user.displayPicture == '{}') {%>
+              <img src="/images/defaultDp.png"
+              class="match-img" alt="altt">
+             
               <%}else{%>
-                <img src="/images/defaultDp.png"
-                  class="match-img" alt="altt">
-                <!-- <img src="https://img1.pnghut.com/1/16/10/nrdkyKR0fe/symbol-figure-icon-portrait-customer-redm.jpg"
-                  class="match-img" alt="altt"> -->
+                <img src="<%= user.displayPicture.image %>" class="match-img" alt="altt" style="object-fit: cover;">
+                
                 <%}%>
 
                   <%if(likedUser!=null){%>
 
-                    <% if (likedUser.displayPicture) {%>
-                      <img src="/image/<%= likedUser.displayPicture %>" class="match-img" alt="altt" style="object-fit: cover;">
+                    <% if (likedUser.displayPicture == '{}') {%>
+
+                      <img src="/images/defaultDp.png" class="match-img" alt="altt">
+                     
                       <%}else{%>
-                        <img
-                          src="/images/defaultDp.png"
-                          class="match-img" alt="altt">
-                        <!-- <img
-                          src="https://img1.pnghut.com/1/16/10/nrdkyKR0fe/symbol-figure-icon-portrait-customer-redm.jpg"
-                          class="match-img" alt="altt"> -->
+                        <img src="<%= likedUser.displayPicture.image %>" class="match-img" alt="altt" style="object-fit: cover;">
+                       
                         <%}%>
                           <%}%>
 

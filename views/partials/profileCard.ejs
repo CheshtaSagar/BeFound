@@ -9,23 +9,25 @@
       <div>
         <div class="text-center profile">
           <div class="text-center pt-1">
-            <% if (user.displayPicture) {%>
-            <img
-              src="/image/<%= user.displayPicture %>"
-              alt="..."
-              width="60%"
-              class="rounded pt-10 img-thumbnail"
-              style="object-fit: contain; height: 300px;"
-            />
-
-            <% }else{ %>
-            <img
+            
+            <% if (user.displayPicture == '{}' ) {%>
+              <img
               src="https://i.pinimg.com/originals/fd/14/a4/fd14a484f8e558209f0c2a94bc36b855.png"
               style="border-radius: 50%;border: 0px solid #6213c9; "
               alt=" ..."
               width="60%"
               class="rounded pt-10"
             />
+            
+            <% }else{ %>
+              <img
+              src="<%= user.displayPicture.image %>"
+              alt="..."
+              width="60%"
+              class="rounded pt-10 img-thumbnail"
+              style="object-fit: contain; height: 300px;"
+            />
+
             <% } %>
 
             <!--  <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80"

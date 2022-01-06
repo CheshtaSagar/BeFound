@@ -15,7 +15,17 @@
                   padding-top:10px ; 
                     text-align: center;
                    ">
-                <img src="/image/<%= user.displayPicture %>" style="border:3px solid black;"class="rounded-circle" width="100px" height="100px">
+
+
+
+
+                <%if(user.displayPicture == '{}'){%>
+
+                <img src="https://i.pinimg.com/originals/fd/14/a4/fd14a484f8e558209f0c2a94bc36b855.png" style="border:3px solid black;"class="rounded-circle" width="100px" height="100px">
+                
+                <%}else{%>   
+                <img src="<%= user.displayPicture.image %>" style="border:3px solid black;"class="rounded-circle" width="100px" height="100px">
+                <%}%>
                 <h5 class="text-capitalize" style="color: rgb(255, 255, 255); text-shadow: blue; object-fit: cover;">
                     <%= user.username%>
                 </h5>
@@ -29,26 +39,37 @@
             <div>
 
                 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+
+                    
                     <div class="carousel-inner">
+
+                        <%if(user.profilePictures.length >0 ){%>
                         <div class="carousel-item active">
-                            <img class="d-block w-100" src="/image/<%= user.profilePictures[0] %>" height="350px"
+                            <img class="d-block w-100" src="<%= user.profilePictures[0].image %>" height="350px"
                                 alt="Upload image first!!" style="object-fit: contain;">
                         </div>
 
 
                         <div class="carousel-item">
-                            <img class="d-block w-100" src="/image/<%= user.profilePictures[1] %>" height="350px"
+                            <img class="d-block w-100" src="<%= user.profilePictures[1].image %>" height="350px"
                                 alt="Upload image first!!" style="object-fit: contain;">
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block w-100" src="/image/<%= user.profilePictures[2] %>" height="350px"
+                            <img class="d-block w-100" src="<%= user.profilePictures[2].image %>" height="350px"
                                 alt="Upload image first!!" style="object-fit: contain;">
                         </div>
 
                         <div class="carousel-item">
-                            <img class="d-block w-100" src="/image/<%= user.profilePictures[3] %>" height="350px"
+                            <img class="d-block w-100" src="<%= user.profilePictures[3].image %>" height="350px"
                                 alt="Upload image first!!" style="object-fit: contain;">
                         </div>
+
+                        <%}else{%>
+                            <div class="carousel-item active">
+                                <img class="d-block w-100"  height="350px"
+                                    alt="Upload image first!!" style="object-fit: contain;">
+                            </div>
+                            <%}%>
 
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">

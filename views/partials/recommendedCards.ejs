@@ -111,12 +111,14 @@
                     <%if(recUser.id !=user.id ){%>
                         <div class="swiper-slide" id="slider">
 
-                            <% if (recUser.displayPicture) {%>
-                            <img class="card-img-top rounded" height="90%" width="70%"
-                                src="/image/<%= recUser.displayPicture %>" style="object-fit: cover;">
-                            <%}else{%>
-                            <img src="/images/defaultDp.png"
+                            <% if (recUser.displayPicture == '{}') {%>
+
+                                <img src="/images/defaultDp.png"
                                     style="border-radius: 50%" height="90%" width="70%" alt=" ..." class="rounded pt-10 img-thumbnail"/>
+                           
+                            <%}else{%>
+                                <img class="card-img-top rounded" height="90%" width="70%"
+                                src="<%= recUser.displayPicture.image %>" style="object-fit: cover;">
                             <% } %>       
                                 
                             <div class="info">
