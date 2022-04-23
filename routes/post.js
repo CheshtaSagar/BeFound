@@ -124,16 +124,18 @@ router.get("/delete/:id", isUser, function (req, res) {
       console.log(err);
     } else {
 
-      let ids=[];
-
-      for(let i=0;i<post.pictures.length;i++)
-      {
-        ids.push(post.pictures[i].cloudinary_id);
-      }
+      
 
       try
       {
-      await cloudinary.api.delete_resources(ids);
+      for(let i=0;i<post.pictures.length;i++)
+      {
+        let type=post.pictures[i].image.split('/')[4];
+        
+        cloudinary.uploader.destroy(post.pictures[i].cloudinary_id,{resource_type: type });
+        
+      }
+     
       }
       catch(err)
       {
